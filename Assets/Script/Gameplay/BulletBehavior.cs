@@ -43,11 +43,10 @@ public class BulletBehavior : MonoBehaviour {
 
 	public void Die() {
 		this._isAlive = false;
-		Destroy (gameObject);
+		this.gameObject.SetActive (false);
 	}
 
 	public void Explode() {
-		this._isAlive = false;
-		Destroy (gameObject);
+		this.Die ();
 	}
 }

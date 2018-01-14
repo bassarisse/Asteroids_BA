@@ -10,10 +10,10 @@ public class ShipBehavior : MonoBehaviour {
 	public GameObject BulletObject;
 	public float MoveForceMultiplier = 0.2f;
 	public float TurnRate = 3f;
-
 	public int Life = 3;
-
 	public IntEvent OnDamage;
+
+	List<GameObject> _bulletPool;
 
 	void Awake () {
 		if (OnDamage == null)
@@ -21,7 +21,30 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void Start () {
+
+		_bulletPool = new List<GameObject> ();
+		for (var i = 0; i < 10; i++) {
+			_bulletPool.Add (CreateBullet ());
+		}
 		
+	}
+
+	GameObject CreateBullet() {
+		var bullet = Instantiate (this.BulletObject);
+		bullet.SetActive (false);
+		return bullet;
+	}
+
+	GameObject GetBullet() {
+		for (int i = 0; i < _bulletPool.Count; i++) {
+			var bullet = _bulletPool [i];
+			if (!bullet.activeInHierarchy)
+				return bullet;
+		}
+		for (var i = 0; i < 4; i++) {
+			_bulletPool.Add (CreateBullet ());
+		}
+		return _bulletPool [_bulletPool.Count - 1];
 	}
 
 	void Update () {
@@ -45,11 +68,10 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void FireLaser() {
-
-		if (BulletObject == null)
-			return;
-
-		Instantiate (BulletObject, transform.position, transform.rotation);
+		var bullet = GetBullet ();
+		bullet.transform.position = transform.position;
+		bullet.transform.rotation = transform.rotation;
+		bullet.SetActive (true);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
