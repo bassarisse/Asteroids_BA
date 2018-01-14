@@ -22,19 +22,22 @@ public class SpaceTeleport : MonoBehaviour {
 		var yMin = posMin.y;
 		var yMax = posMax.y;
 
-		if (pos.x < xMin) {
-			this.transform.position = new Vector3 (xMax + AppearOffset, pos.y, pos.z);
-		} else if (pos.x > xMax) {
-			this.transform.position = new Vector3 (xMin - AppearOffset, pos.y, pos.z);
-		}
+		var x = pos.x;
+		var y = pos.y;
 
-		pos = this.transform.position;
+		if (pos.x < xMin) {
+			x = xMax + AppearOffset;
+		} else if (pos.x > xMax) {
+			x = xMin - AppearOffset;
+		}
 
 		if (pos.y < yMin) {
-			this.transform.position = new Vector3 (pos.x, yMax + AppearOffset, pos.z);
+			y = yMax + AppearOffset;
 		} else if (pos.y > yMax) {
-			this.transform.position = new Vector3 (pos.x, yMin - AppearOffset, pos.z);
+			y = yMin - AppearOffset;
 		}
+
+		this.transform.position = new Vector3 (x, y, pos.z);
 
 	}
 }
