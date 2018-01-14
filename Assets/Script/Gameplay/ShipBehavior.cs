@@ -1,12 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class ShipBehavior : MonoBehaviour {
 
 	public Rigidbody2D TargetBody;
 	public float MoveForceMultiplier = 0.2f;
 	public float TurnRate = 3f;
+
+	public int Life = 3;
+
+	public IntEvent OnDamage;
+
+	void Awake () {
+		if (OnDamage == null)
+			OnDamage = new IntEvent ();
+	}
 
 	void Start () {
 		
@@ -26,5 +37,19 @@ public class ShipBehavior : MonoBehaviour {
 			this.TargetBody.transform.Rotate (0, 0, this.TurnRate);
 		}
 		
+	}
+
+	void OnTriggerEnter2D(Collider2D collider) {
+		var cache = ShipHit.Cache;
+		var key = collider.gameObject;
+		if (cache.ContainsKey(key))
+			cache [key].Hit (gameObject, collider);
+	}
+
+	public void Damage(GameObject originGameObject, Collider2D collider) {
+		this.Life -= 1;
+		OnDamage.Invoke (this.Life);
+		if (this.Life == 0)
+			SceneManager.LoadScene ("Game");
 	}
 }
