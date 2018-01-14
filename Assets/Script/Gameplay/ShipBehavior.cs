@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ShipBehavior : MonoBehaviour {
 
 	public Rigidbody2D TargetBody;
+	public GameObject BulletObject;
 	public float MoveForceMultiplier = 0.2f;
 	public float TurnRate = 3f;
 
@@ -36,7 +37,19 @@ public class ShipBehavior : MonoBehaviour {
 		if (InputExtensions.Holding.Left) {
 			this.TargetBody.transform.Rotate (0, 0, this.TurnRate);
 		}
+
+		if (InputExtensions.Pressed.A) {
+			this.FireLaser ();
+		}
 		
+	}
+
+	void FireLaser() {
+
+		if (BulletObject == null)
+			return;
+
+		Instantiate (BulletObject, transform.position, transform.rotation);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {

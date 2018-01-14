@@ -7,7 +7,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 1.5f;
 
-	void Start () {
+	void OnEnable () {
 
 		this.transform.Rotate (0, 0, Random.Range (0, 360));
 
