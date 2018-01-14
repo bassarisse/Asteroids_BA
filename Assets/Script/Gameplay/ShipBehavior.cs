@@ -36,7 +36,7 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	GameObject GetBullet() {
-		for (int i = 0; i < _bulletPool.Count; i++) {
+		for (var i = 0; i < _bulletPool.Count; i++) {
 			var bullet = _bulletPool [i];
 			if (!bullet.activeInHierarchy)
 				return bullet;
