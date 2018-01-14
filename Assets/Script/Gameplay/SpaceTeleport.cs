@@ -9,6 +9,9 @@ public class SpaceTeleport : MonoBehaviour {
 	public void Teleport() {
 
 		var camera = Camera.main;
+		if (camera == null)
+			return;
+		
 		var area = camera.rect;
 		var pos = this.transform.position;
 
