@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ShipBehavior : MonoBehaviour {
 
+	const string CRASH_SFX = "ship_crash";
+
 	public Rigidbody2D TargetBody;
 	public GameObject BulletObject;
 	public float MoveForceMultiplier = 0.2f;
@@ -16,10 +18,12 @@ public class ShipBehavior : MonoBehaviour {
 	ObjectPool _bulletPool;
 
 	void Awake () {
+		AudioHandler.Load (CRASH_SFX);
 		if (OnLifeChange == null)
 			OnLifeChange = new IntEvent ();
 
 		_bulletPool = new ObjectPool (BulletObject, 6, 4);
+
 	}
 
 	void OnEnable() {
@@ -61,6 +65,7 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	public void Damage(GameObject originGameObject, Collider2D collider) {
+		AudioHandler.Play (CRASH_SFX);
 		this.Life -= 1;
 		OnLifeChange.Invoke (this.Life);
 		if (this.Life == 0) // LOSE!!!

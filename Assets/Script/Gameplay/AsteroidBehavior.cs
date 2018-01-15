@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AsteroidBehavior : MonoBehaviour {
 
+	const string CRASH_SFX = "asteroid_crash";
+
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 1.5f;
 	public int Level = 0;
@@ -13,6 +15,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	public AsteroidEvent OnDie;
 
 	void Awake() {
+		AudioHandler.Load (CRASH_SFX);
 		if (OnStruck == null)
 			OnStruck = new AsteroidEvent ();
 		if (OnDie == null)
@@ -36,6 +39,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	}
 
 	public void Die() {
+		AudioHandler.Play (CRASH_SFX);
 		OnDie.Invoke (gameObject, this);
 	}
 }
