@@ -144,8 +144,18 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	void Update () {
-		
+	public void ResetAsteroids() {
+		if (_asteroidPools == null)
+			return;
+		for (var l = 0; l < _asteroidPools.Count; l++) {
+			var poolsPerLevel = _asteroidPools [l];
+			for (var t = 0; t < poolsPerLevel.Count; t++) {
+				var pool = poolsPerLevel [t];
+				pool.Reclaim ();
+			}
+		}
+		_asteroidCount = 0;
+		DeployAsteroids ();
 	}
 
 }

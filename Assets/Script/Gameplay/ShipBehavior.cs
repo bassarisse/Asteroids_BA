@@ -16,6 +16,7 @@ public class ShipBehavior : MonoBehaviour {
 	public IntEvent OnLifeChange;
 
 	ObjectPool _bulletPool;
+	float _deathTime = 0f;
 
 	void Awake () {
 		AudioHandler.Load (CRASH_SFX);
@@ -31,6 +32,9 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void Update () {
+		
+		if (_deathTime > 0f)
+			return;
 
 		if (InputExtensions.Holding.Up) {
 			this.TargetBody.AddForce (this.TargetBody.transform.up * this.MoveForceMultiplier);
@@ -50,6 +54,13 @@ public class ShipBehavior : MonoBehaviour {
 		
 	}
 
+	void FixedUpdate() {
+
+		if (_deathTime > 0f)
+			_deathTime -= Time.fixedDeltaTime;
+		
+	}
+
 	void FireLaser() {
 		var bullet = _bulletPool.GetObject ();
 		bullet.transform.position = transform.position;
@@ -58,6 +69,8 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
+		if (_deathTime > 0f)
+			return;
 		var cache = ShipHit.Cache;
 		var key = collider.gameObject;
 		if (cache.ContainsKey(key))
@@ -65,10 +78,19 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	public void Damage(GameObject originGameObject, Collider2D collider) {
+		
 		AudioHandler.Play (CRASH_SFX);
+		_deathTime = 1f;
+
+		this.transform.SetPositionAndRotation (Vector3.zero, Quaternion.Euler (Vector3.zero));
+		this.TargetBody.velocity = Vector2.zero;
+		this.TargetBody.angularVelocity = 0f;
+
 		this.Life -= 1;
 		OnLifeChange.Invoke (this.Life);
+
 		if (this.Life == 0) // LOSE!!!
 			SceneManager.LoadScene ("Game");
+		
 	}
 }

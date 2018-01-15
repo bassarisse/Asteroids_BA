@@ -64,4 +64,11 @@ public class ObjectPool {
 		_pool.Clear ();
 	}
 
+	public void Reclaim() {
+		var l = _pool.Count;
+		for (var i = 0; i < l; i++) {
+			_pool [i].SetActive(false);
+		}
+	}
+
 }
