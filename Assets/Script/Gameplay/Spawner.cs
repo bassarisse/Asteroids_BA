@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour {
 	int _stage;
 	int _asteroidCount = 0;
 
-	void OnAwake() {
+	void Awake() {
 		if (OnScore == null)
 			OnScore = new IntEvent ();
 	}

@@ -37,4 +37,5 @@ public class ScoreLabelBehavior : MonoBehaviour {
 	public void ReceiveScore(int score) {
 		_score = score;
 	}
+
 }

@@ -8,7 +8,7 @@ public class ScoreBehavior : MonoBehaviour {
 
 	int _score;
 
-	void OnAwake() {
+	void Awake() {
 		if (OnScoreChange == null)
 			OnScoreChange = new IntEvent ();
 	}
@@ -22,4 +22,5 @@ public class ScoreBehavior : MonoBehaviour {
 		if (score != 0)
 			OnScoreChange.Invoke (_score);
 	}
+
 }
