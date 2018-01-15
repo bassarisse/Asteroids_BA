@@ -14,8 +14,7 @@ public class BulletBehavior : MonoBehaviour {
 	void OnEnable() {
 		
 		this.TargetBody.velocity = Vector2.zero;
-
-		this.TargetBody.AddForce (this.TargetBody.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
+		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 
 		this._isAlive = true;
 		this._lifeTime = 0f;

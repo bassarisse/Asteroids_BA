@@ -8,15 +8,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	public float ImpulseForce = 1.5f;
 
 	void OnEnable () {
-
-		this.transform.Rotate (0, 0, Random.Range (0, 360));
-
-		this.TargetBody.AddForce (this.TargetBody.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
-		
-	}
-
-	void Update () {
-		
+		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
