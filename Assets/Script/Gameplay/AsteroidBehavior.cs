@@ -7,10 +7,14 @@ public class AsteroidBehavior : MonoBehaviour {
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 1.5f;
 	public int Level = 0;
+	public int Score = 0;
 
+	public AsteroidEvent OnStruck;
 	public AsteroidEvent OnDie;
 
 	void OnAwake() {
+		if (OnStruck == null)
+			OnStruck = new AsteroidEvent ();
 		if (OnDie == null)
 			OnDie = new AsteroidEvent ();
 	}
@@ -24,6 +28,11 @@ public class AsteroidBehavior : MonoBehaviour {
 		var key = collider.gameObject;
 		if (cache.ContainsKey(key))
 			cache [key].Hit (gameObject, collider);
+	}
+
+	public void Struck() {
+		OnStruck.Invoke (gameObject, this);
+		Die ();
 	}
 
 	public void Die() {

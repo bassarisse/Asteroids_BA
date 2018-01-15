@@ -9,6 +9,7 @@ public class BulletBehavior : MonoBehaviour {
 	public float MaxLifeSeconds = 1f;
 
 	bool _isAlive = false;
+	bool _didHit = false;
 	float _lifeTime = 0f;
 
 	void OnEnable() {
@@ -17,6 +18,7 @@ public class BulletBehavior : MonoBehaviour {
 		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 
 		this._isAlive = true;
+		this._didHit = false;
 		this._lifeTime = 0f;
 
 	}
@@ -34,10 +36,18 @@ public class BulletBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
+		
+		if (this._didHit)
+			return;
+		
 		var cache = BulletHit.Cache;
 		var key = collider.gameObject;
-		if (cache.ContainsKey(key))
+
+		if (cache.ContainsKey (key)) {
 			cache [key].Hit (gameObject, collider);
+			this._didHit = true;
+		}
+
 	}
 
 	public void Die() {

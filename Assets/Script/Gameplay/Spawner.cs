@@ -12,12 +12,17 @@ public class Spawner : MonoBehaviour {
 	public float SpawnOffset = 2f;
 	public float DirectionOffset = 45f;
 	public List<ListOfObjects> AsteroidObjects;
+	public IntEvent OnScore;
 
 	List<List<List<GameObject>>> _asteroidPools;
 	int _stage;
 	int _asteroidCount = 0;
 
-	// Use this for initialization
+	void OnAwake() {
+		if (OnScore == null)
+			OnScore = new IntEvent ();
+	}
+
 	void Start () {
 
 		_stage = 1;
@@ -110,8 +115,10 @@ public class Spawner : MonoBehaviour {
 		bullet.SetActive (false);
 
 		var asteroidBehavior = bullet.GetComponent<AsteroidBehavior> ();
-		if (asteroidBehavior != null)
+		if (asteroidBehavior != null) {
+			asteroidBehavior.OnStruck.AddListener (ScoreFromAsteroid);
 			asteroidBehavior.OnDie.AddListener (ReturnAsteroid);
+		}
 		
 		return bullet;
 	}
@@ -139,6 +146,10 @@ public class Spawner : MonoBehaviour {
 		return pool [pool.Count - 1];
 	}
 
+	void ScoreFromAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
+		OnScore.Invoke (asteroidBehavior.Score);
+	}
+
 	void ReturnAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
 		gameObject.SetActive (false);
 		_asteroidCount -= 1;
@@ -152,9 +163,9 @@ public class Spawner : MonoBehaviour {
 			DeployAsteroids ();
 		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 	}
+
 }

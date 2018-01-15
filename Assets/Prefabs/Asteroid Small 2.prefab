@@ -140,7 +140,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114324944696329114}
-        m_MethodName: Die
+        m_MethodName: Struck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -166,6 +166,12 @@ MonoBehaviour:
   TargetBody: {fileID: 50448243863840954}
   ImpulseForce: 3.5
   Level: 2
+  Score: 100
+  OnStruck:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   OnDie:
     m_PersistentCalls:
       m_Calls: []
