@@ -13,38 +13,17 @@ public class ShipBehavior : MonoBehaviour {
 	public int Life = 3;
 	public IntEvent OnLifeChange;
 
-	List<GameObject> _bulletPool;
+	ObjectPool _bulletPool;
 
 	void Awake () {
 		if (OnLifeChange == null)
 			OnLifeChange = new IntEvent ();
 
-		_bulletPool = new List<GameObject> ();
-		for (var i = 0; i < 10; i++) {
-			_bulletPool.Add (CreateBullet ());
-		}
+		_bulletPool = new ObjectPool (BulletObject, 6, 4);
 	}
 
 	void OnEnable() {
 		OnLifeChange.Invoke (Life);
-	}
-
-	GameObject CreateBullet() {
-		var bullet = Instantiate (this.BulletObject);
-		bullet.SetActive (false);
-		return bullet;
-	}
-
-	GameObject GetBullet() {
-		for (var i = 0; i < _bulletPool.Count; i++) {
-			var bullet = _bulletPool [i];
-			if (!bullet.activeInHierarchy)
-				return bullet;
-		}
-		for (var i = 0; i < 4; i++) {
-			_bulletPool.Add (CreateBullet ());
-		}
-		return _bulletPool [_bulletPool.Count - 1];
 	}
 
 	void Update () {
@@ -68,7 +47,7 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void FireLaser() {
-		var bullet = GetBullet ();
+		var bullet = _bulletPool.GetObject ();
 		bullet.transform.position = transform.position;
 		bullet.transform.rotation = transform.rotation;
 		bullet.SetActive (true);

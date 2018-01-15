@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour {
 	public List<ListOfObjects> AsteroidObjects;
 	public IntEvent OnScore;
 
-	List<List<List<GameObject>>> _asteroidPools;
+	List<List<ObjectPool>> _asteroidPools;
 	int _stage;
 	int _asteroidCount = 0;
 
@@ -89,38 +89,27 @@ public class Spawner : MonoBehaviour {
 
 	void CreateObjectPools() {
 
-		_asteroidPools = new List<List<List<GameObject>>> ();
+		_asteroidPools = new List<List<ObjectPool>> ();
 
 		for (var a = 0; a < AsteroidObjects.Count; a++) {
 			var levelTypes = AsteroidObjects [a].Objects;
-			var newTypePool = new List<List<GameObject>> ();
+			var newTypePool = new List<ObjectPool> ();
 
 			for (var l = 0; l < levelTypes.Count; l++) {
 				var prefab = levelTypes [l];
-				var newPool = new List<GameObject> ();
-
-				for (int i = 0; i < 3; i++) {
-					newPool.Add (CreateObject (prefab));
-				}
-
-				newTypePool.Add (newPool);
+				newTypePool.Add (new ObjectPool (prefab, 3, 2, ConfigAsteroid));
 			}
 
 			_asteroidPools.Add (newTypePool);
 		}
 	}
 
-	GameObject CreateObject(GameObject newObject) {
-		var bullet = Instantiate (newObject);
-		bullet.SetActive (false);
-
-		var asteroidBehavior = bullet.GetComponent<AsteroidBehavior> ();
+	void ConfigAsteroid(GameObject newObject) {
+		var asteroidBehavior = newObject.GetComponent<AsteroidBehavior> ();
 		if (asteroidBehavior != null) {
 			asteroidBehavior.OnStruck.AddListener (ScoreFromAsteroid);
 			asteroidBehavior.OnDie.AddListener (ReturnAsteroid);
 		}
-		
-		return bullet;
 	}
 
 	GameObject GetAsteroid(int level) {
@@ -133,17 +122,8 @@ public class Spawner : MonoBehaviour {
 		var typeIndex = Random.Range (0, objects.Objects.Count - 1);
 
 		var pool = _asteroidPools[level][typeIndex];
-		for (var i = 0; i < pool.Count; i++) {
-			var newObject = pool [i];
-			if (!newObject.activeInHierarchy)
-				return newObject;
-		}
 
-		for (var i = 0; i < 2; i++) {
-			pool.Add (CreateObject (AsteroidObjects[level].Objects[typeIndex]));
-		}
-
-		return pool [pool.Count - 1];
+		return pool.GetObject ();
 	}
 
 	void ScoreFromAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
