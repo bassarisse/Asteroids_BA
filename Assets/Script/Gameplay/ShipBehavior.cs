@@ -84,7 +84,7 @@ public class ShipBehavior : MonoBehaviour {
 	public void Damage(GameObject originGameObject, Collider2D collider) {
 		this.Life -= 1;
 		OnDamage.Invoke (this.Life);
-		if (this.Life == 0)
+		if (this.Life == 0) // LOSE!!!
 			SceneManager.LoadScene ("Game");
 	}
 }

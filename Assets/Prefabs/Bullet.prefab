@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4213945795860752}
   - component: {fileID: 212759904507196476}
-  - component: {fileID: 114161141385144230}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -121,39 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e586ec3d91a549b78c068c51b8c5226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetRenderer: {fileID: 212759904507196476}
   AppearOffset: 0.05
---- !u!114 &114161141385144230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1923671564134460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354036e10791443bb8ceda9e271536aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAppear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDisappear:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114113833383215780}
-        m_MethodName: Teleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114656312184054856
 MonoBehaviour:
   m_ObjectHideFlags: 1

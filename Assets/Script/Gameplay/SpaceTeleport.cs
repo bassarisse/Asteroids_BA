@@ -4,7 +4,43 @@ using UnityEngine;
 
 public class SpaceTeleport : MonoBehaviour {
 
+	public Renderer TargetRenderer;
 	public float AppearOffset = 1f;
+	public float InitialToleranceTime = 3f;
+	public float ToleranceTime = 1f;
+
+	bool _isVisible;
+	float _teleportTime;
+
+	void Start() {
+		_isVisible = true;
+		_teleportTime = InitialToleranceTime;
+	}
+
+	void OnEnable() {
+		_isVisible = true;
+		_teleportTime = InitialToleranceTime;
+	}
+
+	void FixedUpdate() {
+		if (TargetRenderer == null)
+			return;
+		
+		if (_teleportTime > 0f)
+			_teleportTime -= Time.fixedDeltaTime;
+		
+		if (_isVisible && !TargetRenderer.isVisible && _teleportTime <= 0f) {
+			Teleport ();
+			_isVisible = false;
+			_teleportTime = ToleranceTime;
+		}
+
+		if (TargetRenderer.isVisible) {
+			_isVisible = true;
+			_teleportTime = 0f;
+		}
+
+	}
 
 	public void Teleport() {
 

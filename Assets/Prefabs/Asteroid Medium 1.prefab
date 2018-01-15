@@ -166,6 +166,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50380874575389482}
   ImpulseForce: 2.5
+  Level: 1
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114360221676449932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e586ec3d91a549b78c068c51b8c5226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetRenderer: {fileID: 212461070439593604}
   AppearOffset: 0.2
 --- !u!212 &212461070439593604
 SpriteRenderer:

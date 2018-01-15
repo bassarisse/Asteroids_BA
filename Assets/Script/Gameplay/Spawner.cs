@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour {
 
 	List<List<List<GameObject>>> _asteroidPools;
 	int _stage;
+	int _asteroidCount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -37,13 +38,19 @@ public class Spawner : MonoBehaviour {
 		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
 		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 
-		for (var i = 0; i < 5; i++) {
-			DeployAsteroid (posMin, posMax);
+		var qtyToDeploy = 4 + Mathf.Floor (_stage / 2);
+
+		for (var i = 0; i < qtyToDeploy; i++) {
+			DeployAsteroid (posMin, posMax, 0, 1f + Random.Range (0, SpawnOffset));
 		}
 
 	}
 
-	void DeployAsteroid(Vector3 posMin, Vector3 posMax) {
+	void DeployAsteroid(Vector3 posMin, Vector3 posMax, int level, float offset) {
+		
+		var asteroid = GetAsteroid (level);
+		if (asteroid == null)
+			return;
 
 		var deployOnSides = RandomExtensions.Bool ();
 		var deployOnLeft = RandomExtensions.Bool ();
@@ -53,13 +60,11 @@ public class Spawner : MonoBehaviour {
 		var ax2Min = deployOnSides ? posMin.y : posMin.x;
 		var ax2Max = deployOnSides ? posMax.y : posMax.x;
 
-		var offset = 1f + Random.Range (0, SpawnOffset);
 		var ax1 = deployOnLeft ? ax1Min - offset : ax1Max + offset;
 		var quarter = (ax2Max - ax2Min) / 4f;
 		var ax2 = ax2Min + quarter + quarter * 2f * Random.value;
 
 		var position = new Vector3(deployOnSides ? ax1 : ax2, deployOnSides ? ax2 : ax1, 0);
-		var asteroid = GetAsteroid (0);
 
 		Vector3 direction;
 		if (deployOnSides) {
@@ -72,6 +77,8 @@ public class Spawner : MonoBehaviour {
 		asteroid.transform.rotation = Quaternion.FromToRotation (Vector3.up, direction);
 		asteroid.transform.Rotate (0, 0, Random.Range (-DirectionOffset, DirectionOffset));
 		asteroid.SetActive (true);
+
+		_asteroidCount += 1;
 
 	}
 
@@ -101,21 +108,49 @@ public class Spawner : MonoBehaviour {
 	GameObject CreateObject(GameObject newObject) {
 		var bullet = Instantiate (newObject);
 		bullet.SetActive (false);
+
+		var asteroidBehavior = bullet.GetComponent<AsteroidBehavior> ();
+		if (asteroidBehavior != null)
+			asteroidBehavior.OnDie.AddListener (ReturnAsteroid);
+		
 		return bullet;
 	}
 
 	GameObject GetAsteroid(int level) {
-		var typeIndex = Random.Range (0, AsteroidObjects.Count - 1);
+		
+		var maxLevel = AsteroidObjects.Count - 1;
+		if (level > maxLevel)
+			return null;
+
+		var objects = AsteroidObjects [level];
+		var typeIndex = Random.Range (0, objects.Objects.Count - 1);
+
 		var pool = _asteroidPools[level][typeIndex];
 		for (var i = 0; i < pool.Count; i++) {
 			var newObject = pool [i];
 			if (!newObject.activeInHierarchy)
 				return newObject;
 		}
+
 		for (var i = 0; i < 2; i++) {
 			pool.Add (CreateObject (AsteroidObjects[level].Objects[typeIndex]));
 		}
+
 		return pool [pool.Count - 1];
+	}
+
+	void ReturnAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
+		gameObject.SetActive (false);
+		_asteroidCount -= 1;
+
+		for (var i = 0; i < 2; i++) {
+			DeployAsteroid (gameObject.transform.position, gameObject.transform.position, asteroidBehavior.Level + 1, 0f);
+		}
+
+		if (_asteroidCount == 0) {
+			_stage += 1;
+			DeployAsteroids ();
+		}
 	}
 	
 	// Update is called once per frame

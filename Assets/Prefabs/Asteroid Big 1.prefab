@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4606463395319352}
   - component: {fileID: 212566390120007980}
-  - component: {fileID: 114493411816741698}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -138,7 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e586ec3d91a549b78c068c51b8c5226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AppearOffset: 0.2
+  TargetRenderer: {fileID: 212566390120007980}
+  AppearOffset: 0.35
 --- !u!114 &114190164632717190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,38 +166,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114493411816741698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1866496043073326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354036e10791443bb8ceda9e271536aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAppear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDisappear:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114133556802732868}
-        m_MethodName: Teleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114697424676498056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +179,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50048722725337930}
   ImpulseForce: 1.5
+  Level: 0
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114842266281494148
 MonoBehaviour:
   m_ObjectHideFlags: 1

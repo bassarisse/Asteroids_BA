@@ -6,6 +6,14 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 1.5f;
+	public int Level = 0;
+
+	public AsteroidEvent OnDie;
+
+	void Start() {
+		if (OnDie == null)
+			OnDie = new AsteroidEvent ();
+	}
 
 	void OnEnable () {
 		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
@@ -19,6 +27,6 @@ public class AsteroidBehavior : MonoBehaviour {
 	}
 
 	public void Die() {
-		Destroy (gameObject);
+		OnDie.Invoke (gameObject, this);
 	}
 }

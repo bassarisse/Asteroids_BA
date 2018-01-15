@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4060663781355072}
   - component: {fileID: 212632451481950382}
-  - component: {fileID: 114145177386203620}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -126,38 +125,6 @@ PolygonCollider2D:
       - {x: 0.038520664, y: -0.115703106}
       - {x: 0.13169229, y: 0.015069485}
       - {x: 0.05080097, y: 0.1088984}
---- !u!114 &114145177386203620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1952131098311216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354036e10791443bb8ceda9e271536aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAppear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDisappear:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114624971549542614}
-        m_MethodName: Teleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114318432216589844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,6 +165,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50448243863840954}
   ImpulseForce: 3.5
+  Level: 2
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114341990046149392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e586ec3d91a549b78c068c51b8c5226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetRenderer: {fileID: 212632451481950382}
   AppearOffset: 0.2
 --- !u!212 &212632451481950382
 SpriteRenderer:
