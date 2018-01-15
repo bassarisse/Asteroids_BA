@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4570882343279588}
   - component: {fileID: 212461070439593604}
-  - component: {fileID: 114495831066413006}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -199,38 +198,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114495831066413006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285423085196894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354036e10791443bb8ceda9e271536aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAppear:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDisappear:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114719119354669424}
-        m_MethodName: Teleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114719119354669424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,6 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetRenderer: {fileID: 212461070439593604}
   AppearOffset: 0.2
+  InitialToleranceTime: 3
+  ToleranceTime: 1
 --- !u!212 &212461070439593604
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -517,6 +517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetRenderer: {fileID: 1557409422}
   AppearOffset: 0.3
+  InitialToleranceTime: 3
+  ToleranceTime: 1
 --- !u!114 &1705047371
 MonoBehaviour:
   m_ObjectHideFlags: 0

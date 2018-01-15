@@ -210,7 +210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetRenderer: {fileID: 212452937814782530}
-  AppearOffset: 0.35
+  AppearOffset: 0.45
+  InitialToleranceTime: 3
+  ToleranceTime: 1
 --- !u!212 &212452937814782530
 SpriteRenderer:
   m_ObjectHideFlags: 1
