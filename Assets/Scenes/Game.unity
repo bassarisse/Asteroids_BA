@@ -623,6 +623,7 @@ MonoBehaviour:
   MoveForceMultiplier: 7
   TurnRate: 3
   Life: 3
+  MaxBullets: 4
   OnLifeChange:
     m_PersistentCalls:
       m_Calls:

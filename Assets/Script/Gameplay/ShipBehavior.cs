@@ -13,6 +13,7 @@ public class ShipBehavior : MonoBehaviour {
 	public float MoveForceMultiplier = 0.2f;
 	public float TurnRate = 3f;
 	public int Life = 3;
+	public int MaxBullets = 4;
 	public IntEvent OnLifeChange;
 
 	ObjectPool _bulletPool;
@@ -23,7 +24,7 @@ public class ShipBehavior : MonoBehaviour {
 		if (OnLifeChange == null)
 			OnLifeChange = new IntEvent ();
 
-		_bulletPool = new ObjectPool (BulletObject, 6, 4);
+		_bulletPool = new ObjectPool (BulletObject, MaxBullets, 0);
 
 	}
 
@@ -63,6 +64,8 @@ public class ShipBehavior : MonoBehaviour {
 
 	void FireLaser() {
 		var bullet = _bulletPool.GetObject ();
+		if (bullet == null)
+			return;
 		bullet.transform.position = transform.position;
 		bullet.transform.rotation = transform.rotation;
 		bullet.SetActive (true);
@@ -81,6 +84,7 @@ public class ShipBehavior : MonoBehaviour {
 		
 		AudioHandler.Play (CRASH_SFX);
 		_deathTime = 1f;
+		_bulletPool.Reclaim ();
 
 		this.transform.SetPositionAndRotation (Vector3.zero, Quaternion.Euler (Vector3.zero));
 		this.TargetBody.velocity = Vector2.zero;
