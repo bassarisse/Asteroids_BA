@@ -18,15 +18,11 @@ public class ShipBehavior : MonoBehaviour {
 	void Awake () {
 		if (OnDamage == null)
 			OnDamage = new IntEvent ();
-	}
-
-	void Start () {
 
 		_bulletPool = new List<GameObject> ();
 		for (var i = 0; i < 10; i++) {
 			_bulletPool.Add (CreateBullet ());
 		}
-		
 	}
 
 	GameObject CreateBullet() {

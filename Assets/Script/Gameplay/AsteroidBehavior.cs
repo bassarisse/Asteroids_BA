@@ -10,7 +10,7 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	public AsteroidEvent OnDie;
 
-	void Start() {
+	void OnAwake() {
 		if (OnDie == null)
 			OnDie = new AsteroidEvent ();
 	}

@@ -9,15 +9,12 @@ public class SpaceTeleport : MonoBehaviour {
 	public float InitialToleranceTime = 3f;
 	public float ToleranceTime = 1f;
 
+	Camera _camera;
 	bool _isVisible;
 	float _teleportTime;
 
-	void Start() {
-		_isVisible = true;
-		_teleportTime = InitialToleranceTime;
-	}
-
 	void OnEnable() {
+		_camera = Camera.main;
 		_isVisible = true;
 		_teleportTime = InitialToleranceTime;
 	}
@@ -44,15 +41,14 @@ public class SpaceTeleport : MonoBehaviour {
 
 	public void Teleport() {
 
-		var camera = Camera.main;
-		if (camera == null)
+		if (_camera == null)
 			return;
 		
-		var area = camera.rect;
+		var area = _camera.rect;
 		var pos = this.transform.position;
 
-		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
-		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
+		var posMin = _camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
+		var posMax = _camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 		var xMin = posMin.x;
 		var xMax = posMax.x;
 		var yMin = posMin.y;
