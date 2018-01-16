@@ -10,6 +10,7 @@ public class BulletBehavior : MonoBehaviour {
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 4f;
 	public float MaxLifeSeconds = 1f;
+	public ObjectPool CrashParticlePool;
 
 	bool _playedSound = false;
 	bool _isAlive = false;
@@ -73,6 +74,9 @@ public class BulletBehavior : MonoBehaviour {
 	}
 
 	public void Explode() {
+		var crashParticle = CrashParticlePool.GetObject ();
+		crashParticle.transform.position = transform.position;
+		crashParticle.SetActive (true);
 		this.Die ();
 	}
 }

@@ -9,23 +9,39 @@ public class ShipBehavior : MonoBehaviour {
 	const string CRASH_SFX = "ship_crash";
 
 	public Rigidbody2D TargetBody;
-	public GameObject BulletObject;
+	public ParticleSystem FireParticle;
+	public AudioSource EngineAudio;
+	public GameObject LaserObject;
+	public GameObject LaserCrashObject;
 	public float MoveForceMultiplier = 0.2f;
 	public float TurnRate = 3f;
 	public int Life = 3;
 	public int MaxBullets = 4;
 	public IntEvent OnLifeChange;
+	public UnityEvent OnRestore;
 
 	ObjectPool _bulletPool;
+	ObjectPool _bulletCrashPool;
 	float _deathTime = 0f;
 
 	void Awake () {
 		AudioHandler.Load (CRASH_SFX);
+
 		if (OnLifeChange == null)
 			OnLifeChange = new IntEvent ();
+		if (OnRestore == null)
+			OnRestore = new UnityEvent ();
 
-		_bulletPool = new ObjectPool (BulletObject, MaxBullets, 0);
+		_bulletCrashPool = new ObjectPool (LaserCrashObject, MaxBullets, 2);
+		_bulletPool = new ObjectPool (LaserObject, MaxBullets, 0, ConfigBullet);
 
+	}
+
+	void ConfigBullet(GameObject newObject) {
+		var bulletBehavior = newObject.GetComponent<BulletBehavior> ();
+		if (bulletBehavior != null) {
+			bulletBehavior.CrashParticlePool = _bulletCrashPool;
+		}
 	}
 
 	void OnEnable() {
@@ -34,11 +50,22 @@ public class ShipBehavior : MonoBehaviour {
 
 	void Update () {
 		
-		if (_deathTime > 0f)
+		if (_deathTime > 0f) {
+			EngineAudio.volume = 0f;
+			EngineAudio.pitch = 1f;
 			return;
+		}
+
+		var main = FireParticle.main;
+		var emission = FireParticle.emission;
 
 		if (InputExtensions.Holding.Up) {
 			this.TargetBody.AddForce (this.TargetBody.transform.up * this.MoveForceMultiplier);
+			main.startSpeed = 6;
+			emission.rateOverTime = 120;
+		} else {
+			main.startSpeed = 2;
+			emission.rateOverTime = 30;
 		}
 
 		if (InputExtensions.Holding.Right) {
@@ -52,13 +79,22 @@ public class ShipBehavior : MonoBehaviour {
 		if (InputExtensions.Pressed.A) {
 			this.FireLaser ();
 		}
+
+		EngineAudio.volume = (InputExtensions.Holding.Up ? 0.15f : 0.1f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
+		EngineAudio.pitch = 1f + Mathf.Min (0.6f, TargetBody.velocity.sqrMagnitude / 60f);
 		
 	}
 
 	void FixedUpdate() {
 
-		if (_deathTime > 0f)
+		if (_deathTime > 0f && this.Life > 0) {
 			_deathTime -= Time.fixedDeltaTime;
+			if (_deathTime <= 0f) {
+				OnRestore.Invoke ();
+				FireParticle.Clear ();
+				FireParticle.Play ();
+			}
+		}
 		
 	}
 
@@ -83,8 +119,10 @@ public class ShipBehavior : MonoBehaviour {
 	public void Damage(GameObject originGameObject, Collider2D collider) {
 		
 		AudioHandler.Play (CRASH_SFX);
-		_deathTime = 1f;
+		_deathTime = 2f;
+		FireParticle.Stop ();
 		_bulletPool.Reclaim ();
+		_bulletCrashPool.Reclaim ();
 
 		this.transform.SetPositionAndRotation (Vector3.zero, Quaternion.Euler (Vector3.zero));
 		this.TargetBody.velocity = Vector2.zero;
