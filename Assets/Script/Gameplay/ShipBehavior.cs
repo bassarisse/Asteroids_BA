@@ -10,6 +10,7 @@ public class ShipBehavior : MonoBehaviour {
 
 	public Rigidbody2D TargetBody;
 	public ParticleSystem FireParticle;
+	public List<TrailRenderer> WingTrails;
 	public AudioSource EngineAudio;
 	public GameObject LaserObject;
 	public GameObject LaserCrashObject;
@@ -120,7 +121,6 @@ public class ShipBehavior : MonoBehaviour {
 		
 		AudioHandler.Play (CRASH_SFX);
 		_deathTime = 2f;
-		FireParticle.Stop ();
 		_bulletPool.Reclaim ();
 		_bulletCrashPool.Reclaim ();
 
@@ -128,11 +128,24 @@ public class ShipBehavior : MonoBehaviour {
 		this.TargetBody.velocity = Vector2.zero;
 		this.TargetBody.angularVelocity = 0f;
 
+		ClearTrails ();
+		FireParticle.Stop ();
+
 		this.Life -= 1;
 		OnLifeChange.Invoke (this.Life);
 
 		if (this.Life == 0) // LOSE!!!
 			SceneManager.LoadScene ("Game");
 		
+	}
+
+	public void ClearTrails() {
+
+		if (WingTrails != null) {
+			for (var i = 0; i < WingTrails.Count; i++) {
+				WingTrails [i].Clear ();
+			}
+		}
+
 	}
 }

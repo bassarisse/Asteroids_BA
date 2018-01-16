@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpaceTeleport : MonoBehaviour {
 
@@ -8,10 +9,16 @@ public class SpaceTeleport : MonoBehaviour {
 	public float AppearOffset = 1f;
 	public float InitialToleranceTime = 3f;
 	public float ToleranceTime = 1f;
+	public UnityEvent OnTeleport;
 
 	Camera _camera;
 	bool _isVisible;
 	float _teleportTime;
+
+	void Awake() {
+		if (OnTeleport == null)
+			OnTeleport = new UnityEvent ();
+	}
 
 	void OnEnable() {
 		_camera = Camera.main;
@@ -70,6 +77,8 @@ public class SpaceTeleport : MonoBehaviour {
 		}
 
 		this.transform.position = new Vector3 (x, y, pos.z);
+
+		OnTeleport.Invoke ();
 
 	}
 }
