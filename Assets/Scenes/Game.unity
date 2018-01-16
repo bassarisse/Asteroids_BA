@@ -4441,7 +4441,6 @@ GameObject:
   - component: {fileID: 2094263968}
   - component: {fileID: 2094263967}
   - component: {fileID: 2094263966}
-  - component: {fileID: 2094263965}
   m_Layer: 5
   m_Name: LifeIcon
   m_TagString: Untagged
@@ -4465,22 +4464,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 30, y: 75}
+  m_SizeDelta: {x: 33, y: 26}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &2094263965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2094263963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!114 &2094263966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4493,7 +4478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &2094263967
 MonoBehaviour:
@@ -4514,7 +4499,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2b310917257544faabeb1d4170d20287, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17d97f4e083ff413eaa2e22bf8edd56b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
