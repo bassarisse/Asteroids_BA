@@ -22,6 +22,9 @@ public class ShipBehavior : MonoBehaviour {
 	public int Life = 3;
 	public int MaxBullets = 4;
 	public float EnterTime = 2f;
+	public float HyperspaceMargin = 1f;
+	public float HyperspaceTransitionTime = 0.75f;
+	public float HyperspaceWaitTime = 0.5f;
 	public IntEvent OnLifeChange;
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
@@ -31,6 +34,9 @@ public class ShipBehavior : MonoBehaviour {
 	ObjectPool _bulletCrashPool;
 	float _enterTime = 0f;
 	float _deathTime = 0f;
+	float _hyperspaceTime = 0f;
+	float _hyperspaceWaitTime = 0f;
+	Camera _camera;
 
 	void Awake () {
 		AudioHandler.Load (CRASH_SFX);
@@ -45,6 +51,8 @@ public class ShipBehavior : MonoBehaviour {
 		_shipExplosionPool = new ObjectPool (ShipExplosionObject, 1, 1);
 		_bulletCrashPool = new ObjectPool (LaserCrashObject, MaxBullets, 2);
 		_bulletPool = new ObjectPool (LaserObject, MaxBullets, 0, ConfigBullet);
+
+		_camera = Camera.main;
 
 	}
 
@@ -80,7 +88,7 @@ public class ShipBehavior : MonoBehaviour {
 
 	void Update () {
 		
-		if (_deathTime > 0f) {
+		if (_deathTime > 0f || _hyperspaceTime > 0f) {
 			EngineAudio.volume = 0f;
 			EngineAudio.pitch = 1f;
 			return;
@@ -117,6 +125,10 @@ public class ShipBehavior : MonoBehaviour {
 				this.FireLaser ();
 			}
 
+			if (InputExtensions.Pressed.B) {
+				this.Hyperspace ();
+			}
+
 		}
 
 		EngineAudio.volume = (engineIsOn ? 0.125f : 0.1f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
@@ -125,6 +137,19 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+
+		if (_hyperspaceTime > 0f) {
+			_hyperspaceTime -= Time.fixedDeltaTime;
+			if (_hyperspaceTime <= 0f) {
+				_hyperspaceWaitTime = HyperspaceWaitTime;
+				this.transform.position = GetPositionToTeleport ();
+				SpaceTeleportBehavior.enabled = true;
+			}
+		}
+
+		if (_hyperspaceWaitTime > 0f) {
+			_hyperspaceWaitTime -= Time.fixedDeltaTime;
+		}
 
 		if (_enterTime > 0f) {
 			_enterTime -= Time.fixedDeltaTime;
@@ -157,8 +182,41 @@ public class ShipBehavior : MonoBehaviour {
 		bullet.SetActive (true);
 	}
 
+	void Hyperspace() {
+		if (_hyperspaceWaitTime > 0f)
+			return;
+		if (_camera == null)
+			return;
+
+		SpaceTeleportBehavior.enabled = false;
+
+		_hyperspaceTime = HyperspaceTransitionTime;
+
+		this.transform.position = BeforeEnterPosition;
+		this.TargetBody.velocity = Vector2.zero;
+		this.TargetBody.angularVelocity = 0f;
+
+		ClearTrails ();
+		FireParticle.Stop ();
+
+	}
+
+	Vector3 GetPositionToTeleport() {
+
+		var pos = transform.position;
+		var center = _camera.transform.position;
+		var height = _camera.orthographicSize * 2.0f;
+		var width = height * _camera.aspect;
+
+		return new Vector3(
+			center.x + (Random.value - 0.5f) * (width - HyperspaceMargin * 2),
+			center.y + (Random.value - 0.5f) * (height - HyperspaceMargin * 2),
+			pos.z
+		);
+	}
+
 	void OnTriggerEnter2D(Collider2D collider) {
-		if (_deathTime > 0f || _enterTime > 0f)
+		if (_deathTime > 0f || _enterTime > 0f || _hyperspaceTime > 0f)
 			return;
 		var cache = ShipHit.Cache;
 		var key = collider.gameObject;

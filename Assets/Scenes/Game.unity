@@ -3858,7 +3858,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1667952124}
-  - component: {fileID: 1667952123}
   - component: {fileID: 1667952125}
   m_Layer: 0
   m_Name: GameManager
@@ -3867,20 +3866,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1667952123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1667952122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d539e1ea6b3410c895774994275ce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ship: {fileID: 1705047365}
-  Margin: 1
-  TransitionTime: 0.75
 --- !u!4 &1667952124
 Transform:
   m_ObjectHideFlags: 0
@@ -4050,6 +4035,9 @@ MonoBehaviour:
   Life: 3
   MaxBullets: 4
   EnterTime: 2
+  HyperspaceMargin: 1
+  HyperspaceTransitionTime: 0.75
+  HyperspaceWaitTime: 0.5
   OnLifeChange:
     m_PersistentCalls:
       m_Calls:
