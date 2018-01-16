@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour {
 		_stage = 1;
 
 		CreatePools ();
-		DeployAsteroids ();
 		
 	}
 
@@ -60,7 +59,8 @@ public class Spawner : MonoBehaviour {
 		if (asteroidBehavior != null) {
 			asteroidBehavior.CrashParticlePool = _asteroidParticlePool;
 			asteroidBehavior.OnStruck.AddListener (ScoreFromAsteroid);
-			asteroidBehavior.OnDie.AddListener (ReturnAsteroid);
+			asteroidBehavior.OnDie.AddListener (DivideAsteroid);
+			asteroidBehavior.OnGone.AddListener (ReturnAsteroid);
 		}
 	}
 
@@ -79,6 +79,9 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void DeployAsteroids() {
+
+		if (_asteroidPools == null)
+			CreatePools ();
 
 		var camera = Camera.main;
 		if (camera == null)
@@ -137,9 +140,7 @@ public class Spawner : MonoBehaviour {
 		OnScore.Invoke (asteroidBehavior.Score);
 	}
 
-	void ReturnAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
-		gameObject.SetActive (false);
-		_asteroidCount -= 1;
+	void DivideAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
 
 		for (var i = 0; i < 2; i++) {
 			DeployAsteroid (gameObject.transform.position, gameObject.transform.position, asteroidBehavior.Level + 1, 0f);
@@ -149,6 +150,11 @@ public class Spawner : MonoBehaviour {
 			_stage += 1;
 			DeployAsteroids ();
 		}
+	}
+
+	void ReturnAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
+		gameObject.SetActive (false);
+		_asteroidCount -= 1;
 	}
 
 	public void ResetAsteroids() {

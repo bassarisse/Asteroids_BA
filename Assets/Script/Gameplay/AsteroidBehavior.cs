@@ -14,6 +14,7 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	public AsteroidEvent OnStruck;
 	public AsteroidEvent OnDie;
+	public AsteroidEvent OnGone;
 
 	void Awake() {
 		AudioHandler.Load (CRASH_SFX);
@@ -21,6 +22,8 @@ public class AsteroidBehavior : MonoBehaviour {
 			OnStruck = new AsteroidEvent ();
 		if (OnDie == null)
 			OnDie = new AsteroidEvent ();
+		if (OnGone == null)
+			OnGone = new AsteroidEvent ();
 	}
 
 	void OnEnable () {
@@ -40,10 +43,19 @@ public class AsteroidBehavior : MonoBehaviour {
 	}
 
 	public void Die() {
+		Gone ();
+		OnDie.Invoke (gameObject, this);
+	}
+
+	public void Gone() {
+		
 		AudioHandler.Play (CRASH_SFX);
+
 		var crashParticle = CrashParticlePool.GetObject ();
 		crashParticle.transform.position = transform.position;
 		crashParticle.SetActive (true);
-		OnDie.Invoke (gameObject, this);
+
+		OnGone.Invoke (gameObject, this);
+
 	}
 }

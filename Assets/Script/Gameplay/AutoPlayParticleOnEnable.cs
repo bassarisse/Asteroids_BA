@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class AutoPlayParticleOnEnable : MonoBehaviour {
 
-	ParticleSystem _particle;
+	public List<ParticleSystem> Particles;
+
+	ParticleSystem[] _particles;
 
 	void Awake() {
-		_particle = GetComponent<ParticleSystem> ();
+		_particles = GetComponents<ParticleSystem> ();
 	}
 
 	void OnEnable() {
-		if (_particle.isStopped)
-			_particle.Play();
+		
+		if (Particles != null) {
+			for (var i = 0; i < Particles.Count; i++) {
+				var particle = Particles [i];
+				if (particle.isStopped)
+					particle.Play();
+			}
+		}
+
+		for (var i = 0; i < _particles.Length; i++) {
+			var particle = _particles [i];
+			if (particle.isStopped)
+				particle.Play();
+		}
+
 	}
 
 }

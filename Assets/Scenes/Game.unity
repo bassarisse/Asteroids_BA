@@ -399,8 +399,8 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 1
-  playOnAwake: 1
+  prewarm: 0
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4033,6 +4033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 1705047368}
   FireParticle: {fileID: 353837879}
+  SpaceTeleportBehavior: {fileID: 1705047370}
   WingTrails:
   - {fileID: 7429160}
   - {fileID: 2042486270}
@@ -4041,10 +4042,14 @@ MonoBehaviour:
     type: 2}
   LaserCrashObject: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5,
     type: 2}
+  ShipExplosionObject: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d,
+    type: 2}
+  BeforeEnterPosition: {x: 0, y: -10, z: 0}
   MoveForceMultiplier: 7
   TurnRate: 3
   Life: 3
   MaxBullets: 4
+  EnterTime: 2
   OnLifeChange:
     m_PersistentCalls:
       m_Calls:
@@ -4059,6 +4064,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRestore:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1037840470}
         m_MethodName: ResetAsteroids
         m_Mode: 1
@@ -4070,10 +4084,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  OnRestore:
-    m_PersistentCalls:
-      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!60 &1705047367

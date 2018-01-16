@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114133556802732868}
   - component: {fileID: 114842266281494148}
   - component: {fileID: 114190164632717190}
+  - component: {fileID: 114315956961365526}
   m_Layer: 0
   m_Name: Asteroid Big 1
   m_TagString: Untagged
@@ -141,6 +142,11 @@ MonoBehaviour:
   AppearOffset: 0.45
   InitialToleranceTime: 3
   ToleranceTime: 1
+  OnTeleport:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114190164632717190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,6 +174,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114315956961365526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1523663976252944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10be61cbf637c4531ab9e70f42cd849f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114697424676498056}
+        m_MethodName: Gone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114697424676498056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,6 +222,11 @@ MonoBehaviour:
     m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnGone:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,

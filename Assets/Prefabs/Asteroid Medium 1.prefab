@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114719119354669424}
   - component: {fileID: 114360221676449932}
   - component: {fileID: 114084603969177520}
+  - component: {fileID: 114516896995262890}
   m_Layer: 0
   m_Name: Asteroid Medium 1
   m_TagString: Untagged
@@ -177,6 +178,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnGone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114360221676449932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +210,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114516896995262890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962594973556804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10be61cbf637c4531ab9e70f42cd849f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114120972488556942}
+        m_MethodName: Gone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114719119354669424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,6 +252,11 @@ MonoBehaviour:
   AppearOffset: 0.2
   InitialToleranceTime: 3
   ToleranceTime: 1
+  OnTeleport:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!212 &212461070439593604
 SpriteRenderer:
   m_ObjectHideFlags: 1
