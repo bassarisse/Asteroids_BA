@@ -12,13 +12,14 @@ public class Spawner : MonoBehaviour {
 	public float SpawnOffset = 2f;
 	public float DirectionOffset = 45f;
 	public int MaxAsteroids = 10;
+	public int Stage = 1;
+	public bool AutoDeploy = false;
 	public List<ListOfObjects> AsteroidObjects;
 	public GameObject AsteroidCrashObject;
 	public IntEvent OnScore;
 
 	List<List<ObjectPool>> _asteroidPools;
 	ObjectPool _asteroidParticlePool;
-	int _stage;
 	int _asteroidCount = 0;
 
 	void Awake() {
@@ -28,9 +29,9 @@ public class Spawner : MonoBehaviour {
 
 	void Start () {
 
-		_stage = 1;
-
 		CreatePools ();
+		if (AutoDeploy)
+			DeployAsteroids();
 		
 	}
 
@@ -92,7 +93,7 @@ public class Spawner : MonoBehaviour {
 		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
 		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 
-		var qtyToDeploy = Mathf.Min(4 + Mathf.FloorToInt (_stage / 2), MaxAsteroids);
+		var qtyToDeploy = Mathf.Min(4 + Mathf.FloorToInt (Stage / 2), MaxAsteroids);
 
 		for (var i = 0; i < qtyToDeploy; i++) {
 			DeployAsteroid (posMin, posMax, 0, 1f + Random.Range (0, SpawnOffset));
@@ -147,7 +148,7 @@ public class Spawner : MonoBehaviour {
 		}
 
 		if (_asteroidCount == 0) {
-			_stage += 1;
+			Stage += 1;
 			DeployAsteroids ();
 		}
 	}

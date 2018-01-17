@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1104767258717164}
+  m_IsPrefabParent: 1
+--- !u!1 &1104767258717164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4380114305177788}
+  - component: {fileID: 114319582898870244}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4380114305177788
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104767258717164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114319582898870244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104767258717164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91864e30d1ec4435b98fb83157a2322f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnOffset: 3
+  DirectionOffset: 45
+  MaxAsteroids: 10
+  AsteroidObjects:
+  - Objects:
+    - {fileID: 1523663976252944, guid: cad7fcde98bf141a296b110b94830b53, type: 2}
+    - {fileID: 1503439986755430, guid: ab27a8de6466d414cb01d46239c5af64, type: 2}
+    - {fileID: 1832484937983620, guid: 4882942038b91450eb7e67d7b92bd596, type: 2}
+    - {fileID: 1559799609914572, guid: 2ed4b10a66a3e4e6ab2758293eeef938, type: 2}
+  - Objects:
+    - {fileID: 1962594973556804, guid: 862bbd66e44e6495a9a5995042c103b7, type: 2}
+    - {fileID: 1976461789642874, guid: 60613af8783e64884ba2727dc5d3332e, type: 2}
+  - Objects:
+    - {fileID: 1659708974141220, guid: 302dc087cff274e7d8e339048b97777f, type: 2}
+    - {fileID: 1204730073445238, guid: 767cacdccaf6d458fa8df22274f5b182, type: 2}
+  AsteroidCrashObject: {fileID: 1975314887512552, guid: 7c8cf3367d2a84e759db84b5a1173857,
+    type: 2}
+  OnScore:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

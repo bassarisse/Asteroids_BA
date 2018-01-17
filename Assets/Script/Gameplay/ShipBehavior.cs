@@ -180,7 +180,7 @@ public class ShipBehavior : MonoBehaviour {
 			_deathTime -= Time.fixedDeltaTime;
 			if (_deathTime <= 0f) {
 				if (this.Life == 0) { // LOSE!!!
-					SceneManager.LoadScene ("Game");
+					SceneManager.LoadScene ("Title");
 				} else {
 					Enter ();
 				}

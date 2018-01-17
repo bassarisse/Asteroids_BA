@@ -124,6 +124,11 @@ MonoBehaviour:
   AppearOffset: 0.05
   InitialToleranceTime: 3
   ToleranceTime: 1
+  OnTeleport:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114656312184054856
 MonoBehaviour:
   m_ObjectHideFlags: 1
