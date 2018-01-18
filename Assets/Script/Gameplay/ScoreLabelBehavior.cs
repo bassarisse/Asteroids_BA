@@ -34,7 +34,7 @@ public class ScoreLabelBehavior : MonoBehaviour {
 
 	}
 
-	public void ReceiveScore(int score) {
+	public void UpdateScore(int score) {
 		_score = score;
 	}
 

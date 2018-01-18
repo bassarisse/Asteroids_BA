@@ -108,6 +108,40 @@ public class ShipBehavior : MonoBehaviour {
 
 		var engineIsOn = (InputExtensions.Holding.Up || _enterTime > 0) && _hyperspaceTime <= 0f;
 
+		HandleInput ();
+		UpdateFire (engineIsOn);
+		UpdateVolume (engineIsOn);
+
+	}
+
+	void HandleInput() {
+		if (_enterTime > 0f || _hyperspaceTime > 0f)
+			return;
+
+		if (InputExtensions.Holding.Up) {
+			this.TargetBody.AddForce (this.TargetBody.transform.up * this.MoveForceMultiplier);
+		}
+
+		if (InputExtensions.Holding.Right) {
+			this.TargetBody.transform.Rotate (0, 0, -this.TurnRate);
+		}
+
+		if (InputExtensions.Holding.Left) {
+			this.TargetBody.transform.Rotate (0, 0, this.TurnRate);
+		}
+
+		if (InputExtensions.Pressed.A) {
+			this.FireLaser ();
+		}
+
+		if (InputExtensions.Pressed.X) {
+			this.Hyperspace ();
+		}
+
+	}
+
+	void UpdateFire(bool engineIsOn) {
+		
 		var main = FireParticle.main;
 		var emission = FireParticle.emission;
 
@@ -119,29 +153,9 @@ public class ShipBehavior : MonoBehaviour {
 			emission.rateOverTime = 30;
 		}
 
-		if (_enterTime <= 0f && _hyperspaceTime <= 0f) {
+	}
 
-			if (InputExtensions.Holding.Up) {
-				this.TargetBody.AddForce (this.TargetBody.transform.up * this.MoveForceMultiplier);
-			}
-
-			if (InputExtensions.Holding.Right) {
-				this.TargetBody.transform.Rotate (0, 0, -this.TurnRate);
-			}
-
-			if (InputExtensions.Holding.Left) {
-				this.TargetBody.transform.Rotate (0, 0, this.TurnRate);
-			}
-
-			if (InputExtensions.Pressed.A) {
-				this.FireLaser ();
-			}
-
-			if (InputExtensions.Pressed.B) {
-				this.Hyperspace ();
-			}
-
-		}
+	void UpdateVolume(bool engineIsOn) {
 
 		var volume = (engineIsOn ? 0.125f : 0.1f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
 

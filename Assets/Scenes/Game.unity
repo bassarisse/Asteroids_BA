@@ -4142,7 +4142,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 218565335}
-        m_MethodName: ReceiveScore
+        m_MethodName: UpdateScore
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
