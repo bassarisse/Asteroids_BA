@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleScreen : MonoBehaviour {
+public class GameOver : MonoBehaviour {
 
-	public void StartGame() {
+	public void RestartGame() {
 		SceneManager.LoadScene ("Game");
+	}
+
+	public void Exit() {
+		SceneManager.LoadScene ("Title");
 	}
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class ScoreBehavior : MonoBehaviour {
 
@@ -38,6 +39,11 @@ public class ScoreBehavior : MonoBehaviour {
 				OnNewLife.Invoke ();
 			}
 		}
+	}
+
+	public void EndGame() {
+		UserSession.LastScore = _score;
+		SceneManager.LoadScene ("GameOver");
 	}
 
 }

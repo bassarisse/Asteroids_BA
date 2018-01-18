@@ -201,9 +201,8 @@ public class ShipBehavior : MonoBehaviour {
 		if (_deathTime > 0f) {
 			_deathTime -= Time.fixedDeltaTime;
 			if (_deathTime <= 0f) {
-				if (this.Life == 0) { // LOSE!!!
+				if (this.Life == 0) {
 					OnDie.Invoke();
-					SceneManager.LoadScene ("Title");
 				} else {
 					Enter ();
 				}
