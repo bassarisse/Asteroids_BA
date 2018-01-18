@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114842266281494148}
   - component: {fileID: 114190164632717190}
   - component: {fileID: 114315956961365526}
+  - component: {fileID: 114948596743489818}
   m_Layer: 0
   m_Name: Asteroid Big 1
   m_TagString: Untagged
@@ -258,6 +259,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114948596743489818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1523663976252944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  ComponentsToDisable: []
+  Particles: []
+  Bodies:
+  - {fileID: 50048722725337930}
 --- !u!212 &212566390120007980
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4431466037750488}
   - component: {fileID: 20607853808362952}
   - component: {fileID: 114500685277108616}
+  - component: {fileID: 114929815135630790}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -90,3 +91,32 @@ MonoBehaviour:
   XRotation: -2
   YRotation: 0
   ZRotation: 0
+--- !u!114 &114929815135630790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032608102507062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  GameObjectToDisable: []
+  ComponentsToDisable:
+  - {fileID: 114500685277108616}
+  Particles: []
+  Bodies: []
+  Trails: []

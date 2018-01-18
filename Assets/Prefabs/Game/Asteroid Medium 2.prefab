@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114335586611798744}
   - component: {fileID: 114392262934368792}
   - component: {fileID: 114708133737261918}
+  - component: {fileID: 114108176067033346}
   m_Layer: 0
   m_Name: Asteroid Medium 2
   m_TagString: Untagged
@@ -126,6 +127,33 @@ PolygonCollider2D:
       - {x: 0.06375456, y: -0.18353534}
       - {x: 0.2113483, y: 0.021842599}
       - {x: 0.082368135, y: 0.1808542}
+--- !u!114 &114108176067033346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976461789642874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  ComponentsToDisable: []
+  Particles: []
+  Bodies:
+  - {fileID: 50919432298364230}
 --- !u!114 &114335586611798744
 MonoBehaviour:
   m_ObjectHideFlags: 1

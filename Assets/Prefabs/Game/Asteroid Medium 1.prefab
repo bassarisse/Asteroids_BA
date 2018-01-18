@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114360221676449932}
   - component: {fileID: 114084603969177520}
   - component: {fileID: 114516896995262890}
+  - component: {fileID: 114958735974105146}
   m_Layer: 0
   m_Name: Asteroid Medium 1
   m_TagString: Untagged
@@ -257,6 +258,33 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114958735974105146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962594973556804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  ComponentsToDisable: []
+  Particles: []
+  Bodies:
+  - {fileID: 50380874575389482}
 --- !u!212 &212461070439593604
 SpriteRenderer:
   m_ObjectHideFlags: 1

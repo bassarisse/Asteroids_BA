@@ -74,6 +74,9 @@ public class ShipBehavior : MonoBehaviour {
 
 	void OnEnable() {
 		OnLifeChange.Invoke (Life);
+	}
+
+	void Start() {
 		Enter ();
 	}
 

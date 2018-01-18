@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 198168282982699090}
   - component: {fileID: 199744710129316926}
   - component: {fileID: 114310400863122684}
+  - component: {fileID: 114686608419491392}
   m_Layer: 0
   m_Name: AsteroidCrash
   m_TagString: Untagged
@@ -54,6 +55,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Particles: []
+--- !u!114 &114686608419491392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975314887512552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  ComponentsToDisable: []
+  Particles:
+  - {fileID: 198168282982699090}
+  Bodies: []
 --- !u!198 &198168282982699090
 ParticleSystem:
   m_ObjectHideFlags: 1

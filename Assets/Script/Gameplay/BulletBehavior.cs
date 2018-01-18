@@ -12,6 +12,7 @@ public class BulletBehavior : MonoBehaviour {
 	public float MaxLifeSeconds = 1f;
 	public ObjectPool CrashParticlePool;
 
+	bool _paused = false;
 	bool _playedSound = false;
 	bool _isAlive = false;
 	bool _didHit = false;
@@ -42,7 +43,7 @@ public class BulletBehavior : MonoBehaviour {
 
 	void FixedUpdate() {
 		
-		if (!this._isAlive)
+		if (this._paused || !this._isAlive)
 			return;
 		
 		_lifeTime += Time.fixedDeltaTime;
@@ -79,4 +80,13 @@ public class BulletBehavior : MonoBehaviour {
 		crashParticle.SetActive (true);
 		this.Die ();
 	}
+
+	public void Pause() {
+		this._paused = true;
+	}
+
+	public void Resume() {
+		this._paused = false;
+	}
+
 }

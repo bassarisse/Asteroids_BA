@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114885021443778564}
   - component: {fileID: 114407946166484982}
   - component: {fileID: 114597872137588938}
+  - component: {fileID: 114394005184025748}
   m_Layer: 0
   m_Name: Asteroid Big 3
   m_TagString: Untagged
@@ -127,6 +128,33 @@ PolygonCollider2D:
       - {x: 0.19673872, y: -0.4093275}
       - {x: 0.42500162, y: -0.0292902}
       - {x: 0.27759314, y: 0.27967548}
+--- !u!114 &114394005184025748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832484937983620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactToInput: 0
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  ComponentsToDisable: []
+  Particles: []
+  Bodies:
+  - {fileID: 50320859661341252}
 --- !u!114 &114407946166484982
 MonoBehaviour:
   m_ObjectHideFlags: 1
