@@ -6,24 +6,23 @@ using UnityEngine.UI;
 public class LifeLabelBehavior : MonoBehaviour {
 
 	public Text Label;
+	public ParticleSystem NewLifeParticle;
 
-	int _currentLife = 0;
 	int _life = 0;
 
-	void Update () {
+	public void ReceiveLife(int life) {
 
-		if (_currentLife != _life) {
-			_currentLife = _life;
-
-			if (Label != null) {
-				Label.text = string.Format ("{0:#0}", _life);
-			}
+		if (Label != null) {
+			Label.text = string.Format ("{0:#0}", life);
 		}
 
-	}
+		if (NewLifeParticle != null && life > _life && _life != 0) {
+			NewLifeParticle.Clear ();
+			NewLifeParticle.Play ();
+		}
 
-	public void ReceiveLife(int life) {
 		_life = life;
+
 	}
 
 }

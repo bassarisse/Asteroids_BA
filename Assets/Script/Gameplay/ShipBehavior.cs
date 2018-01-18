@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ShipBehavior : MonoBehaviour {
 
+	const string NEW_LIFE_SFX = "new_life";
 	const string CRASH_SFX = "ship_crash";
 	const string HYPERSPACE_SFX = "hyperspace";
 
@@ -31,6 +32,7 @@ public class ShipBehavior : MonoBehaviour {
 	public IntEvent OnLifeChange;
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
+	public UnityEvent OnDie;
 
 	ObjectPool _shipExplosionPool;
 	ObjectPool _hyperspacePool;
@@ -45,6 +47,7 @@ public class ShipBehavior : MonoBehaviour {
 	Camera _camera;
 
 	void Awake () {
+		AudioHandler.Load (NEW_LIFE_SFX);
 		AudioHandler.Load (CRASH_SFX);
 		AudioHandler.Load (HYPERSPACE_SFX);
 
@@ -54,6 +57,8 @@ public class ShipBehavior : MonoBehaviour {
 			OnEnter = new UnityEvent ();
 		if (OnRestore == null)
 			OnRestore = new UnityEvent ();
+		if (OnDie == null)
+			OnDie = new UnityEvent ();
 
 		_shipExplosionPool = new ObjectPool (ShipExplosionObject, 1, 1);
 		_hyperspacePool = new ObjectPool (HyperspaceObject, 1, 1);
@@ -197,6 +202,7 @@ public class ShipBehavior : MonoBehaviour {
 			_deathTime -= Time.fixedDeltaTime;
 			if (_deathTime <= 0f) {
 				if (this.Life == 0) { // LOSE!!!
+					OnDie.Invoke();
 					SceneManager.LoadScene ("Title");
 				} else {
 					Enter ();
@@ -300,6 +306,16 @@ public class ShipBehavior : MonoBehaviour {
 				WingTrails [i].Clear ();
 			}
 		}
+
+	}
+
+	public void ReceiveNewLife() {
+		if (this.Life <= 0 || _deathTime > 0f)
+			return;
+		
+		AudioHandler.Play (NEW_LIFE_SFX);
+		this.Life += 1;
+		OnLifeChange.Invoke (this.Life);
 
 	}
 }
