@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBehavior : MonoBehaviour {
+public class EnemyLaserBehavior : MonoBehaviour {
 
 	const string LASER_FIRE_SFX = "laser1";
 	const string LASER_HIT_SFX = "laser_hit";
-	
+
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 4f;
 	public float MaxLifeSeconds = 1f;
@@ -22,7 +22,7 @@ public class LaserBehavior : MonoBehaviour {
 	}
 
 	void OnEnable() {
-		
+
 		this.TargetBody.velocity = Vector2.zero;
 		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 
@@ -40,23 +40,23 @@ public class LaserBehavior : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		
+
 		if (this._paused || !this._isAlive)
 			return;
-		
+
 		_lifeTime += Time.deltaTime;
 
 		if (_lifeTime > this.MaxLifeSeconds)
 			this.Die ();
-		
+
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		
+
 		if (!this._isAlive)
 			return;
-		
-		var cache = LaserHit.Cache;
+
+		var cache = EnemyLaserHit.Cache;
 		var key = collider.gameObject;
 
 		if (cache.ContainsKey (key)) {
@@ -68,7 +68,7 @@ public class LaserBehavior : MonoBehaviour {
 	}
 
 	public void Explode() {
-		
+
 		var crashParticle = CrashPool.GetObject ();
 		if (crashParticle != null) {
 			crashParticle.transform.position = transform.position;

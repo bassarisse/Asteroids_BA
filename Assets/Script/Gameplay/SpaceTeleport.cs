@@ -12,7 +12,6 @@ public class SpaceTeleport : MonoBehaviour {
 	public UnityEvent OnTeleport;
 
 	Camera _camera;
-	bool _isVisible;
 	float _teleportTime;
 
 	void Awake() {
@@ -22,7 +21,6 @@ public class SpaceTeleport : MonoBehaviour {
 
 	void OnEnable() {
 		_camera = Camera.main;
-		_isVisible = true;
 		_teleportTime = InitialToleranceTime;
 	}
 
@@ -33,14 +31,12 @@ public class SpaceTeleport : MonoBehaviour {
 		if (_teleportTime > 0f)
 			_teleportTime -= Time.deltaTime;
 		
-		if (_isVisible && !TargetRenderer.isVisible && _teleportTime <= 0f) {
+		if (!TargetRenderer.isVisible && _teleportTime <= 0f) {
 			Teleport ();
-			_isVisible = false;
 			_teleportTime = ToleranceTime;
 		}
 
 		if (TargetRenderer.isVisible) {
-			_isVisible = true;
 			_teleportTime = 0f;
 		}
 

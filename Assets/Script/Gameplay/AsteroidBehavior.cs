@@ -7,9 +7,9 @@ public class AsteroidBehavior : MonoBehaviour {
 	const string CRASH_SFX = "asteroid_crash";
 
 	public Rigidbody2D TargetBody;
-	public float ImpulseForce = 1.5f;
 	public int Level = 0;
 	public int Score = 0;
+	public float ImpulseForce = 1.5f;
 	public GameObjectPool CrashPool;
 
 	public AsteroidEvent OnStruck;
@@ -18,12 +18,14 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	void Awake() {
 		AudioHandler.Load (CRASH_SFX);
+
 		if (OnStruck == null)
 			OnStruck = new AsteroidEvent ();
 		if (OnDie == null)
 			OnDie = new AsteroidEvent ();
 		if (OnGone == null)
 			OnGone = new AsteroidEvent ();
+		
 	}
 
 	void OnEnable () {
@@ -52,8 +54,10 @@ public class AsteroidBehavior : MonoBehaviour {
 		AudioHandler.Play (CRASH_SFX);
 
 		var crashParticle = CrashPool.GetObject ();
-		crashParticle.transform.position = transform.position;
-		crashParticle.SetActive (true);
+		if (crashParticle != null) {
+			crashParticle.transform.position = transform.position;
+			crashParticle.SetActive (true);
+		}
 
 		OnGone.Invoke (gameObject, this);
 

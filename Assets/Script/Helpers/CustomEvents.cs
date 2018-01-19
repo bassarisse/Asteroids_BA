@@ -12,6 +12,10 @@ public class AsteroidEvent : UnityEvent<GameObject, AsteroidBehavior> {
 }
 
 [System.Serializable]
+public class SaucerEvent : UnityEvent<GameObject, SaucerBehavior> {
+}
+
+[System.Serializable]
 public class Collider2DEvent : UnityEvent<GameObject, Collider2D> {
 }
 

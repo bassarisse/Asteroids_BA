@@ -7703,7 +7703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1667952125
 MonoBehaviour:
@@ -7865,6 +7865,8 @@ GameObject:
   - component: {fileID: 1705047366}
   - component: {fileID: 1705047370}
   - component: {fileID: 1705047371}
+  - component: {fileID: 1705047374}
+  - component: {fileID: 1705047375}
   - component: {fileID: 1705047372}
   - component: {fileID: 1705047373}
   m_Layer: 0
@@ -7928,6 +7930,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1037840470}
         m_MethodName: ResetAsteroids
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1778881073}
+        m_MethodName: ResetEnemies
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8076,7 +8089,7 @@ Transform:
   - {fileID: 7429159}
   - {fileID: 2042486271}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1705047370
 MonoBehaviour:
@@ -8180,6 +8193,200 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e37bdac3ea824597a2742d133b1abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1705047374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705047365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01af41c8c12bc4cd39ecf28f06746096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1705047366}
+        m_MethodName: Damage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1705047375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705047365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f39accd05214d1abdbbcb6b821df6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1705047366}
+        m_MethodName: Damage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!1 &1778881072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1778881074}
+  - component: {fileID: 1778881073}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1778881073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778881072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d848fd81548b43ae93085c06db2832c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnOffset: 2
+  AutoDeploy: 0
+  MinSaucerWaitTime: 3
+  MaxSaucerWaitTime: 8
+  MinEnemyShipWaitTime: 8
+  MaxEnemyShipWaitTime: 20
+  LaserTarget: {fileID: 1705047365}
+  SaucerPool:
+    Prefab: {fileID: 1416540888331136, guid: 219c8fcdf1de44b03bf3aec4b67a49d2, type: 2}
+    InitialSize: 1
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1778881073}
+          m_MethodName: ConfigEnemy
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  EnemyShipPool:
+    Prefab: {fileID: 1540895057935644, guid: 480d1ff9ac8674a8ea59b7469db3b1f7, type: 2}
+    InitialSize: 1
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1778881073}
+          m_MethodName: ConfigEnemy
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  EnemyLaserPool:
+    Prefab: {fileID: 1996712855909130, guid: 140057eed7cf34d47913e330c041c9fe, type: 2}
+    InitialSize: 4
+    AutoExpandQuantity: 2
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1778881073}
+          m_MethodName: ConfigEnemyLaser
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  EnemyLaserCrashPool:
+    Prefab: {fileID: 1724327315219692, guid: 56bec4d07eca3430a975acb8f9546a29, type: 2}
+    InitialSize: 2
+    AutoExpandQuantity: 2
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  EnemyCrashPool:
+    Prefab: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d, type: 2}
+    InitialSize: 2
+    AutoExpandQuantity: 2
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  OnScore:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1667952125}
+        m_MethodName: AddScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!4 &1778881074
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778881072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837713688 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1543542882758594, guid: 87d05f379db5d4bd5a25a89bda793021,
@@ -8346,7 +8553,7 @@ RectTransform:
   - {fileID: 1837713689}
   - {fileID: 1089690268}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8816,7 +9023,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2035196284
 MonoBehaviour:
@@ -9076,5 +9283,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4380114305177788}
   - component: {fileID: 114319582898870244}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: AsteroidSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnOffset: 3
   DirectionOffset: 45
-  MaxAsteroids: 10
+  MaxAsteroids: 8
   Stage: 1
   AutoDeploy: 0
   AsteroidPools:
@@ -225,6 +225,33 @@ MonoBehaviour:
     Prefab: {fileID: 1975314887512552, guid: 7c8cf3367d2a84e759db84b5a1173857, type: 2}
     InitialSize: 4
     AutoExpandQuantity: 4
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  SaucerPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  HyperSaucerPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  SaucerCrashPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
     OnCreate:
       m_PersistentCalls:
         m_Calls: []

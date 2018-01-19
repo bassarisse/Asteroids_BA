@@ -68,6 +68,7 @@ public class GameObjectPool : System.Object {
 			_pool [i].SetActive(false);
 		}
 	}
+
 }
 
 [Serializable]
@@ -77,6 +78,18 @@ public class ListOfPools {
 	public void Fill() {
 		for (var i = 0; i < Pools.Count; i++) {
 			Pools [i].Fill ();
+		}
+	}
+
+	public void Drain() {
+		for (var i = 0; i < Pools.Count; i++) {
+			Pools [i].Drain ();
+		}
+	}
+
+	public void Reclaim() {
+		for (var i = 0; i < Pools.Count; i++) {
+			Pools [i].Reclaim ();
 		}
 	}
 
@@ -94,7 +107,7 @@ public class ListOfPools {
 		set {
 			Pools[index] = value;
 		}
-	} 
+	}
 
 }
 
@@ -105,6 +118,18 @@ public class DoubleListOfPools {
 	public void Fill() {
 		for (var i = 0; i < Lists.Count; i++) {
 			Lists [i].Fill ();
+		}
+	}
+
+	public void Drain() {
+		for (var i = 0; i < Lists.Count; i++) {
+			Lists [i].Drain ();
+		}
+	}
+
+	public void Reclaim() {
+		for (var i = 0; i < Lists.Count; i++) {
+			Lists [i].Reclaim ();
 		}
 	}
 
@@ -122,6 +147,6 @@ public class DoubleListOfPools {
 		set {
 			Lists[index] = value;
 		}
-	} 
+	}
 
 }

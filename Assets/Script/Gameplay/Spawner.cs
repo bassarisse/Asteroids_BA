@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : Waiter {
 	
 	public float SpawnOffset = 2f;
 	public float DirectionOffset = 45f;
@@ -68,7 +68,8 @@ public class Spawner : MonoBehaviour {
 		var qtyToDeploy = Mathf.Min(4 + Mathf.FloorToInt (Stage / 2), MaxAsteroids);
 
 		for (var i = 0; i < qtyToDeploy; i++) {
-			DeployAsteroid (posMin, posMax, 0, 1f + Random.Range (0, SpawnOffset));
+			var offset = 1f + Random.Range (0, SpawnOffset);
+			DeployAsteroid (posMin, posMax, 0, offset);
 		}
 
 	}
@@ -131,13 +132,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public void ResetAsteroids() {
-		for (var l = 0; l < AsteroidPools.Count; l++) {
-			var poolsPerLevel = AsteroidPools [l];
-			for (var t = 0; t < poolsPerLevel.Count; t++) {
-				var pool = poolsPerLevel [t];
-				pool.Reclaim ();
-			}
-		}
+		AsteroidPools.Reclaim ();
 		_asteroidCount = 0;
 		DeployAsteroids ();
 	}
