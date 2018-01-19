@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BulletHit : MonoBehaviour {
+public class LaserHit : MonoBehaviour {
 
-	public static readonly Dictionary<GameObject, BulletHit> Cache = new Dictionary<GameObject, BulletHit>();
+	public static readonly Dictionary<GameObject, LaserHit> Cache = new Dictionary<GameObject, LaserHit>();
 	public void OnEnable() { Cache.Add(gameObject, this); }
 	public void OnDisable() { Cache.Remove(gameObject); }
 

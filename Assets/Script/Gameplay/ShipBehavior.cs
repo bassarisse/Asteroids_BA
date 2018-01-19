@@ -24,7 +24,7 @@ public class ShipBehavior : Waiter {
 	public List<TrailRenderer> WingTrails;
 	public Vector3 BeforeEnterPosition;
 	public int Life = 3;
-	public int MaxBullets = 4;
+	public int MaxLasers = 4;
 	public float MoveForceMultiplier = 7f;
 	public float TurnRate = 3f;
 	public float EnterImpulseMultiplier = 9.5f;
@@ -49,8 +49,8 @@ public class ShipBehavior : Waiter {
 	ObjectPool _shipExplosionPool;
 	ObjectPool _hyperspacePool;
 	ObjectPool _hyperspaceFinishPool;
-	ObjectPool _bulletPool;
-	ObjectPool _bulletCrashPool;
+	ObjectPool _laserPool;
+	ObjectPool _laserCrashPool;
 	bool _canHyperspace = true;
 	Camera _camera;
 
@@ -71,17 +71,17 @@ public class ShipBehavior : Waiter {
 		_shipExplosionPool = new ObjectPool (ShipExplosionObject, 1, 1);
 		_hyperspacePool = new ObjectPool (HyperspaceObject, 1, 1);
 		_hyperspaceFinishPool = new ObjectPool (HyperspaceFinishObject, 1, 1);
-		_bulletCrashPool = new ObjectPool (LaserCrashObject, MaxBullets, 2);
-		_bulletPool = new ObjectPool (LaserObject, MaxBullets, 0, ConfigBullet);
+		_laserCrashPool = new ObjectPool (LaserCrashObject, MaxLasers, 2);
+		_laserPool = new ObjectPool (LaserObject, MaxLasers, 0, ConfigLaser);
 
 		_camera = Camera.main;
 
 	}
 
-	void ConfigBullet(GameObject newObject) {
-		var bulletBehavior = newObject.GetComponent<BulletBehavior> ();
-		if (bulletBehavior != null) {
-			bulletBehavior.CrashParticlePool = _bulletCrashPool;
+	void ConfigLaser(GameObject newObject) {
+		var laserBehavior = newObject.GetComponent<LaserBehavior> ();
+		if (laserBehavior != null) {
+			laserBehavior.CrashParticlePool = _laserCrashPool;
 		}
 	}
 
@@ -127,7 +127,7 @@ public class ShipBehavior : Waiter {
 		}
 
 		if (InputExtensions.Pressed.A) {
-			FireLaser ();
+			ShootLaser ();
 		}
 
 		if (InputExtensions.Pressed.X) {
@@ -193,13 +193,13 @@ public class ShipBehavior : Waiter {
 
 	}
 
-	void FireLaser() {
-		var bullet = _bulletPool.GetObject ();
-		if (bullet == null)
+	void ShootLaser() {
+		var laser = _laserPool.GetObject ();
+		if (laser == null)
 			return;
-		bullet.transform.position = transform.position;
-		bullet.transform.rotation = transform.rotation;
-		bullet.SetActive (true);
+		laser.transform.position = transform.position;
+		laser.transform.rotation = transform.rotation;
+		laser.SetActive (true);
 	}
 
 	IEnumerator Hyperspace() {

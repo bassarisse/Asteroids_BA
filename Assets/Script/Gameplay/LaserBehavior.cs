@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehavior : MonoBehaviour {
+public class LaserBehavior : MonoBehaviour {
 
 	const string LASER_FIRE_SFX = "laser1";
 	const string LASER_HIT_SFX = "laser_hit";
@@ -56,7 +56,7 @@ public class BulletBehavior : MonoBehaviour {
 		if (!this._isAlive)
 			return;
 		
-		var cache = BulletHit.Cache;
+		var cache = LaserHit.Cache;
 		var key = collider.gameObject;
 
 		if (cache.ContainsKey (key)) {
