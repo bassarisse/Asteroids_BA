@@ -22,7 +22,7 @@ public class HighScoreList : MonoBehaviour {
 
 	void UpdateText () {
 
-		var scores = UserSession.GetScores (20);
+		var scores = UserSession.GetScores (50);
 
 		if (scores.Count() == 0) {
 			Scores.text = "-";
