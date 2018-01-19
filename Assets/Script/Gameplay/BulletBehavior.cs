@@ -13,9 +13,8 @@ public class BulletBehavior : MonoBehaviour {
 	public ObjectPool CrashParticlePool;
 
 	bool _paused = false;
-	bool _playedSound = false;
+	bool _playedSound = false; // needed to prevent the audio from playing when the prefab is instatiated
 	bool _isAlive = false;
-	bool _didHit = false;
 	float _lifeTime = 0f;
 
 	void Awake() {
@@ -29,7 +28,6 @@ public class BulletBehavior : MonoBehaviour {
 
 		this._playedSound = false;
 		this._isAlive = true;
-		this._didHit = false;
 		this._lifeTime = 0f;
 
 	}
@@ -55,7 +53,7 @@ public class BulletBehavior : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		
-		if (this._didHit)
+		if (!this._isAlive)
 			return;
 		
 		var cache = BulletHit.Cache;
@@ -64,14 +62,9 @@ public class BulletBehavior : MonoBehaviour {
 		if (cache.ContainsKey (key)) {
 			AudioHandler.Play (LASER_HIT_SFX);
 			cache [key].Hit (gameObject, collider);
-			this._didHit = true;
+			Explode ();
 		}
 
-	}
-
-	public void Die() {
-		this._isAlive = false;
-		this.gameObject.SetActive (false);
 	}
 
 	public void Explode() {
@@ -79,6 +72,11 @@ public class BulletBehavior : MonoBehaviour {
 		crashParticle.transform.position = transform.position;
 		crashParticle.SetActive (true);
 		this.Die ();
+	}
+
+	public void Die() {
+		this._isAlive = false;
+		this.gameObject.SetActive (false);
 	}
 
 	public void Pause() {

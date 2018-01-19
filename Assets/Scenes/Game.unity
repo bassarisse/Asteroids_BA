@@ -7866,6 +7866,7 @@ GameObject:
   - component: {fileID: 1705047370}
   - component: {fileID: 1705047371}
   - component: {fileID: 1705047372}
+  - component: {fileID: 1705047373}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -7887,26 +7888,19 @@ MonoBehaviour:
   TargetBody: {fileID: 1705047368}
   FireParticle: {fileID: 353837879}
   SpaceTeleportBehavior: {fileID: 1705047370}
+  EngineAudio: {fileID: 2121136798}
   WingTrails:
   - {fileID: 7429160}
   - {fileID: 2042486270}
-  EngineAudio: {fileID: 2121136798}
-  ShipExplosionObject: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d,
-    type: 2}
-  HyperspaceObject: {fileID: 1148850774071724, guid: b25a136299e1d4c25a84e109ccb85c96,
-    type: 2}
-  HyperspaceFinishObject: {fileID: 1301913801819892, guid: b3f4c72e2f2664a58b3792613c5cd0f4,
-    type: 2}
-  LaserObject: {fileID: 1473169507733142, guid: 955dca5d6206346f79b55c570b52bdce,
-    type: 2}
-  LaserCrashObject: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5,
-    type: 2}
-  BeforeEnterPosition: {x: 0, y: -10, z: 0}
-  MoveForceMultiplier: 7
-  TurnRate: 3
+  BeforeEnterPosition: {x: 0, y: -8, z: 0}
   Life: 3
   MaxBullets: 4
-  EnterTime: 2
+  MoveForceMultiplier: 7
+  TurnRate: 3
+  EnterImpulseMultiplier: 8
+  EnterTime: 0.75
+  AfterEnterTime: 0.5
+  DeathTime: 2
   HyperspaceMargin: 1
   HyperspaceTransitionTime: 1
   HyperspaceWaitTime: 1
@@ -7962,6 +7956,16 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  ShipExplosionObject: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d,
+    type: 2}
+  HyperspaceObject: {fileID: 1148850774071724, guid: b25a136299e1d4c25a84e109ccb85c96,
+    type: 2}
+  HyperspaceFinishObject: {fileID: 1301913801819892, guid: b3f4c72e2f2664a58b3792613c5cd0f4,
+    type: 2}
+  LaserObject: {fileID: 1473169507733142, guid: 955dca5d6206346f79b55c570b52bdce,
+    type: 2}
+  LaserCrashObject: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5,
+    type: 2}
 --- !u!60 &1705047367
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8120,6 +8124,17 @@ MonoBehaviour:
   Trails:
   - {fileID: 7429160}
   - {fileID: 2042486270}
+--- !u!114 &1705047373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705047365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e37bdac3ea824597a2742d133b1abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837713688 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1543542882758594, guid: 87d05f379db5d4bd5a25a89bda793021,

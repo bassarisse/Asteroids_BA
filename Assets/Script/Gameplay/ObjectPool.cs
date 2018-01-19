@@ -11,7 +11,6 @@ public class ObjectPool {
 	int _autoExpandQuantity;
 	Action<GameObject> _onCreate = null;
 
-	// Use this for initialization
 	public ObjectPool (GameObject baseObject, int initialSize, int autoExpandQuantity = 0, Action<GameObject> onCreate = null) {
 		_pool = new List<GameObject> ();
 		_baseObject = baseObject;

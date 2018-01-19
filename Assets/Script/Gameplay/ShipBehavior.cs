@@ -4,28 +4,33 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class ShipBehavior : MonoBehaviour {
+public class ShipBehavior : Waiter {
 
 	const string NEW_LIFE_SFX = "new_life";
 	const string CRASH_SFX = "ship_crash";
 	const string HYPERSPACE_SFX = "hyperspace";
 
+	internal enum ShipState {
+		Idle = 0,
+		Entering = 1,
+		Hyperspacing = 2,
+		Dead = 3,
+	}
+
 	public Rigidbody2D TargetBody;
 	public ParticleSystem FireParticle;
 	public SpaceTeleport SpaceTeleportBehavior;
-	public List<TrailRenderer> WingTrails;
 	public AudioSource EngineAudio;
-	public GameObject ShipExplosionObject;
-	public GameObject HyperspaceObject;
-	public GameObject HyperspaceFinishObject;
-	public GameObject LaserObject;
-	public GameObject LaserCrashObject;
+	public List<TrailRenderer> WingTrails;
 	public Vector3 BeforeEnterPosition;
-	public float MoveForceMultiplier = 0.2f;
-	public float TurnRate = 3f;
 	public int Life = 3;
 	public int MaxBullets = 4;
-	public float EnterTime = 2f;
+	public float MoveForceMultiplier = 7f;
+	public float TurnRate = 3f;
+	public float EnterImpulseMultiplier = 9.5f;
+	public float EnterTime = 1f;
+	public float AfterEnterTime = 1f;
+	public float DeathTime = 2f;
 	public float HyperspaceMargin = 1f;
 	public float HyperspaceTransitionTime = 0.75f;
 	public float HyperspaceWaitTime = 0.5f;
@@ -33,17 +38,20 @@ public class ShipBehavior : MonoBehaviour {
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
 	public UnityEvent OnDie;
+	public GameObject ShipExplosionObject;
+	public GameObject HyperspaceObject;
+	public GameObject HyperspaceFinishObject;
+	public GameObject LaserObject;
+	public GameObject LaserCrashObject;
+
+	ShipState _state = ShipState.Idle;
 
 	ObjectPool _shipExplosionPool;
 	ObjectPool _hyperspacePool;
 	ObjectPool _hyperspaceFinishPool;
 	ObjectPool _bulletPool;
 	ObjectPool _bulletCrashPool;
-	float _enterTime = 0f;
-	float _deathTime = 0f;
-	float _hyperspaceTime = 0f;
-	float _hyperspaceWaitTime = 0f;
-	Vector3 _hyperspacePosition;
+	bool _canHyperspace = true;
 	Camera _camera;
 
 	void Awake () {
@@ -82,36 +90,18 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void Start() {
-		Enter ();
-	}
-
-	void Enter() {
-		
-		transform.position = BeforeEnterPosition;
-
-		var hitList = new List<VoidHit> ();
-		foreach (var item in VoidHit.Cache.Values)
-			hitList.Add(item);
-		foreach (var item in hitList)
-			item.Hit ();
-
-		_enterTime = EnterTime;
-		FireParticle.Clear ();
-		FireParticle.Play ();
-
-		OnEnter.Invoke ();
-
+		StartCoroutine(Enter ());
 	}
 
 	void Update () {
 		
-		if (_deathTime > 0f) {
+		if (_state == ShipState.Dead) {
 			EngineAudio.volume = 0f;
 			EngineAudio.pitch = 1f;
 			return;
 		}
 
-		var engineIsOn = (InputExtensions.Holding.Up || _enterTime > 0) && _hyperspaceTime <= 0f;
+		var engineIsOn = InputExtensions.Holding.Up && _state == ShipState.Idle || _state == ShipState.Entering;
 
 		HandleInput ();
 		UpdateFire (engineIsOn);
@@ -120,11 +110,12 @@ public class ShipBehavior : MonoBehaviour {
 	}
 
 	void HandleInput() {
-		if (_enterTime > 0f || _hyperspaceTime > 0f)
+
+		if (_state != ShipState.Idle)
 			return;
 
 		if (InputExtensions.Holding.Up) {
-			this.TargetBody.AddForce (this.TargetBody.transform.up * this.MoveForceMultiplier);
+			this.TargetBody.AddForce (transform.up * this.MoveForceMultiplier);
 		}
 
 		if (InputExtensions.Holding.Right) {
@@ -136,11 +127,11 @@ public class ShipBehavior : MonoBehaviour {
 		}
 
 		if (InputExtensions.Pressed.A) {
-			this.FireLaser ();
+			FireLaser ();
 		}
 
 		if (InputExtensions.Pressed.X) {
-			this.Hyperspace ();
+			StartCoroutine(Hyperspace ());
 		}
 
 	}
@@ -164,7 +155,7 @@ public class ShipBehavior : MonoBehaviour {
 
 		var volume = (engineIsOn ? 0.1f : 0.075f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
 
-		if (_hyperspaceTime > 0f)
+		if (_state == ShipState.Hyperspacing)
 			volume /= 5f;
 
 		EngineAudio.volume = EngineAudio.volume + (volume - EngineAudio.volume) * Time.deltaTime;
@@ -172,43 +163,34 @@ public class ShipBehavior : MonoBehaviour {
 
 	}
 
-	void FixedUpdate() {
+	IEnumerator Enter() {
 
-		if (_hyperspaceTime > 0f) {
-			_hyperspaceTime -= Time.fixedDeltaTime;
-			if (_hyperspaceTime <= 0f) {
-				_hyperspaceWaitTime = HyperspaceWaitTime;
-				this.transform.position = _hyperspacePosition;
-				SpaceTeleportBehavior.enabled = true;
-				ClearTrails ();
-				FireParticle.Play ();
-			}
-		}
+		_state = ShipState.Entering;
 
-		if (_hyperspaceWaitTime > 0f) {
-			_hyperspaceWaitTime -= Time.fixedDeltaTime;
-		}
+		transform.position = BeforeEnterPosition;
 
-		if (_enterTime > 0f) {
-			_enterTime -= Time.fixedDeltaTime;
-			this.transform.position = BeforeEnterPosition * (_enterTime / EnterTime);
-			if (_enterTime <= 0f) {
-				OnRestore.Invoke ();
-				SpaceTeleportBehavior.enabled = true;
-			}
-		}
+		var hitList = new List<VoidHit> ();
+		foreach (var item in VoidHit.Cache.Values)
+			hitList.Add(item);
+		foreach (var item in hitList)
+			item.Hit ();
 
-		if (_deathTime > 0f) {
-			_deathTime -= Time.fixedDeltaTime;
-			if (_deathTime <= 0f) {
-				if (this.Life == 0) {
-					OnDie.Invoke();
-				} else {
-					Enter ();
-				}
-			}
-		}
-		
+		FireParticle.Clear ();
+		FireParticle.Play ();
+
+		OnEnter.Invoke ();
+
+		this.TargetBody.AddForce (transform.up * EnterImpulseMultiplier, ForceMode2D.Impulse);
+
+		yield return Wait(EnterTime);
+
+		_state = ShipState.Idle;
+
+		yield return Wait(AfterEnterTime);
+
+		OnRestore.Invoke ();
+		SpaceTeleportBehavior.enabled = true;
+
 	}
 
 	void FireLaser() {
@@ -220,40 +202,122 @@ public class ShipBehavior : MonoBehaviour {
 		bullet.SetActive (true);
 	}
 
-	void Hyperspace() {
-		if (_hyperspaceWaitTime > 0f)
-			return;
-		if (_camera == null)
-			return;
+	IEnumerator Hyperspace() {
+		if (!_canHyperspace)
+			yield break;
+
+		_state = ShipState.Hyperspacing;
+		_canHyperspace = false;
+
+		SpaceTeleportBehavior.enabled = false;
+		AudioHandler.Play (HYPERSPACE_SFX);
+
+		var hyperspacePosition = GetHyperspacePosition ();
 
 		var hyperspaceParticle = _hyperspacePool.GetObject ();
 		hyperspaceParticle.transform.position = transform.position;
 		hyperspaceParticle.transform.rotation = transform.rotation;
 		hyperspaceParticle.SetActive (true);
 
-		SpaceTeleportBehavior.enabled = false;
-
-		AudioHandler.Play (HYPERSPACE_SFX);
-		_hyperspaceTime = HyperspaceTransitionTime;
-		_hyperspacePosition = GetHyperspacePosition ();
-
 		var hyperspaceFinishParticle = _hyperspaceFinishPool.GetObject ();
-		hyperspaceFinishParticle.transform.position = _hyperspacePosition;
+		hyperspaceFinishParticle.transform.position = hyperspacePosition;
 		hyperspaceFinishParticle.transform.rotation = transform.rotation;
 		hyperspaceFinishParticle.SetActive (true);
 
-		this.transform.position = BeforeEnterPosition;
+		transform.position = BeforeEnterPosition;
 		this.TargetBody.velocity = Vector2.zero;
 		this.TargetBody.angularVelocity = 0f;
 
 		ClearTrails ();
 		FireParticle.Stop ();
 
+		yield return Wait (HyperspaceTransitionTime);
+
+		_state = ShipState.Idle;
+
+		transform.position = hyperspacePosition;
+		SpaceTeleportBehavior.enabled = true;
+		ClearTrails ();
+		FireParticle.Play ();
+
+		yield return Wait (HyperspaceWaitTime);
+
+		_canHyperspace = true;
+
+	}
+
+	IEnumerator Die() {
+
+		_state = ShipState.Dead;
+
+		SpaceTeleportBehavior.enabled = false;
+		AudioHandler.Play (CRASH_SFX);
+
+		var explosionParticle = _shipExplosionPool.GetObject ();
+		explosionParticle.transform.position = transform.position;
+		explosionParticle.transform.rotation = transform.rotation;
+		explosionParticle.SetActive (true);
+
+		transform.SetPositionAndRotation (BeforeEnterPosition, Quaternion.Euler (Vector3.zero));
+		this.TargetBody.velocity = Vector2.zero;
+		this.TargetBody.angularVelocity = 0f;
+
+		ClearTrails ();
+		FireParticle.Stop ();
+
+		this.Life -= 1;
+		OnLifeChange.Invoke (this.Life);
+
+		yield return Wait (DeathTime);
+
+		if (this.Life == 0) {
+			OnDie.Invoke();
+		} else {
+			StartCoroutine(Enter ());
+		}
+
+	}
+
+	void OnTriggerEnter2D(Collider2D collider) {
+		if (_state != ShipState.Idle)
+			return;
+		var cache = ShipHit.Cache;
+		var key = collider.gameObject;
+		if (cache.ContainsKey(key))
+			cache [key].Hit (gameObject, collider);
+	}
+
+	public void Damage(GameObject originGameObject, Collider2D collider) {
+		StartCoroutine (Die ());
+	}
+
+	public void ReceiveNewLife() {
+		if (this.Life <= 0 || _state == ShipState.Dead)
+			return;
+		
+		AudioHandler.Play (NEW_LIFE_SFX);
+		this.Life += 1;
+		OnLifeChange.Invoke (this.Life);
+
+	}
+
+	public void ClearTrails() {
+		if (WingTrails == null)
+			return;
+
+		for (var i = 0; i < WingTrails.Count; i++) {
+			WingTrails [i].Clear ();
+		}
+
 	}
 
 	Vector3 GetHyperspacePosition() {
 
 		var pos = transform.position;
+
+		if (_camera == null)
+			return pos;
+
 		var center = _camera.transform.position;
 		var height = _camera.orthographicSize * 2.0f;
 		var width = height * _camera.aspect;
@@ -263,58 +327,5 @@ public class ShipBehavior : MonoBehaviour {
 			center.y + (Random.value - 0.5f) * (height - HyperspaceMargin * 2),
 			pos.z
 		);
-	}
-
-	void OnTriggerEnter2D(Collider2D collider) {
-		if (_deathTime > 0f || _enterTime > 0f || _hyperspaceTime > 0f)
-			return;
-		var cache = ShipHit.Cache;
-		var key = collider.gameObject;
-		if (cache.ContainsKey(key))
-			cache [key].Hit (gameObject, collider);
-	}
-
-	public void Damage(GameObject originGameObject, Collider2D collider) {
-
-		var explosionParticle = _shipExplosionPool.GetObject ();
-		explosionParticle.transform.position = transform.position;
-		explosionParticle.transform.rotation = transform.rotation;
-		explosionParticle.SetActive (true);
-
-		SpaceTeleportBehavior.enabled = false;
-		
-		AudioHandler.Play (CRASH_SFX);
-		_deathTime = 2f;
-
-		this.transform.SetPositionAndRotation (BeforeEnterPosition, Quaternion.Euler (Vector3.zero));
-		this.TargetBody.velocity = Vector2.zero;
-		this.TargetBody.angularVelocity = 0f;
-
-		ClearTrails ();
-		FireParticle.Stop ();
-
-		this.Life -= 1;
-		OnLifeChange.Invoke (this.Life);
-		
-	}
-
-	public void ClearTrails() {
-
-		if (WingTrails != null) {
-			for (var i = 0; i < WingTrails.Count; i++) {
-				WingTrails [i].Clear ();
-			}
-		}
-
-	}
-
-	public void ReceiveNewLife() {
-		if (this.Life <= 0 || _deathTime > 0f)
-			return;
-		
-		AudioHandler.Play (NEW_LIFE_SFX);
-		this.Life += 1;
-		OnLifeChange.Invoke (this.Life);
-
 	}
 }
