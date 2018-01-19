@@ -16,11 +16,19 @@ public class AudioHandlerHelper : MonoBehaviour {
 	private AudioSource _music;
 	
 	private Dictionary<GameObject, AudioSource> _audioSourceCache;
-	private ObjectPool _pool;
+	private GameObjectPool _pool;
 
 	void Awake() {
+		
 		_audioSourceCache = new Dictionary<GameObject, AudioSource> ();
-		_pool = new ObjectPool (new GameObject ("SoundEffect"), 15, 5, ConfigAudio);
+
+		_pool = new GameObjectPool ();
+		_pool.Prefab = new GameObject ("SoundEffect");
+		_pool.InitialSize = 15;
+		_pool.AutoExpandQuantity = 5;
+		_pool.OnCreate.AddListener (ConfigAudio);
+		_pool.Fill ();
+
 		DontDestroyOnLoad(gameObject);	
 	}
 

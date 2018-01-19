@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class ListOfObjects {
-	public List<GameObject> Objects;
-}
-
 public class Spawner : MonoBehaviour {
 	
 	public float SpawnOffset = 2f;
@@ -14,51 +9,31 @@ public class Spawner : MonoBehaviour {
 	public int MaxAsteroids = 10;
 	public int Stage = 1;
 	public bool AutoDeploy = false;
-	public List<ListOfObjects> AsteroidObjects;
-	public GameObject AsteroidCrashObject;
+	public DoubleListOfPools AsteroidPools;
+	public GameObjectPool AsteroidCrashPool;
 	public IntEvent OnScore;
 
-	List<List<ObjectPool>> _asteroidPools;
-	ObjectPool _asteroidParticlePool;
 	int _asteroidCount = 0;
 
 	void Awake() {
+		
 		if (OnScore == null)
 			OnScore = new IntEvent ();
+
+		AsteroidPools.Fill ();
+		AsteroidCrashPool.Fill ();
+
 	}
 
 	void Start () {
-
-		CreatePools ();
 		if (AutoDeploy)
 			DeployAsteroids();
-		
 	}
 
-	void CreatePools() {
-
-		_asteroidParticlePool = new ObjectPool (AsteroidCrashObject, 4, 4);
-
-		_asteroidPools = new List<List<ObjectPool>> ();
-
-		for (var l = 0; l < AsteroidObjects.Count; l++) {
-			var levelTypes = AsteroidObjects [l].Objects;
-			var newTypePool = new List<ObjectPool> ();
-
-			for (var t = 0; t < levelTypes.Count; t++) {
-				var prefab = levelTypes [t];
-				newTypePool.Add (new ObjectPool (prefab, l + 2, l + 1, ConfigAsteroid));
-			}
-
-			_asteroidPools.Add (newTypePool);
-		}
-
-	}
-
-	void ConfigAsteroid(GameObject newObject) {
+	public void ConfigAsteroid(GameObject newObject) {
 		var asteroidBehavior = newObject.GetComponent<AsteroidBehavior> ();
 		if (asteroidBehavior != null) {
-			asteroidBehavior.CrashParticlePool = _asteroidParticlePool;
+			asteroidBehavior.CrashPool = AsteroidCrashPool;
 			asteroidBehavior.OnStruck.AddListener (ScoreFromAsteroid);
 			asteroidBehavior.OnDie.AddListener (DivideAsteroid);
 			asteroidBehavior.OnGone.AddListener (ReturnAsteroid);
@@ -67,22 +42,19 @@ public class Spawner : MonoBehaviour {
 
 	GameObject GetAsteroid(int level) {
 
-		var maxLevel = AsteroidObjects.Count - 1;
+		var maxLevel = AsteroidPools.Count - 1;
 		if (level > maxLevel)
 			return null;
 
-		var objects = AsteroidObjects [level];
-		var typeIndex = Random.Range (0, objects.Objects.Count - 1);
+		var listsOfPools = AsteroidPools [level];
+		var typeIndex = Random.Range (0, listsOfPools.Count - 1);
 
-		var pool = _asteroidPools[level][typeIndex];
+		var pool = listsOfPools[typeIndex];
 
 		return pool.GetObject ();
 	}
 
 	void DeployAsteroids() {
-
-		if (_asteroidPools == null)
-			CreatePools ();
 
 		var camera = Camera.main;
 		if (camera == null)
@@ -159,10 +131,8 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public void ResetAsteroids() {
-		if (_asteroidPools == null)
-			return;
-		for (var l = 0; l < _asteroidPools.Count; l++) {
-			var poolsPerLevel = _asteroidPools [l];
+		for (var l = 0; l < AsteroidPools.Count; l++) {
+			var poolsPerLevel = AsteroidPools [l];
 			for (var t = 0; t < poolsPerLevel.Count; t++) {
 				var pool = poolsPerLevel [t];
 				pool.Reclaim ();

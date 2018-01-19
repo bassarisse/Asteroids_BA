@@ -7894,7 +7894,6 @@ MonoBehaviour:
   - {fileID: 2042486270}
   BeforeEnterPosition: {x: 0, y: -8, z: 0}
   Life: 3
-  MaxBullets: 4
   MoveForceMultiplier: 7
   TurnRate: 3
   EnterImpulseMultiplier: 8
@@ -7956,16 +7955,62 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  ShipExplosionObject: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d,
-    type: 2}
-  HyperspaceObject: {fileID: 1148850774071724, guid: b25a136299e1d4c25a84e109ccb85c96,
-    type: 2}
-  HyperspaceFinishObject: {fileID: 1301913801819892, guid: b3f4c72e2f2664a58b3792613c5cd0f4,
-    type: 2}
-  LaserObject: {fileID: 1473169507733142, guid: 955dca5d6206346f79b55c570b52bdce,
-    type: 2}
-  LaserCrashObject: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5,
-    type: 2}
+  ShipExplosionPool:
+    Prefab: {fileID: 1790136226604690, guid: eaaefefe542c145b1995c3b01941263d, type: 2}
+    InitialSize: 1
+    AutoExpandQuantity: 1
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  HyperspacePool:
+    Prefab: {fileID: 1148850774071724, guid: b25a136299e1d4c25a84e109ccb85c96, type: 2}
+    InitialSize: 1
+    AutoExpandQuantity: 1
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  HyperspaceFinishPool:
+    Prefab: {fileID: 1301913801819892, guid: b3f4c72e2f2664a58b3792613c5cd0f4, type: 2}
+    InitialSize: 1
+    AutoExpandQuantity: 1
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  LaserPool:
+    Prefab: {fileID: 1473169507733142, guid: 955dca5d6206346f79b55c570b52bdce, type: 2}
+    InitialSize: 4
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1705047366}
+          m_MethodName: ConfigLaser
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  LaserCrashPool:
+    Prefab: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5, type: 2}
+    InitialSize: 2
+    AutoExpandQuantity: 2
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
 --- !u!60 &1705047367
 PolygonCollider2D:
   m_ObjectHideFlags: 0

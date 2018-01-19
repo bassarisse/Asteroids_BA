@@ -10,7 +10,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	public float ImpulseForce = 1.5f;
 	public int Level = 0;
 	public int Score = 0;
-	public ObjectPool CrashParticlePool;
+	public GameObjectPool CrashPool;
 
 	public AsteroidEvent OnStruck;
 	public AsteroidEvent OnDie;
@@ -51,7 +51,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		
 		AudioHandler.Play (CRASH_SFX);
 
-		var crashParticle = CrashParticlePool.GetObject ();
+		var crashParticle = CrashPool.GetObject ();
 		crashParticle.transform.position = transform.position;
 		crashParticle.SetActive (true);
 

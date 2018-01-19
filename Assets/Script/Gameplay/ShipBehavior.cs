@@ -24,7 +24,6 @@ public class ShipBehavior : Waiter {
 	public List<TrailRenderer> WingTrails;
 	public Vector3 BeforeEnterPosition;
 	public int Life = 3;
-	public int MaxLasers = 4;
 	public float MoveForceMultiplier = 7f;
 	public float TurnRate = 3f;
 	public float EnterImpulseMultiplier = 9.5f;
@@ -38,26 +37,18 @@ public class ShipBehavior : Waiter {
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
 	public UnityEvent OnDie;
-	public GameObject ShipExplosionObject;
-	public GameObject HyperspaceObject;
-	public GameObject HyperspaceFinishObject;
-	public GameObject LaserObject;
-	public GameObject LaserCrashObject;
+	public GameObjectPool ShipExplosionPool;
+	public GameObjectPool HyperspacePool;
+	public GameObjectPool HyperspaceFinishPool;
+	public GameObjectPool LaserPool;
+	public GameObjectPool LaserCrashPool;
 
 	ShipState _state = ShipState.Idle;
-
-	ObjectPool _shipExplosionPool;
-	ObjectPool _hyperspacePool;
-	ObjectPool _hyperspaceFinishPool;
-	ObjectPool _laserPool;
-	ObjectPool _laserCrashPool;
 	bool _canHyperspace = true;
 	Camera _camera;
 
 	void Awake () {
-		AudioHandler.Load (NEW_LIFE_SFX);
-		AudioHandler.Load (CRASH_SFX);
-		AudioHandler.Load (HYPERSPACE_SFX);
+		AudioHandler.Load (NEW_LIFE_SFX, CRASH_SFX, HYPERSPACE_SFX);
 
 		if (OnLifeChange == null)
 			OnLifeChange = new IntEvent ();
@@ -68,20 +59,20 @@ public class ShipBehavior : Waiter {
 		if (OnDie == null)
 			OnDie = new UnityEvent ();
 
-		_shipExplosionPool = new ObjectPool (ShipExplosionObject, 1, 1);
-		_hyperspacePool = new ObjectPool (HyperspaceObject, 1, 1);
-		_hyperspaceFinishPool = new ObjectPool (HyperspaceFinishObject, 1, 1);
-		_laserCrashPool = new ObjectPool (LaserCrashObject, MaxLasers, 2);
-		_laserPool = new ObjectPool (LaserObject, MaxLasers, 0, ConfigLaser);
+		ShipExplosionPool.Fill ();
+		HyperspacePool.Fill ();
+		HyperspaceFinishPool.Fill ();
+		LaserPool.Fill ();
+		LaserCrashPool.Fill ();
 
 		_camera = Camera.main;
 
 	}
 
-	void ConfigLaser(GameObject newObject) {
+	public void ConfigLaser(GameObject newObject) {
 		var laserBehavior = newObject.GetComponent<LaserBehavior> ();
 		if (laserBehavior != null) {
-			laserBehavior.CrashParticlePool = _laserCrashPool;
+			laserBehavior.CrashPool = LaserCrashPool;
 		}
 	}
 
@@ -194,7 +185,7 @@ public class ShipBehavior : Waiter {
 	}
 
 	void ShootLaser() {
-		var laser = _laserPool.GetObject ();
+		var laser = LaserPool.GetObject ();
 		if (laser == null)
 			return;
 		laser.transform.position = transform.position + transform.up * 0.55f;
@@ -214,12 +205,12 @@ public class ShipBehavior : Waiter {
 
 		var hyperspacePosition = GetHyperspacePosition ();
 
-		var hyperspaceParticle = _hyperspacePool.GetObject ();
+		var hyperspaceParticle = HyperspacePool.GetObject ();
 		hyperspaceParticle.transform.position = transform.position;
 		hyperspaceParticle.transform.rotation = transform.rotation;
 		hyperspaceParticle.SetActive (true);
 
-		var hyperspaceFinishParticle = _hyperspaceFinishPool.GetObject ();
+		var hyperspaceFinishParticle = HyperspaceFinishPool.GetObject ();
 		hyperspaceFinishParticle.transform.position = hyperspacePosition;
 		hyperspaceFinishParticle.transform.rotation = transform.rotation;
 		hyperspaceFinishParticle.SetActive (true);
@@ -257,7 +248,7 @@ public class ShipBehavior : Waiter {
 		SpaceTeleportBehavior.enabled = false;
 		AudioHandler.Play (CRASH_SFX);
 
-		var explosionParticle = _shipExplosionPool.GetObject ();
+		var explosionParticle = ShipExplosionPool.GetObject ();
 		explosionParticle.transform.position = transform.position;
 		explosionParticle.transform.rotation = transform.rotation;
 		explosionParticle.SetActive (true);

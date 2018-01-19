@@ -10,7 +10,7 @@ public class LaserBehavior : MonoBehaviour {
 	public Rigidbody2D TargetBody;
 	public float ImpulseForce = 4f;
 	public float MaxLifeSeconds = 1f;
-	public ObjectPool CrashParticlePool;
+	public GameObjectPool CrashPool;
 
 	bool _paused = false;
 	bool _playedSound = false; // needed to prevent the audio from playing when the prefab is instatiated
@@ -68,7 +68,7 @@ public class LaserBehavior : MonoBehaviour {
 	}
 
 	public void Explode() {
-		var crashParticle = CrashParticlePool.GetObject ();
+		var crashParticle = CrashPool.GetObject ();
 		crashParticle.transform.position = transform.position;
 		crashParticle.SetActive (true);
 		this.Die ();

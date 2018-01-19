@@ -54,20 +54,182 @@ MonoBehaviour:
   SpawnOffset: 3
   DirectionOffset: 45
   MaxAsteroids: 10
-  AsteroidObjects:
-  - Objects:
-    - {fileID: 1523663976252944, guid: cad7fcde98bf141a296b110b94830b53, type: 2}
-    - {fileID: 1503439986755430, guid: ab27a8de6466d414cb01d46239c5af64, type: 2}
-    - {fileID: 1832484937983620, guid: 4882942038b91450eb7e67d7b92bd596, type: 2}
-    - {fileID: 1559799609914572, guid: 2ed4b10a66a3e4e6ab2758293eeef938, type: 2}
-  - Objects:
-    - {fileID: 1962594973556804, guid: 862bbd66e44e6495a9a5995042c103b7, type: 2}
-    - {fileID: 1976461789642874, guid: 60613af8783e64884ba2727dc5d3332e, type: 2}
-  - Objects:
-    - {fileID: 1659708974141220, guid: 302dc087cff274e7d8e339048b97777f, type: 2}
-    - {fileID: 1204730073445238, guid: 767cacdccaf6d458fa8df22274f5b182, type: 2}
-  AsteroidCrashObject: {fileID: 1975314887512552, guid: 7c8cf3367d2a84e759db84b5a1173857,
-    type: 2}
+  Stage: 1
+  AutoDeploy: 0
+  AsteroidPools:
+    Lists:
+    - Pools:
+      - Prefab: {fileID: 1523663976252944, guid: cad7fcde98bf141a296b110b94830b53,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+      - Prefab: {fileID: 1503439986755430, guid: ab27a8de6466d414cb01d46239c5af64,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+      - Prefab: {fileID: 1832484937983620, guid: 4882942038b91450eb7e67d7b92bd596,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+      - Prefab: {fileID: 1559799609914572, guid: 2ed4b10a66a3e4e6ab2758293eeef938,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+    - Pools:
+      - Prefab: {fileID: 1962594973556804, guid: 862bbd66e44e6495a9a5995042c103b7,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+      - Prefab: {fileID: 1976461789642874, guid: 60613af8783e64884ba2727dc5d3332e,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+    - Pools:
+      - Prefab: {fileID: 1659708974141220, guid: 302dc087cff274e7d8e339048b97777f,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+      - Prefab: {fileID: 1204730073445238, guid: 767cacdccaf6d458fa8df22274f5b182,
+          type: 2}
+        InitialSize: 2
+        AutoExpandQuantity: 2
+        OnCreate:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 114319582898870244}
+              m_MethodName: ConfigAsteroid
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+          m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+  AsteroidCrashPool:
+    Prefab: {fileID: 1975314887512552, guid: 7c8cf3367d2a84e759db84b5a1173857, type: 2}
+    InitialSize: 4
+    AutoExpandQuantity: 4
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   OnScore:
     m_PersistentCalls:
       m_Calls: []
