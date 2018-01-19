@@ -197,7 +197,7 @@ public class ShipBehavior : Waiter {
 		var laser = _laserPool.GetObject ();
 		if (laser == null)
 			return;
-		laser.transform.position = transform.position;
+		laser.transform.position = transform.position + transform.up * 0.55f;
 		laser.transform.rotation = transform.rotation;
 		laser.SetActive (true);
 	}
@@ -246,6 +246,10 @@ public class ShipBehavior : Waiter {
 
 	}
 
+	public void Damage(GameObject originGameObject, Collider2D collider) {
+		StartCoroutine (Die ());
+	}
+
 	IEnumerator Die() {
 
 		_state = ShipState.Dead;
@@ -285,10 +289,6 @@ public class ShipBehavior : Waiter {
 		var key = collider.gameObject;
 		if (cache.ContainsKey(key))
 			cache [key].Hit (gameObject, collider);
-	}
-
-	public void Damage(GameObject originGameObject, Collider2D collider) {
-		StartCoroutine (Die ());
 	}
 
 	public void ReceiveNewLife() {
