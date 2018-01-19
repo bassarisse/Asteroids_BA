@@ -46,7 +46,7 @@ public class BulletBehavior : MonoBehaviour {
 		if (this._paused || !this._isAlive)
 			return;
 		
-		_lifeTime += Time.fixedDeltaTime;
+		_lifeTime += Time.deltaTime;
 
 		if (_lifeTime > this.MaxLifeSeconds)
 			this.Die ();

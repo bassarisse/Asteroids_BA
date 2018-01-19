@@ -31,7 +31,7 @@ public class SpaceTeleport : MonoBehaviour {
 			return;
 		
 		if (_teleportTime > 0f)
-			_teleportTime -= Time.fixedDeltaTime;
+			_teleportTime -= Time.deltaTime;
 		
 		if (_isVisible && !TargetRenderer.isVisible && _teleportTime <= 0f) {
 			Teleport ();
