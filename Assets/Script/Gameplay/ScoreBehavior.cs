@@ -14,6 +14,8 @@ public class ScoreBehavior : MonoBehaviour {
 	int _nextScoreForNewLife;
 
 	void Awake() {
+
+		UserSession.ResetSessionId ();
 		
 		if (OnScoreChange == null)
 			OnScoreChange = new IntEvent ();
@@ -43,6 +45,7 @@ public class ScoreBehavior : MonoBehaviour {
 
 	public void EndGame() {
 		UserSession.LastScore = _score;
+		UserSession.SetScore ();
 		SceneManager.LoadScene ("GameOver");
 	}
 
