@@ -36,7 +36,7 @@ public class BulletBehavior : MonoBehaviour {
 
 	void Update() {
 		if (!this._playedSound) {
-			AudioHandler.Play (LASER_FIRE_SFX);
+			AudioHandler.Play (LASER_FIRE_SFX, Random.Range(0.25f, 0.45f));
 			this._playedSound = true;
 		}
 	}

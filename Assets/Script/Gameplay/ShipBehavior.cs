@@ -162,7 +162,7 @@ public class ShipBehavior : MonoBehaviour {
 
 	void UpdateVolume(bool engineIsOn) {
 
-		var volume = (engineIsOn ? 0.125f : 0.1f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
+		var volume = (engineIsOn ? 0.1f : 0.075f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
 
 		if (_hyperspaceTime > 0f)
 			volume /= 5f;
