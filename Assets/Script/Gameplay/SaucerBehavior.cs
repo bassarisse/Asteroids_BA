@@ -117,7 +117,7 @@ public class SaucerBehavior : Waiter {
 
 		this._isAlive = false;
 
-		AudioHandler.Play (CRASH_SFX);
+		AudioHandler.Play (CRASH_SFX, 0.6f);
 
 		var crashParticle = CrashPool.GetObject ();
 		if (crashParticle != null) {
