@@ -160,11 +160,7 @@ public class ShipBehavior : Waiter {
 
 		transform.position = BeforeEnterPosition;
 
-		var hitList = new List<VoidHit> ();
-		foreach (var item in VoidHit.Cache.Values)
-			hitList.Add(item);
-		foreach (var item in hitList)
-			item.Hit ();
+		VoidHit.HitAll ();
 
 		FireParticle.Clear ();
 		FireParticle.Play ();
