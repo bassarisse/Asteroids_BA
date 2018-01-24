@@ -34,15 +34,19 @@ public class PauseTrigger : MonoBehaviour {
 
 	void ExecutePauseOrResume() {
 		_paused = !_paused;
-		if (_paused) {
-			foreach (var item in PauseEffect.Cache) {
-				item.Value.Pause ();
-			}
-		} else {
-			foreach (var item in PauseEffect.Cache) {
-				item.Value.Resume ();
+
+		using (var enumerator = PauseEffect.Cache.Values.GetEnumerator())
+		{
+			while (enumerator.MoveNext())
+			{
+				var item = enumerator.Current;
+				if (_paused)
+					item.Pause ();
+				else
+					item.Resume ();
 			}
 		}
+
 	}
 
 }

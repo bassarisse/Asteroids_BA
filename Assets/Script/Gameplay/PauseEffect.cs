@@ -23,6 +23,7 @@ public class PauseEffect : MonoBehaviour {
 	public UnityEvent OnResume;
 	public GameObject[] GameObjectToDisable;
 	public MonoBehaviour[] ComponentsToDisable;
+	public MonoBehaviour[] ComponentsToPause;
 	public ParticleSystem[] Particles;
 	public Rigidbody2D[] Bodies;
 	public TrailRenderer[] Trails;
@@ -74,6 +75,18 @@ public class PauseEffect : MonoBehaviour {
 		if (ComponentsToDisable != null) {
 			for (var i = 0; i < ComponentsToDisable.Length; i++) {
 				ComponentsToDisable [i].enabled = !paused;
+			}
+		}
+
+		if (ComponentsToPause != null) {
+			for (var i = 0; i < ComponentsToPause.Length; i++) {
+				var waiter = ComponentsToPause [i] as Waiter;
+				if (waiter != null) {
+					if (paused)
+						waiter.PauseWaiter ();
+					else
+						waiter.ResumeWaiter ();
+				}
 			}
 		}
 

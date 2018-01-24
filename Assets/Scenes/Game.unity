@@ -7689,6 +7689,7 @@ MonoBehaviour:
   GameObjectToDisable:
   - {fileID: 1446688330}
   ComponentsToDisable: []
+  ComponentsToPause: []
   Particles: []
   Bodies: []
   Trails: []
@@ -7868,7 +7869,6 @@ GameObject:
   - component: {fileID: 1705047374}
   - component: {fileID: 1705047375}
   - component: {fileID: 1705047372}
-  - component: {fileID: 1705047373}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -8175,6 +8175,8 @@ MonoBehaviour:
   - {fileID: 2121136797}
   ComponentsToDisable:
   - {fileID: 1705047366}
+  ComponentsToPause:
+  - {fileID: 1705047366}
   Particles:
   - {fileID: 353837879}
   Bodies:
@@ -8182,17 +8184,6 @@ MonoBehaviour:
   Trails:
   - {fileID: 7429160}
   - {fileID: 2042486270}
---- !u!114 &1705047373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1705047365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e37bdac3ea824597a2742d133b1abd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1705047374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8256,6 +8247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778881074}
   - component: {fileID: 1778881073}
+  - component: {fileID: 1778881075}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -8387,6 +8379,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778881075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778881072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertStates: 0
+  OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnResume:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  GameObjectToDisable: []
+  ComponentsToDisable: []
+  ComponentsToPause:
+  - {fileID: 1778881073}
+  Particles: []
+  Bodies: []
+  Trails: []
 --- !u!1 &1837713688 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1543542882758594, guid: 87d05f379db5d4bd5a25a89bda793021,

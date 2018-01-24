@@ -5,13 +5,27 @@ using UnityEngine;
 public class Waiter : MonoBehaviour {
 
 	protected WaiterModule _waiter = new WaiterModule();
+	protected bool _paused = false;
 
 	void FixedUpdate() {
-		_waiter.FixedUpdate ();
+		if (!_paused)
+			_waiter.Update (Time.deltaTime);
+	}
+
+	public void PauseWaiter() {
+		_paused = true;
+	}
+
+	public void ResumeWaiter() {
+		_paused = false;
 	}
 
 	public Coroutine Wait(float time) {
 		return StartCoroutine (_waiter.CreateWait(time));
+	}
+
+	void OnDestroy() {
+		StopAllCoroutines ();
 	}
 
 }
@@ -20,10 +34,11 @@ public class WaiterModule {
 
 	const float DISABLE_TIME = -10f;
 
+	WaitForFixedUpdate _waitInstruction = new WaitForFixedUpdate();
+
 	List<float> _timers = new List<float>();
 
-	public void FixedUpdate() {
-		var t = Time.deltaTime;
+	public void Update(float t) {
 		var l = _timers.Count;
 		for (int i = 0; i < l; i++) {
 			var time = _timers [i];
@@ -49,7 +64,9 @@ public class WaiterModule {
 
 	public IEnumerator CreateWait(float time) {
 		var i = AddTimer (time);
-		yield return new WaitUntil (() => _timers [i] <= 0f); // this could probably be more optimized by caching the coroutine
+		while (_timers [i] > 0f) {
+			yield return _waitInstruction;
+		}
 		_timers [i] = DISABLE_TIME;
 	}
 

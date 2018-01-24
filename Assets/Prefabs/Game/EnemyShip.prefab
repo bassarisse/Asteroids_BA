@@ -175,6 +175,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   GameObjectToDisable: []
   ComponentsToDisable: []
+  ComponentsToPause:
+  - {fileID: 114696033313626596}
   Particles: []
   Bodies:
   - {fileID: 50434438676695306}

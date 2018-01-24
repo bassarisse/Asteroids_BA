@@ -136,6 +136,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   GameObjectToDisable: []
   ComponentsToDisable: []
+  ComponentsToPause:
+  - {fileID: 114009142005184936}
   Particles: []
   Bodies:
   - {fileID: 50132711829767214}
@@ -160,6 +162,7 @@ MonoBehaviour:
   MaxStopTime: 8
   MinWaitToShootTime: 5
   MaxWaitToShootTime: 10
+  LaserTarget: {fileID: 0}
   LaserPool:
     Prefab: {fileID: 0}
     InitialSize: 0
