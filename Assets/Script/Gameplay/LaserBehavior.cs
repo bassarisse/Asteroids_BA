@@ -32,14 +32,12 @@ public class LaserBehavior : MonoBehaviour {
 
 	}
 
-	void Update() {
+	void FixedUpdate() {
+		
 		if (!this._playedSound) {
 			AudioHandler.Play (LASER_FIRE_SFX, Random.Range(0.25f, 0.45f));
 			this._playedSound = true;
 		}
-	}
-
-	void FixedUpdate() {
 		
 		if (this._paused || !this._isAlive)
 			return;

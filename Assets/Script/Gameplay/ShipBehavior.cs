@@ -81,7 +81,7 @@ public class ShipBehavior : Waiter {
 	}
 
 	void Start() {
-		StartCoroutine(Enter ());
+		StartCoroutine (Enter ());
 	}
 
 	void Update () {
@@ -122,7 +122,7 @@ public class ShipBehavior : Waiter {
 		}
 
 		if (InputExtensions.Pressed.X) {
-			StartCoroutine(Hyperspace ());
+			Hyperspace ();
 		}
 
 	}
@@ -189,9 +189,13 @@ public class ShipBehavior : Waiter {
 		laser.SetActive (true);
 	}
 
-	IEnumerator Hyperspace() {
+	void Hyperspace() {
 		if (!_canHyperspace)
-			yield break;
+			return;
+		StartCoroutine (ExecuteHyperspace ());
+	}
+
+	IEnumerator ExecuteHyperspace() {
 
 		_state = ShipState.Hyperspacing;
 		_canHyperspace = false;
@@ -264,7 +268,7 @@ public class ShipBehavior : Waiter {
 		if (this.Life == 0) {
 			OnDie.Invoke();
 		} else {
-			StartCoroutine(Enter ());
+			StartCoroutine (Enter ());
 		}
 
 	}
