@@ -18,7 +18,11 @@ public class LaserBehavior : MonoBehaviour {
 	float _lifeTime = 0f;
 
 	void Awake() {
+
 		AudioHandler.Load (LASER_FIRE_SFX, LASER_HIT_SFX);
+
+		CrashPool.Fill ();
+		
 	}
 
 	void OnEnable() {

@@ -27,6 +27,8 @@ public class EnemySpawner : Waiter {
 
 		SaucerPool.Fill ();
 		EnemyShipPool.Fill ();
+		EnemyLaserPool.Fill ();
+		EnemyLaserCrashPool.Fill ();
 		EnemyCrashPool.Fill ();
 
 	}

@@ -27,6 +27,7 @@ public class SaucerBehavior : Waiter {
 	bool _isAlive = false;
 
 	void Awake() {
+
 		AudioHandler.Load (CRASH_SFX);
 
 		if (OnStruck == null)
@@ -35,6 +36,10 @@ public class SaucerBehavior : Waiter {
 			OnDie = new SaucerEvent ();
 		if (OnGone == null)
 			OnGone = new SaucerEvent ();
+
+		LaserPool.Fill ();
+		LaserCrashPool.Fill ();
+		CrashPool.Fill ();
 		
 	}
 

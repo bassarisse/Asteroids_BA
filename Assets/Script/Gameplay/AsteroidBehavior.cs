@@ -17,6 +17,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	public AsteroidEvent OnGone;
 
 	void Awake() {
+		
 		AudioHandler.Load (CRASH_SFX);
 
 		if (OnStruck == null)
@@ -25,6 +26,8 @@ public class AsteroidBehavior : MonoBehaviour {
 			OnDie = new AsteroidEvent ();
 		if (OnGone == null)
 			OnGone = new AsteroidEvent ();
+
+		CrashPool.Fill ();
 		
 	}
 
