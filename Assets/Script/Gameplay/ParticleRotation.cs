@@ -11,8 +11,6 @@ public class ParticleRotation : MonoBehaviour {
 	}
 
 	public void SetStartRotation(float rotation) {
-		if (Particle == null)
-			return;
 
 		var main = Particle.main;
 		main.startRotation = new ParticleSystem.MinMaxCurve(Mathf.Deg2Rad * -rotation);

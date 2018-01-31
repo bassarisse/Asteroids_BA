@@ -25,8 +25,6 @@ public class SpaceTeleport : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (TargetRenderer == null)
-			return;
 		
 		if (_teleportTime > 0f)
 			_teleportTime -= Time.deltaTime;

@@ -21,9 +21,6 @@ public class GameObjectPool : System.Object {
 
 	GameObject CreateObject() {
 
-		if (Prefab == null)
-			return null;
-
 		Prefab.SetActive(false);
 
 		var newObject = GameObject.Instantiate(Prefab);

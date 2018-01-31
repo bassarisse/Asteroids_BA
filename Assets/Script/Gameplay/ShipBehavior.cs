@@ -293,8 +293,6 @@ public class ShipBehavior : Waiter {
 	}
 
 	public void ClearTrails() {
-		if (WingTrails == null)
-			return;
 
 		for (var i = 0; i < WingTrails.Count; i++) {
 			WingTrails [i].Clear ();
