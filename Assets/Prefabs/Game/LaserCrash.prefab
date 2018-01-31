@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4267527776303358
 Transform:
   m_ObjectHideFlags: 1
@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReactToInput: 0
   InvertStates: 0
   OnPause:
     m_PersistentCalls:
@@ -78,7 +77,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  GameObjectToDisable: []
   ComponentsToDisable: []
+  ComponentsToPause: []
   Particles:
   - {fileID: 198818291083330440}
   Bodies: []

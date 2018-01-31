@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4187540204946054
 Transform:
   m_ObjectHideFlags: 1
@@ -166,9 +166,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50380874575389482}
-  ImpulseForce: 2.5
   Level: 1
   Score: 50
+  ImpulseForce: 2.5
+  CrashPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
   OnStruck:
     m_PersistentCalls:
       m_Calls: []
@@ -269,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8247e8db181b0421592cf73800deb4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReactToInput: 0
   InvertStates: 0
   OnPause:
     m_PersistentCalls:
@@ -281,10 +289,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  GameObjectToDisable: []
   ComponentsToDisable: []
+  ComponentsToPause: []
   Particles: []
   Bodies:
   - {fileID: 50380874575389482}
+  Trails: []
 --- !u!212 &212461070439593604
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4430643542309172
 Transform:
   m_ObjectHideFlags: 1
@@ -175,6 +175,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   GameObjectToDisable: []
   ComponentsToDisable: []
+  ComponentsToPause: []
   Particles: []
   Bodies:
   - {fileID: 50392568322561918}
