@@ -13,7 +13,6 @@ public class EnemyLaserBehavior : MonoBehaviour {
 	public GameObjectPool CrashPool;
 
 	bool _paused = false;
-	bool _playedSound = false; // needed to prevent the audio from playing when the prefab is instatiated
 	bool _isAlive = false;
 	float _lifeTime = 0f;
 
@@ -30,18 +29,14 @@ public class EnemyLaserBehavior : MonoBehaviour {
 		this.TargetBody.velocity = Vector2.zero;
 		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 
-		this._playedSound = false;
 		this._isAlive = true;
 		this._lifeTime = 0f;
+
+		AudioHandler.Play (LASER_FIRE_SFX, Random.Range(0.25f, 0.45f));
 
 	}
 
 	void FixedUpdate() {
-		
-		if (!this._playedSound) {
-			AudioHandler.Play (LASER_FIRE_SFX, Random.Range(0.25f, 0.45f));
-			this._playedSound = true;
-		}
 
 		if (this._paused || !this._isAlive)
 			return;
