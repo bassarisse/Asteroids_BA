@@ -130,6 +130,8 @@ public class SaucerBehavior : Waiter {
 			crashParticle.SetActive (true);
 		}
 
+		StopAllCoroutines ();
+		
 		OnGone.Invoke (gameObject, this);
 
 	}
