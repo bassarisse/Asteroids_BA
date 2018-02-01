@@ -96,6 +96,9 @@ public class EnemySpawner : Waiter {
 
 	void DeployEnemy(GameObject enemy, Vector3 posMin, Vector3 posMax, float offset) {
 
+		if (enemy == null)
+			return;
+
 		var deployOnSides = RandomExtensions.Bool ();
 		var deployOnLeft = RandomExtensions.Bool ();
 
