@@ -23,7 +23,7 @@ public class ShipBehavior : Waiter {
 	public AudioSource EngineAudio;
 	public List<TrailRenderer> WingTrails;
 	public Vector3 BeforeEnterPosition;
-	public int Life = 3;
+	public int InitialLifeCount = 3;
 	public float MoveForceMultiplier = 7f;
 	public float TurnRate = 3f;
 	public float EnterImpulseMultiplier = 9.5f;
@@ -44,6 +44,7 @@ public class ShipBehavior : Waiter {
 	public GameObjectPool LaserCrashPool;
 
 	ShipState _state = ShipState.Idle;
+	int _currentLifeCount = 3;
 	bool _canHyperspace = true;
 	Camera _camera;
 
@@ -77,10 +78,11 @@ public class ShipBehavior : Waiter {
 	}
 
 	void OnEnable() {
-		OnLifeChange.Invoke (Life);
+		OnLifeChange.Invoke (_currentLifeCount);
 	}
 
 	void Start() {
+		_currentLifeCount = InitialLifeCount;
 		StartCoroutine (Enter ());
 	}
 
@@ -260,12 +262,12 @@ public class ShipBehavior : Waiter {
 		ClearTrails ();
 		FireParticle.Stop ();
 
-		this.Life -= 1;
-		OnLifeChange.Invoke (this.Life);
+		this._currentLifeCount -= 1;
+		OnLifeChange.Invoke (this._currentLifeCount);
 
 		yield return Wait (DeathTime);
 
-		if (this.Life == 0) {
+		if (this._currentLifeCount == 0) {
 			OnDie.Invoke();
 		} else {
 			StartCoroutine (Enter ());
@@ -283,12 +285,12 @@ public class ShipBehavior : Waiter {
 	}
 
 	public void ReceiveNewLife() {
-		if (this.Life <= 0 || _state == ShipState.Dead)
+		if (this._currentLifeCount <= 0 || _state == ShipState.Dead)
 			return;
 		
 		AudioHandler.Play (NEW_LIFE_SFX);
-		this.Life += 1;
-		OnLifeChange.Invoke (this.Life);
+		this._currentLifeCount += 1;
+		OnLifeChange.Invoke (this._currentLifeCount);
 
 	}
 
