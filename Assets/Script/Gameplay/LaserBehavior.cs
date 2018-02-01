@@ -59,7 +59,7 @@ public class LaserBehavior : MonoBehaviour {
 		if (cache.ContainsKey (key)) {
 			AudioHandler.Play (LASER_HIT_SFX);
 			cache [key].Hit (gameObject, collider);
-			Explode ();
+			this.Explode ();
 		}
 
 	}
