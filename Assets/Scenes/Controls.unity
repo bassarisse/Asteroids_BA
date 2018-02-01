@@ -597,9 +597,9 @@ Prefab:
 
         Left / Right / A / D
 
-        Space / V
+        Space
 
-        X / N
+        N
 
         Enter'
       objectReference: {fileID: 0}
