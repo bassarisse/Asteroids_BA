@@ -8351,11 +8351,11 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  OnScore:
+  OnEnemyStruck:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1667952125}
-        m_MethodName: AddScore
+        m_MethodName: CollectScore
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8365,7 +8365,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!4 &1778881074
 Transform:
   m_ObjectHideFlags: 0
@@ -8593,6 +8594,11 @@ Prefab:
       propertyPath: OnScore.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4380114305177788, guid: f2a0f5b5f653b4ae58c372044760e60c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8648,6 +8654,31 @@ Prefab:
     - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
         type: 2}
       propertyPath: OnScore.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1667952125}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CollectScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 50380874575389482}
   - component: {fileID: 60362084830130538}
   - component: {fileID: 114120972488556942}
+  - component: {fileID: 114926265018335894}
   - component: {fileID: 114719119354669424}
   - component: {fileID: 114360221676449932}
   - component: {fileID: 114084603969177520}
@@ -267,6 +268,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114926265018335894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962594973556804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62c5c2f5311047949525477698e86d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 50
 --- !u!114 &114958735974105146
 MonoBehaviour:
   m_ObjectHideFlags: 1

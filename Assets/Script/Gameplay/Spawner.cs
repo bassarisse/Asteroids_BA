@@ -11,14 +11,14 @@ public class Spawner : Waiter {
 	public bool AutoDeploy = false;
 	public DoubleListOfPools AsteroidPools;
 	public GameObjectPool AsteroidCrashPool;
-	public IntEvent OnScore;
+	public GameObjectEvent OnAsteroidStruck;
 
 	int _asteroidCount = 0;
 
 	void Awake() {
 		
-		if (OnScore == null)
-			OnScore = new IntEvent ();
+		if (OnAsteroidStruck == null)
+			OnAsteroidStruck = new GameObjectEvent ();
 
 		AsteroidPools.Fill ();
 		AsteroidCrashPool.Fill ();
@@ -34,7 +34,7 @@ public class Spawner : Waiter {
 		var asteroidBehavior = newObject.GetComponent<AsteroidBehavior> ();
 		if (asteroidBehavior != null) {
 			asteroidBehavior.CrashPool = AsteroidCrashPool;
-			asteroidBehavior.OnStruck.AddListener (ScoreFromAsteroid);
+			asteroidBehavior.OnStruck.AddListener (StruckAsteroid);
 			asteroidBehavior.OnDie.AddListener (DivideAsteroid);
 			asteroidBehavior.OnGone.AddListener (ReturnAsteroid);
 		}
@@ -110,8 +110,8 @@ public class Spawner : Waiter {
 
 	}
 
-	void ScoreFromAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
-		OnScore.Invoke (asteroidBehavior.Score);
+	void StruckAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {
+		OnAsteroidStruck.Invoke (gameObject);
 	}
 
 	void DivideAsteroid(GameObject gameObject, AsteroidBehavior asteroidBehavior) {

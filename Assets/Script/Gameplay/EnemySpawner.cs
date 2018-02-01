@@ -16,14 +16,14 @@ public class EnemySpawner : Waiter {
 	public GameObjectPool EnemyLaserPool;
 	public GameObjectPool EnemyLaserCrashPool;
 	public GameObjectPool EnemyCrashPool;
-	public IntEvent OnScore;
+	public GameObjectEvent OnEnemyStruck;
 
 	int _enemyCount = 0;
 
 	void Awake() {
 
-		if (OnScore == null)
-			OnScore = new IntEvent ();
+		if (OnEnemyStruck == null)
+			OnEnemyStruck = new GameObjectEvent ();
 
 		SaucerPool.Fill ();
 		EnemyShipPool.Fill ();
@@ -47,7 +47,7 @@ public class EnemySpawner : Waiter {
 			saucerBehavior.LaserPool = EnemyLaserPool;
 			saucerBehavior.LaserCrashPool = EnemyLaserCrashPool;
 			saucerBehavior.CrashPool = EnemyCrashPool;
-			saucerBehavior.OnStruck.AddListener (ScoreFromEnemy);
+			saucerBehavior.OnStruck.AddListener (StruckEnemy);
 			saucerBehavior.OnDie.AddListener (ScheduleNewEnemy);
 			saucerBehavior.OnGone.AddListener (ReturnEnemy);
 		}
@@ -117,8 +117,8 @@ public class EnemySpawner : Waiter {
 
 	}
 
-	void ScoreFromEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {
-		OnScore.Invoke (saucerBehavior.Score);
+	void StruckEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {
+		OnEnemyStruck.Invoke (gameObject);
 	}
 
 	void ScheduleNewEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50434438676695306}
   - component: {fileID: 60612332439843884}
   - component: {fileID: 114696033313626596}
+  - component: {fileID: 114740305132413322}
   - component: {fileID: 114018888689303158}
   - component: {fileID: 114841937312680914}
   - component: {fileID: 114606137265753070}
@@ -295,6 +296,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: SaucerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &114740305132413322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540895057935644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62c5c2f5311047949525477698e86d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 1000
 --- !u!114 &114841937312680914
 MonoBehaviour:
   m_ObjectHideFlags: 1

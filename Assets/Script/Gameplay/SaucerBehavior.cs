@@ -8,7 +8,6 @@ public class SaucerBehavior : Waiter {
 
 	public Rigidbody2D TargetBody;
 	public int Level = 0;
-	public int Score = 0;
 	public float MinImpulseForce = 1f;
 	public float MaxImpulseForce = 4f;
 	public float MinStopTime = 0.5f;

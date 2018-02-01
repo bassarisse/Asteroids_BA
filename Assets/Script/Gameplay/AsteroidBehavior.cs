@@ -8,7 +8,6 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	public Rigidbody2D TargetBody;
 	public int Level = 0;
-	public int Score = 0;
 	public float ImpulseForce = 1.5f;
 	public GameObjectPool CrashPool;
 

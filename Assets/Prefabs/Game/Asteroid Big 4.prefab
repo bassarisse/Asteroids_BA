@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 50933895211388046}
   - component: {fileID: 60514944716902248}
   - component: {fileID: 114586888196544276}
+  - component: {fileID: 114759582758896430}
   - component: {fileID: 114959177082633626}
   - component: {fileID: 114283851129673590}
   - component: {fileID: 114645392245487854}
@@ -247,6 +248,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114759582758896430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559799609914572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62c5c2f5311047949525477698e86d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 20
 --- !u!114 &114831513031134604
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 50240394587303326}
   - component: {fileID: 60995322034140862}
   - component: {fileID: 114708948698440770}
+  - component: {fileID: 114868399936817896}
   - component: {fileID: 114870870280029788}
   - component: {fileID: 114047337841445192}
   - component: {fileID: 114211934466184206}
@@ -276,6 +277,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: AsteroidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114868399936817896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659708974141220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62c5c2f5311047949525477698e86d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 100
 --- !u!114 &114870870280029788
 MonoBehaviour:
   m_ObjectHideFlags: 1

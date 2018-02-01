@@ -30,6 +30,12 @@ public class ScoreBehavior : MonoBehaviour {
 		OnScoreChange.Invoke (_score);
 	}
 
+	public void CollectScore(GameObject aGameObject) {
+		if (!ScoreHolder.Cache.ContainsKey(aGameObject))
+			return;
+		AddScore (ScoreHolder.Cache[aGameObject].Score);
+	}
+
 	public void AddScore(int score) {
 		_score += score;
 

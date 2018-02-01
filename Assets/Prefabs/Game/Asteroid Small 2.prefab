@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50448243863840954}
   - component: {fileID: 60273012728707076}
   - component: {fileID: 114324944696329114}
+  - component: {fileID: 114556307272481368}
   - component: {fileID: 114624971549542614}
   - component: {fileID: 114341990046149392}
   - component: {fileID: 114318432216589844}
@@ -249,6 +250,18 @@ MonoBehaviour:
   Bodies:
   - {fileID: 50448243863840954}
   Trails: []
+--- !u!114 &114556307272481368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204730073445238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62c5c2f5311047949525477698e86d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 100
 --- !u!114 &114624971549542614
 MonoBehaviour:
   m_ObjectHideFlags: 1
