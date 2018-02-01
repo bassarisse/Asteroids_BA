@@ -36,6 +36,7 @@ public class ShipBehavior : Waiter {
 	public IntEvent OnLifeChange;
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
+	public UnityEvent OnDamage;
 	public UnityEvent OnDie;
 	public GameObjectPool ShipExplosionPool;
 	public GameObjectPool HyperspacePool;
@@ -57,6 +58,8 @@ public class ShipBehavior : Waiter {
 			OnEnter = new UnityEvent ();
 		if (OnRestore == null)
 			OnRestore = new UnityEvent ();
+		if (OnDamage == null)
+			OnDamage = new UnityEvent ();
 		if (OnDie == null)
 			OnDie = new UnityEvent ();
 
@@ -263,6 +266,7 @@ public class ShipBehavior : Waiter {
 		FireParticle.Stop ();
 
 		this._currentLifeCount -= 1;
+		OnDamage.Invoke ();
 		OnLifeChange.Invoke (this._currentLifeCount);
 
 		yield return Wait (DeathTime);

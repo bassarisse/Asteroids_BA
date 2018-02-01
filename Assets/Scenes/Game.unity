@@ -7657,6 +7657,7 @@ GameObject:
   - component: {fileID: 1667952127}
   - component: {fileID: 1667952126}
   - component: {fileID: 1667952123}
+  - component: {fileID: 1667952128}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7771,6 +7772,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4d0e63877e7d447c80c61d0981d0069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1667952128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667952122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11508ad5eae8f4bcbb3547dcb3070456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1673720126
@@ -7895,7 +7907,7 @@ MonoBehaviour:
   - {fileID: 7429160}
   - {fileID: 2042486270}
   BeforeEnterPosition: {x: 0, y: -8, z: 0}
-  Life: 3
+  InitialLifeCount: 3
   MoveForceMultiplier: 7
   TurnRate: 3
   EnterImpulseMultiplier: 8
@@ -7947,6 +7959,22 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1667952128}
+        m_MethodName: SlowMotion
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
