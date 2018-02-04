@@ -248,12 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50434438676695306}
+  PreferedScreenPercentage: 0.85
+  MinSqrMagnitudeToMove: 0.75
   Level: 2
-  Score: 1000
   MinImpulseForce: 4
   MaxImpulseForce: 10
-  MinStopTime: 4
-  MaxStopTime: 6
   MinWaitToShootTime: 4
   MaxWaitToShootTime: 8
   LaserTarget: {fileID: 0}

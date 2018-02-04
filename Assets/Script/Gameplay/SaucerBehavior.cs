@@ -7,11 +7,11 @@ public class SaucerBehavior : Waiter {
 	const string CRASH_SFX = "ship_crash";
 
 	public Rigidbody2D TargetBody;
+	public float PreferedScreenPercentage = 0.9f;
+	public float MinSqrMagnitudeToMove = 1f;
 	public int Level = 0;
 	public float MinImpulseForce = 1f;
 	public float MaxImpulseForce = 4f;
-	public float MinStopTime = 0.5f;
-	public float MaxStopTime = 2f;
 	public float MinWaitToShootTime = 2f;
 	public float MaxWaitToShootTime = 10f;
 	public GameObject LaserTarget;
@@ -24,6 +24,7 @@ public class SaucerBehavior : Waiter {
 	public SaucerEvent OnGone;
 
 	bool _isAlive = false;
+	Camera _camera;
 
 	void Awake() {
 
@@ -39,6 +40,8 @@ public class SaucerBehavior : Waiter {
 		LaserPool.Fill ();
 		LaserCrashPool.Fill ();
 		CrashPool.Fill ();
+
+		_camera = Camera.main;
 		
 	}
 
@@ -58,23 +61,41 @@ public class SaucerBehavior : Waiter {
 				transform.Rotate (0, 0, 90);
 			}
 		}
+
 	}
 
 	IEnumerator Move() {
-
 		while (this._isAlive) {
+
+			yield return Wait(0.5f);
+		
+			if (TargetBody.velocity.sqrMagnitude >= MinSqrMagnitudeToMove)
+				continue;
+
+			var center = _camera.transform.position;
+			var height = _camera.orthographicSize * 2f * PreferedScreenPercentage;
+			var width = height * _camera.aspect;
+
+			var preferedRegion = new Rect(center.x - width / 2f, center.y - height / 2f, width, height);
+
+			Vector2 moveDirection;
+
+			if (preferedRegion.Contains(transform.position)) {
+				moveDirection = Random.insideUnitCircle;
+			} else {
+				var targetPosition = RandomExtensions.PointInsideRect(preferedRegion);
+				moveDirection = targetPosition - new Vector2(transform.position.x, transform.position.y);
+			}
+			
 			var impulse = Random.Range (MinImpulseForce, MaxImpulseForce);
-			var waitTime = Random.Range (MinStopTime, MaxStopTime);
+			this.TargetBody.AddForce (moveDirection.normalized * impulse, ForceMode2D.Impulse);
 
-			this.TargetBody.AddForce (Random.insideUnitCircle.normalized * impulse, ForceMode2D.Impulse);
-			yield return Wait(waitTime);
 		}
-
 	}
 
 	IEnumerator ShootLaser() {
-
 		while (this._isAlive) {
+
 			var waitTime = Random.Range (MinWaitToShootTime, MaxWaitToShootTime);
 			yield return Wait(waitTime);
 
@@ -97,7 +118,6 @@ public class SaucerBehavior : Waiter {
 			laser.SetActive (true);
 
 		}
-
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {

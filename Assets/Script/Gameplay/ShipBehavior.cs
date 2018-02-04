@@ -314,12 +314,12 @@ public class ShipBehavior : Waiter {
 			return pos;
 
 		var center = _camera.transform.position;
-		var height = _camera.orthographicSize * 2.0f;
+		var height = _camera.orthographicSize * 2f;
 		var width = height * _camera.aspect;
 
 		return new Vector3(
-			center.x + (Random.value - 0.5f) * (width - HyperspaceMargin * 2),
-			center.y + (Random.value - 0.5f) * (height - HyperspaceMargin * 2),
+			center.x + (Random.value - 0.5f) * (width - HyperspaceMargin * 2f),
+			center.y + (Random.value - 0.5f) * (height - HyperspaceMargin * 2f),
 			pos.z
 		);
 	}
