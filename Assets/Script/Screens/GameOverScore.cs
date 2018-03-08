@@ -8,8 +8,7 @@ public class GameOverScore : MonoBehaviour {
 	public Text Label;
 
 	void Start () {
-		if (Label != null)
-			Label.text = ScoreLabelBehavior.FormatScore (UserSession.LastScore);
+		Label.text = ScoreLabelBehavior.FormatScore (UserSession.LastScore);
 	}
 
 }

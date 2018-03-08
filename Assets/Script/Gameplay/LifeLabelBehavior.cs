@@ -12,9 +12,7 @@ public class LifeLabelBehavior : MonoBehaviour {
 
 	public void ReceiveLife(int life) {
 
-		if (Label != null) {
-			Label.text = string.Format ("{0:#0}", life);
-		}
+		Label.text = string.Format ("{0:#0}", life);
 
 		if (NewLifeParticle != null && life > _life && _life != 0) {
 			NewLifeParticle.Clear ();

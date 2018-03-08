@@ -27,9 +27,7 @@ public class ScoreLabelBehavior : MonoBehaviour {
 			if (_currentScore >= _score - 0.4f)
 				_currentScore = _score;
 
-			if (Label != null) {
-				Label.text = ScoreLabelBehavior.FormatScore (_currentScore);
-			}
+			Label.text = ScoreLabelBehavior.FormatScore (_currentScore);
 		}
 
 	}
