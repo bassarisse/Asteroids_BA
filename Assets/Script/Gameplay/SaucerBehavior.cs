@@ -8,6 +8,7 @@ public class SaucerBehavior : Waiter {
 
 	public Rigidbody2D TargetBody;
 	public float PreferedScreenPercentage = 0.9f;
+	public float LaserTargetScreenPercentage = 1.1f;
 	public float MinSqrMagnitudeToMove = 1f;
 	public int Level = 0;
 	public float MinImpulseForce = 1f;
@@ -54,12 +55,18 @@ public class SaucerBehavior : Waiter {
 	void Update() {
 
 		if (LaserTarget != null) {
-			var moveDirection = transform.position - LaserTarget.transform.position; 
-			if (moveDirection != Vector3.zero) {
-				var angle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-				transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-				transform.Rotate (0, 0, 90);
+
+			var targetRegion = UnityExtensions.CreateRectFromCamera(_camera, LaserTargetScreenPercentage);
+
+			if (targetRegion.Contains(LaserTarget.transform.position)) {
+				var moveDirection = transform.position - LaserTarget.transform.position; 
+				if (moveDirection != Vector3.zero) {
+					var angle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+					transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+					transform.Rotate (0, 0, 90);
+				}
 			}
+			
 		}
 
 	}
@@ -72,11 +79,7 @@ public class SaucerBehavior : Waiter {
 			if (TargetBody.velocity.sqrMagnitude >= MinSqrMagnitudeToMove)
 				continue;
 
-			var center = _camera.transform.position;
-			var height = _camera.orthographicSize * 2f * PreferedScreenPercentage;
-			var width = height * _camera.aspect;
-
-			var preferedRegion = new Rect(center.x - width / 2f, center.y - height / 2f, width, height);
+			var preferedRegion = UnityExtensions.CreateRectFromCamera(_camera, PreferedScreenPercentage);
 
 			Vector2 moveDirection;
 
