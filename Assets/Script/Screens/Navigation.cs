@@ -21,4 +21,8 @@ public class Navigation : MonoBehaviour {
 		SceneManager.LoadScene ("Controls");
 	}
 
+	public void Quit() {
+		Application.Quit ();
+	}
+
 }
