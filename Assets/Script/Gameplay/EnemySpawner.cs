@@ -54,7 +54,7 @@ public class EnemySpawner : Waiter {
 	}
 
 	public void ConfigEnemyLaser(GameObject newObject) {
-		var enemyLaserBehavior = newObject.GetComponent<EnemyLaserBehavior> ();
+		var enemyLaserBehavior = newObject.GetComponent<LaserBehavior> ();
 		if (enemyLaserBehavior != null) {
 			enemyLaserBehavior.CrashPool = EnemyLaserCrashPool;
 		}

@@ -37,11 +37,11 @@ GameObject:
   - component: {fileID: 4430643542309172}
   - component: {fileID: 50392568322561918}
   - component: {fileID: 70175807943332026}
-  - component: {fileID: 114426677734893146}
+  - component: {fileID: 114876724782787580}
   - component: {fileID: 114019416930800900}
   - component: {fileID: 114422059464072492}
   - component: {fileID: 114441970915598864}
-  - component: {fileID: 114645119436728980}
+  - component: {fileID: 114970880260232256}
   m_Layer: 0
   m_Name: EnemyLaser
   m_TagString: Untagged
@@ -182,29 +182,6 @@ MonoBehaviour:
   Bodies:
   - {fileID: 50392568322561918}
   Trails: []
---- !u!114 &114426677734893146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1996712855909130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a5a6e210d0d4fdfb0753843e8ee63f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetBody: {fileID: 50392568322561918}
-  ImpulseForce: 12
-  MaxLifeSeconds: 0.75
-  CrashPool:
-    Prefab: {fileID: 0}
-    InitialSize: 0
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &114441970915598864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,10 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   OnHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114426677734893146}
+      - m_Target: {fileID: 114876724782787580}
         m_MethodName: Explode
         m_Mode: 1
         m_Arguments:
@@ -232,7 +210,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114645119436728980
+--- !u!114 &114876724782787580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -240,13 +218,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1996712855909130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f39accd05214d1abdbbcb6b821df6f, type: 3}
+  m_Script: {fileID: 11500000, guid: b9334e5ab760f424d9e24e65ed95e738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetBody: {fileID: 50392568322561918}
+  Type: 2
+  ImpulseForce: 12
+  MaxLifeSeconds: 0.75
+  CrashPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+--- !u!114 &114970880260232256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996712855909130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2
   OnHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114426677734893146}
+      - m_Target: {fileID: 114876724782787580}
         m_MethodName: Explode
         m_Mode: 1
         m_Arguments:

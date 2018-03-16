@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LaserType {
+	Friend = 1,
+	Enemy = 2,
+}
+
 public class LaserBehavior : MonoBehaviour {
 
 	const string LASER_FIRE_SFX = "laser1";
 	const string LASER_HIT_SFX = "laser_hit";
 	
 	public Rigidbody2D TargetBody;
+	public LaserType Type = LaserType.Friend;
 	public float ImpulseForce = 4f;
 	public float MaxLifeSeconds = 1f;
 	public GameObjectPool CrashPool;
@@ -53,7 +59,7 @@ public class LaserBehavior : MonoBehaviour {
 		if (!this._isAlive)
 			return;
 		
-		var cache = LaserHit.Cache;
+		var cache = LaserHit.GetCache(Type);
 		var key = collider.gameObject;
 
 		if (cache.ContainsKey (key)) {

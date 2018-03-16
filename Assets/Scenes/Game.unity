@@ -7879,7 +7879,7 @@ GameObject:
   - component: {fileID: 1705047370}
   - component: {fileID: 1705047371}
   - component: {fileID: 1705047374}
-  - component: {fileID: 1705047375}
+  - component: {fileID: 1705047373}
   - component: {fileID: 1705047372}
   m_Layer: 0
   m_Name: Ship
@@ -8212,7 +8212,7 @@ MonoBehaviour:
   Trails:
   - {fileID: 7429160}
   - {fileID: 2042486270}
---- !u!114 &1705047374
+--- !u!114 &1705047373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -8220,9 +8220,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1705047365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01af41c8c12bc4cd39ecf28f06746096, type: 3}
+  m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 2
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -8239,7 +8240,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Collider2DEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &1705047375
+--- !u!114 &1705047374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -8247,7 +8248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1705047365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f39accd05214d1abdbbcb6b821df6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 01af41c8c12bc4cd39ecf28f06746096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnHit:
