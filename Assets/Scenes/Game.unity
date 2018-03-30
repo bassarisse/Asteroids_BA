@@ -7350,11 +7350,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1667952127}
+      objectReference: {fileID: 1667952129}
     - target: {fileID: 114056240969518330, guid: e59384e2e8b484f9c943fcb1ef30a4be,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
+      value: GoToTitle
       objectReference: {fileID: 0}
     - target: {fileID: 114056240969518330, guid: e59384e2e8b484f9c943fcb1ef30a4be,
         type: 2}
@@ -7654,10 +7654,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1667952124}
   - component: {fileID: 1667952125}
-  - component: {fileID: 1667952127}
   - component: {fileID: 1667952126}
   - component: {fileID: 1667952123}
   - component: {fileID: 1667952128}
+  - component: {fileID: 1667952129}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7763,17 +7763,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReactWhilePlaying: 1
   ReactWhilePaused: 0
---- !u!114 &1667952127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1667952122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d0e63877e7d447c80c61d0981d0069, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1667952128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7783,6 +7772,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11508ad5eae8f4bcbb3547dcb3070456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1667952129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667952122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a08dbae73db5415096a3aef0209ff24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1673720126
@@ -8853,11 +8853,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1667952127}
+      objectReference: {fileID: 1667952129}
     - target: {fileID: 114056240969518330, guid: e59384e2e8b484f9c943fcb1ef30a4be,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 114056240969518330, guid: e59384e2e8b484f9c943fcb1ef30a4be,
         type: 2}

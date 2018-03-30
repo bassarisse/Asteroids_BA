@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -257,7 +258,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50320859661341252}
   Level: 0
-  Score: 20
   ImpulseForce: 1.5
   CrashPool:
     Prefab: {fileID: 0}
