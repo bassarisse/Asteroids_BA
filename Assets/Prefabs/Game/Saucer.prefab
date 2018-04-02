@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50132711829767214}
   PreferedScreenPercentage: 0.85
+  LaserTargetScreenPercentage: 1.1
   MinSqrMagnitudeToMove: 0.2
   Level: 1
   MinImpulseForce: 2
@@ -299,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   OnHit:
     m_PersistentCalls:
       m_Calls:

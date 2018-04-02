@@ -122,16 +122,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.2956431, y: 0.41687042}
-      - {x: 0.00784874, y: 0.29897806}
-      - {x: -0.29570794, y: 0.4218248}
-      - {x: -0.46556592, y: 0.14130197}
-      - {x: -0.24794173, y: -0.42062467}
-      - {x: -0.096315145, y: -0.35883477}
-      - {x: -0.0088272095, y: -0.16905025}
-      - {x: 0.10261607, y: -0.35883155}
-      - {x: 0.24584198, y: -0.4303221}
-      - {x: 0.46115232, y: 0.15895641}
+    - - {x: -0.2956431, y: -0.4168704}
+      - {x: 0.00434947, y: -0.28677982}
+      - {x: 0.2957079, y: -0.4218248}
+      - {x: 0.4655659, y: -0.141302}
+      - {x: 0.2479417, y: 0.4206247}
+      - {x: 0.09631515, y: 0.3588348}
+      - {x: 0.0015082359, y: 0.17392948}
+      - {x: -0.1026161, y: 0.3588316}
+      - {x: -0.24781775, y: 0.4204426}
+      - {x: -0.4611523, y: -0.1589564}
 --- !u!114 &114018888689303158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ba06a19cf344af7947115cdf0bd423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50434438676695306}
   PreferedScreenPercentage: 0.85
+  LaserTargetScreenPercentage: 1.1
   MinSqrMagnitudeToMove: 0.75
   Level: 2
   MinImpulseForce: 4
