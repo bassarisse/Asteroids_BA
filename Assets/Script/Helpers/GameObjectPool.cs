@@ -10,6 +10,8 @@ public class GameObjectPool : System.Object {
 	public int InitialSize = 0;
 	public int AutoExpandQuantity = 0;
 	public GameObjectEvent OnCreate = new GameObjectEvent();
+	[HideInInspector]
+	public GameObject Container = null;
 
 	List<GameObject> _pool = new List<GameObject> ();
 
@@ -23,7 +25,9 @@ public class GameObjectPool : System.Object {
 
 		Prefab.SetActive(false);
 
-		var newObject = GameObject.Instantiate(Prefab);
+		var targetContainer = Container != null ? Container : GameObjectPoolContainer.Instance;
+
+		var newObject = GameObject.Instantiate(Prefab, targetContainer.transform);
 
 		OnCreate.Invoke (newObject);
 
@@ -145,6 +149,32 @@ public class DoubleListOfPools {
 		set {
 			Lists[index] = value;
 		}
+	}
+
+}
+
+public class GameObjectPoolContainerHelper : MonoBehaviour {
+
+	void OnDestroy() {
+		GameObjectPoolContainer.Destroy();
+	}
+
+}
+
+static internal class GameObjectPoolContainer {
+	
+	static private GameObjectPoolContainerHelper _container = null;
+
+	static public GameObject Instance {
+		get {
+			if (_container == null)
+				_container = ( new GameObject("GameObjectPoolContainer") ).AddComponent<GameObjectPoolContainerHelper>();
+			return _container.gameObject;
+		}
+	}
+
+	static public void Destroy() {
+		_container = null;
 	}
 
 }

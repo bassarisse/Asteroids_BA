@@ -23,13 +23,18 @@ public class AudioHandlerHelper : MonoBehaviour {
 		_audioSourceCache = new Dictionary<GameObject, AudioSource> ();
 
 		_pool = new GameObjectPool ();
+		_pool.Container = new GameObject ("SoundEffectContainer");
 		_pool.Prefab = new GameObject ("SoundEffect");
+		_pool.Prefab.hideFlags = HideFlags.HideInHierarchy;
 		_pool.InitialSize = 15;
 		_pool.AutoExpandQuantity = 5;
 		_pool.OnCreate.AddListener (ConfigAudio);
 		_pool.Fill ();
 
-		DontDestroyOnLoad(gameObject);	
+		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(_pool.Prefab);
+		DontDestroyOnLoad(_pool.Container);
+
 	}
 
 	void Start() {
@@ -47,8 +52,6 @@ public class AudioHandlerHelper : MonoBehaviour {
 		audioSource.spatialBlend = 0f;
 
 		_audioSourceCache [newObject] = audioSource;
-
-		DontDestroyOnLoad(newObject);	
 
 	}
 
