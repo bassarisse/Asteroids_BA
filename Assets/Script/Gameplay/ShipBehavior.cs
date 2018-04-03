@@ -17,11 +17,15 @@ public class ShipBehavior : Waiter {
 		Dead = 3,
 	}
 
+	[Header("References")]
 	public Rigidbody2D TargetBody;
 	public ParticleSystem FireParticle;
 	public SpaceTeleport SpaceTeleportBehavior;
 	public AudioSource EngineAudio;
 	public List<TrailRenderer> WingTrails;
+	[Space(20)]
+
+	[Header("General parameters")]
 	public Vector3 BeforeEnterPosition;
 	public int InitialLifeCount = 3;
 	public float MoveForceMultiplier = 7f;
@@ -33,11 +37,17 @@ public class ShipBehavior : Waiter {
 	public float HyperspaceMargin = 1f;
 	public float HyperspaceTransitionTime = 0.75f;
 	public float HyperspaceWaitTime = 0.5f;
+	[Space(20)]
+
+	[Header("Events")]
 	public IntEvent OnLifeChange;
 	public UnityEvent OnEnter;
 	public UnityEvent OnRestore;
 	public UnityEvent OnDamage;
 	public UnityEvent OnDie;
+	[Space(20)]
+
+	[Header("Object Pools")]
 	public GameObjectPool ShipExplosionPool;
 	public GameObjectPool HyperspacePool;
 	public GameObjectPool HyperspaceFinishPool;
