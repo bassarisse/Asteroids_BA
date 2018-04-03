@@ -243,12 +243,16 @@ public class ShipBehavior : Waiter {
 	}
 
 	public void Damage(GameObject originGameObject, Collider2D collider) {
+		
+		if (_state != ShipState.Idle)
+			return;
+
+		_state = ShipState.Dead;
 		StartCoroutine (Die ());
+
 	}
 
 	IEnumerator Die() {
-
-		_state = ShipState.Dead;
 
 		SpaceTeleportBehavior.enabled = false;
 		AudioHandler.Play (CRASH_SFX);
