@@ -231,10 +231,11 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  OnScore:
+  OnAsteroidStruck:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114599238427108540
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50017899919332034}
+  Type: 1
   ImpulseForce: 12
   MaxLifeSeconds: 0.75
   CrashPool:
