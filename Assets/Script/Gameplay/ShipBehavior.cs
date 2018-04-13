@@ -18,7 +18,7 @@ public class ShipBehavior : Waiter {
 	}
 
 	[Header("References")]
-	public Rigidbody2D TargetBody;
+	public Rigidbody2D Body;
 	public ParticleSystem FireParticle;
 	public SpaceTeleport SpaceTeleportBehavior;
 	public AudioSource EngineAudio;
@@ -121,15 +121,15 @@ public class ShipBehavior : Waiter {
 			return;
 
 		if (InputExtensions.Holding.Up) {
-			this.TargetBody.AddForce (transform.up * this.MoveForceMultiplier);
+			this.Body.AddForce (transform.up * this.MoveForceMultiplier);
 		}
 
 		if (InputExtensions.Holding.Right) {
-			this.TargetBody.transform.Rotate (0, 0, -this.TurnRate);
+			this.Body.transform.Rotate (0, 0, -this.TurnRate);
 		}
 
 		if (InputExtensions.Holding.Left) {
-			this.TargetBody.transform.Rotate (0, 0, this.TurnRate);
+			this.Body.transform.Rotate (0, 0, this.TurnRate);
 		}
 
 		if (InputExtensions.Pressed.A) {
@@ -159,13 +159,13 @@ public class ShipBehavior : Waiter {
 
 	void UpdateVolume(bool engineIsOn) {
 
-		var volume = (engineIsOn ? 0.1f : 0.075f) + Mathf.Min (0.15f, TargetBody.velocity.sqrMagnitude / 60f);
+		var volume = (engineIsOn ? 0.1f : 0.075f) + Mathf.Min (0.15f, Body.velocity.sqrMagnitude / 60f);
 
 		if (_state == ShipState.Hyperspacing)
 			volume /= 5f;
 
 		EngineAudio.volume = EngineAudio.volume + (volume - EngineAudio.volume) * Time.deltaTime;
-		EngineAudio.pitch = 1f + Mathf.Min (0.6f, TargetBody.velocity.sqrMagnitude / 60f);
+		EngineAudio.pitch = 1f + Mathf.Min (0.6f, Body.velocity.sqrMagnitude / 60f);
 
 	}
 
@@ -182,7 +182,7 @@ public class ShipBehavior : Waiter {
 
 		OnEnter.Invoke ();
 
-		this.TargetBody.AddForce (transform.up * EnterImpulseMultiplier, ForceMode2D.Impulse);
+		this.Body.AddForce (transform.up * EnterImpulseMultiplier, ForceMode2D.Impulse);
 
 		yield return Wait(EnterTime);
 
@@ -231,8 +231,8 @@ public class ShipBehavior : Waiter {
 		hyperspaceFinishParticle.SetActive (true);
 
 		transform.position = BeforeEnterPosition;
-		this.TargetBody.velocity = Vector2.zero;
-		this.TargetBody.angularVelocity = 0f;
+		this.Body.velocity = Vector2.zero;
+		this.Body.angularVelocity = 0f;
 
 		ClearTrails ();
 		FireParticle.Stop ();
@@ -273,8 +273,8 @@ public class ShipBehavior : Waiter {
 		explosionParticle.SetActive (true);
 
 		transform.SetPositionAndRotation (BeforeEnterPosition, Quaternion.Euler (Vector3.zero));
-		this.TargetBody.velocity = Vector2.zero;
-		this.TargetBody.angularVelocity = 0f;
+		this.Body.velocity = Vector2.zero;
+		this.Body.angularVelocity = 0f;
 
 		ClearTrails ();
 		FireParticle.Stop ();

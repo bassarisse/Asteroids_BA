@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533a2f30b0b2545e2a10c68e7b0036cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetBody: {fileID: 50434438676695306}
+  Body: {fileID: 50434438676695306}
   PreferedScreenPercentage: 0.85
   MinSqrMagnitudeToMove: 0.75
   MinImpulseForce: 4

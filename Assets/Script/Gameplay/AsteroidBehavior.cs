@@ -6,7 +6,7 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	const string CRASH_SFX = "asteroid_crash";
 
-	public Rigidbody2D TargetBody;
+	public Rigidbody2D Body;
 	public int Level = 0;
 	public float ImpulseForce = 1.5f;
 	public GameObjectPool CrashPool;
@@ -31,7 +31,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	}
 
 	void OnEnable () {
-		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
+		this.Body.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -61,7 +61,7 @@ public class AsteroidBehavior : MonoBehaviour {
 			crashParticle.SetActive (true);
 		}
 		
-		this.TargetBody.velocity = Vector2.zero;
+		this.Body.velocity = Vector2.zero;
 
 		OnGone.Invoke (gameObject, this);
 

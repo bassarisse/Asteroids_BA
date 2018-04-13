@@ -8,7 +8,7 @@ public class EnemyBehavior : Waiter {
 	const float TARGET_ANGLE_FIX = -90f;
 
 	[Header("References")]
-	public Rigidbody2D TargetBody;
+	public Rigidbody2D Body;
 	[Space(20)]
 
 	[Header("General parameters")]
@@ -102,7 +102,7 @@ public class EnemyBehavior : Waiter {
 			if (!this._isAlive)
 				yield break;
 		
-			if (TargetBody.velocity.sqrMagnitude >= MinSqrMagnitudeToMove)
+			if (Body.velocity.sqrMagnitude >= MinSqrMagnitudeToMove)
 				continue;
 
 			var preferedRegion = UnityExtensions.CreateRectFromCamera(_camera, PreferedScreenPercentage);
@@ -117,7 +117,7 @@ public class EnemyBehavior : Waiter {
 			}
 			
 			var impulse = Random.Range (MinImpulseForce, MaxImpulseForce);
-			this.TargetBody.AddForce (moveDirection.normalized * impulse, ForceMode2D.Impulse);
+			this.Body.AddForce (moveDirection.normalized * impulse, ForceMode2D.Impulse);
 
 		}
 	}
@@ -177,7 +177,7 @@ public class EnemyBehavior : Waiter {
 			crashParticle.SetActive (true);
 		}
 
-		this.TargetBody.velocity = Vector2.zero;
+		this.Body.velocity = Vector2.zero;
 
 		StopAllCoroutines ();
 		

@@ -7910,7 +7910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec95526a3ff674145bd7000d9a026cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetBody: {fileID: 1705047368}
+  Body: {fileID: 1705047368}
   FireParticle: {fileID: 353837879}
   SpaceTeleportBehavior: {fileID: 1705047370}
   EngineAudio: {fileID: 2121136798}

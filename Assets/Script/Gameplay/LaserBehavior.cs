@@ -12,7 +12,7 @@ public class LaserBehavior : MonoBehaviour {
 	const string LASER_FIRE_SFX = "laser1";
 	const string LASER_HIT_SFX = "laser_hit";
 	
-	public Rigidbody2D TargetBody;
+	public Rigidbody2D Body;
 	public LaserType Type = LaserType.Friend;
 	public float ImpulseForce = 4f;
 	public float MaxLifeSeconds = 1f;
@@ -32,8 +32,8 @@ public class LaserBehavior : MonoBehaviour {
 
 	void OnEnable() {
 		
-		this.TargetBody.velocity = Vector2.zero;
-		this.TargetBody.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
+		this.Body.velocity = Vector2.zero;
+		this.Body.AddForce (this.transform.up * this.ImpulseForce, ForceMode2D.Impulse);
 
 		this._isAlive = true;
 		this._lifeTime = 0f;

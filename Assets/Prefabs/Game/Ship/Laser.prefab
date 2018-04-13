@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9334e5ab760f424d9e24e65ed95e738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetBody: {fileID: 50017899919332034}
+  Body: {fileID: 50017899919332034}
   Type: 1
   ImpulseForce: 12
   MaxLifeSeconds: 0.75
@@ -204,6 +204,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
 --- !u!212 &212759904507196476
 SpriteRenderer:
   m_ObjectHideFlags: 1

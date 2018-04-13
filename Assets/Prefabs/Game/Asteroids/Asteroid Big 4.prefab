@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0fffbc1e38545cfbb8ff7bb16ce889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetBody: {fileID: 50933895211388046}
+  Body: {fileID: 50933895211388046}
   Level: 0
   ImpulseForce: 1.5
   CrashPool:
@@ -205,6 +205,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   OnStruck:
     m_PersistentCalls:
       m_Calls: []
