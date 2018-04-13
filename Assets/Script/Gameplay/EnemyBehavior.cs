@@ -175,6 +175,8 @@ public class EnemyBehavior : Waiter {
 			crashParticle.SetActive (true);
 		}
 
+		this.TargetBody.velocity = Vector2.zero;
+
 		StopAllCoroutines ();
 		
 		OnGone.Invoke (gameObject, this);

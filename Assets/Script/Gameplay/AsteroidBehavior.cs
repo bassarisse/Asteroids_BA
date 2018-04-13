@@ -60,6 +60,8 @@ public class AsteroidBehavior : MonoBehaviour {
 			crashParticle.transform.position = transform.position;
 			crashParticle.SetActive (true);
 		}
+		
+		this.TargetBody.velocity = Vector2.zero;
 
 		OnGone.Invoke (gameObject, this);
 
