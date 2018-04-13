@@ -52,11 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91864e30d1ec4435b98fb83157a2322f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoDeploy: 0
   SpawnOffset: 3
   DirectionOffset: 45
+  MinAsteroids: 8
   MaxAsteroids: 8
-  Stage: 1
-  AutoDeploy: 0
+  StageToAsteroidsAddFactor: 0.5
   AsteroidPools:
     Lists:
     - Pools:
@@ -80,6 +81,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
       - Prefab: {fileID: 1503439986755430, guid: ab27a8de6466d414cb01d46239c5af64,
           type: 2}
         InitialSize: 2
@@ -100,6 +102,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
       - Prefab: {fileID: 1832484937983620, guid: 4882942038b91450eb7e67d7b92bd596,
           type: 2}
         InitialSize: 2
@@ -120,6 +123,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
       - Prefab: {fileID: 1559799609914572, guid: 2ed4b10a66a3e4e6ab2758293eeef938,
           type: 2}
         InitialSize: 2
@@ -140,6 +144,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
     - Pools:
       - Prefab: {fileID: 1962594973556804, guid: 862bbd66e44e6495a9a5995042c103b7,
           type: 2}
@@ -161,6 +166,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
       - Prefab: {fileID: 1976461789642874, guid: 60613af8783e64884ba2727dc5d3332e,
           type: 2}
         InitialSize: 2
@@ -181,6 +187,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
     - Pools:
       - Prefab: {fileID: 1659708974141220, guid: 302dc087cff274e7d8e339048b97777f,
           type: 2}
@@ -202,6 +209,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
       - Prefab: {fileID: 1204730073445238, guid: 767cacdccaf6d458fa8df22274f5b182,
           type: 2}
         InitialSize: 2
@@ -222,6 +230,7 @@ MonoBehaviour:
               m_CallState: 2
           m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null
+        Container: {fileID: 0}
   AsteroidCrashPool:
     Prefab: {fileID: 1975314887512552, guid: 7c8cf3367d2a84e759db84b5a1173857, type: 2}
     InitialSize: 4
@@ -231,6 +240,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   OnAsteroidStruck:
     m_PersistentCalls:
       m_Calls: []

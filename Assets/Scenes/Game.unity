@@ -7733,6 +7733,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1778881073}
+        m_MethodName: IncreaseDifficultyFromScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnNewLife:
     m_PersistentCalls:
@@ -8005,6 +8016,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   HyperspacePool:
     Prefab: {fileID: 1148850774071724, guid: b25a136299e1d4c25a84e109ccb85c96, type: 2}
     InitialSize: 1
@@ -8014,6 +8026,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   HyperspaceFinishPool:
     Prefab: {fileID: 1301913801819892, guid: b3f4c72e2f2664a58b3792613c5cd0f4, type: 2}
     InitialSize: 1
@@ -8023,6 +8036,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   LaserPool:
     Prefab: {fileID: 1473169507733142, guid: 955dca5d6206346f79b55c570b52bdce, type: 2}
     InitialSize: 4
@@ -8043,6 +8057,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   LaserCrashPool:
     Prefab: {fileID: 1900632167330668, guid: 445539d8c35a447b98c70f3624626fc5, type: 2}
     InitialSize: 2
@@ -8052,6 +8067,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
 --- !u!60 &1705047367
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8295,13 +8311,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d848fd81548b43ae93085c06db2832c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnOffset: 2
   AutoDeploy: 0
-  MinSaucerWaitTime: 3
-  MaxSaucerWaitTime: 8
-  MinEnemyShipWaitTime: 8
-  MaxEnemyShipWaitTime: 20
+  SpawnOffset: 2
   LaserTarget: {fileID: 1705047365}
+  ScoreToDifficultyFactor: 0.0003
+  MinDifficultyLevel: 1
+  MaxDifficultyLevel: 15
+  MinSaucerWaitTime: 4
+  MaxSaucerWaitTime: 12
+  MinEnemyShipWaitTime: 16
+  MaxEnemyShipWaitTime: 30
   SaucerPool:
     Prefab: {fileID: 1416540888331136, guid: 219c8fcdf1de44b03bf3aec4b67a49d2, type: 2}
     InitialSize: 1
@@ -8322,6 +8341,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   EnemyShipPool:
     Prefab: {fileID: 1540895057935644, guid: 480d1ff9ac8674a8ea59b7469db3b1f7, type: 2}
     InitialSize: 1
@@ -8342,6 +8362,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   EnemyLaserPool:
     Prefab: {fileID: 1996712855909130, guid: 140057eed7cf34d47913e330c041c9fe, type: 2}
     InitialSize: 4
@@ -8362,6 +8383,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   EnemyLaserCrashPool:
     Prefab: {fileID: 1724327315219692, guid: 56bec4d07eca3430a975acb8f9546a29, type: 2}
     InitialSize: 2
@@ -8371,6 +8393,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   EnemyCrashPool:
     Prefab: {fileID: 1927070610698148, guid: 8589ac4013cd1482290bb03abe4ded3a, type: 2}
     InitialSize: 2
@@ -8380,6 +8403,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+    Container: {fileID: 0}
   OnEnemyStruck:
     m_PersistentCalls:
       m_Calls:
@@ -8709,6 +8733,20 @@ Prefab:
         type: 2}
       propertyPath: OnAsteroidStruck.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: MaxAsteroids
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114319582898870244, guid: f2a0f5b5f653b4ae58c372044760e60c,
+        type: 2}
+      propertyPath: MinAsteroids
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104767258717164, guid: f2a0f5b5f653b4ae58c372044760e60c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2a0f5b5f653b4ae58c372044760e60c, type: 2}

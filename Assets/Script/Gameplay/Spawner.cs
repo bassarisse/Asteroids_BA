@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Spawner : Waiter {
 	
+	[Header("General Settings")]
+	public bool AutoDeploy = false;
 	public float SpawnOffset = 2f;
 	public float DirectionOffset = 45f;
-	public int MaxAsteroids = 10;
-	public int Stage = 1;
-	public bool AutoDeploy = false;
+	[Space(20)]
+
+	[Header("Difficulty Settings")]
+	public int MinAsteroids = 3;
+	public int MaxAsteroids = 8;
+	public float StageToAsteroidsAddFactor = 0.5f;
+	[Space(20)]
+
 	public DoubleListOfPools AsteroidPools;
 	public GameObjectPool AsteroidCrashPool;
 	public GameObjectEvent OnAsteroidStruck;
 
+	int _stage = 1;
 	int _asteroidCount = 0;
 
 	void Awake() {
@@ -68,7 +76,7 @@ public class Spawner : Waiter {
 		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
 		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 
-		var qtyToDeploy = Mathf.Min(4 + Mathf.FloorToInt (Stage / 2), MaxAsteroids);
+		var qtyToDeploy = Mathf.Min(MinAsteroids + Mathf.FloorToInt (_stage * StageToAsteroidsAddFactor), MaxAsteroids);
 
 		for (var i = 0; i < qtyToDeploy; i++) {
 			var offset = 1f + Random.Range (0, SpawnOffset);
@@ -124,7 +132,7 @@ public class Spawner : Waiter {
 		}
 
 		if (_asteroidCount == 0) {
-			Stage += 1;
+			_stage += 1;
 			DeployAsteroids ();
 		}
 	}

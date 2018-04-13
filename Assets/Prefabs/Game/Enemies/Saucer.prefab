@@ -155,42 +155,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50132711829767214}
-  PreferedScreenPercentage: 0.85
-  LaserTargetScreenPercentage: 1.1
-  MinSqrMagnitudeToMove: 0.2
   Level: 1
+  PreferedScreenPercentage: 0.85
+  MinSqrMagnitudeToMove: 0.2
   MinImpulseForce: 2
-  MaxImpulseForce: 10
-  MinWaitToShootTime: 5
+  MaxImpulseForce: 8
+  MinWaitToShootTime: 2
   MaxWaitToShootTime: 10
   LaserTarget: {fileID: 0}
-  LaserPool:
-    Prefab: {fileID: 0}
-    InitialSize: 0
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  LaserCrashPool:
-    Prefab: {fileID: 0}
-    InitialSize: 0
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  CrashPool:
-    Prefab: {fileID: 0}
-    InitialSize: 0
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+  LaserTargetScreenPercentage: 1.1
+  LaserTargetMaxOffset: 15
+  LaserTargetRate: 0.95
   OnStruck:
     m_PersistentCalls:
       m_Calls: []
@@ -203,6 +178,36 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: SaucerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  LaserPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    Container: {fileID: 0}
+  LaserCrashPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    Container: {fileID: 0}
+  CrashPool:
+    Prefab: {fileID: 0}
+    InitialSize: 0
+    AutoExpandQuantity: 0
+    OnCreate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    Container: {fileID: 0}
 --- !u!114 &114247522875231876
 MonoBehaviour:
   m_ObjectHideFlags: 1

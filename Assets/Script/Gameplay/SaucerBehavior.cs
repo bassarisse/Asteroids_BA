@@ -5,24 +5,39 @@ using UnityEngine;
 public class SaucerBehavior : Waiter {
 
 	const string CRASH_SFX = "ship_crash";
+	const float TARGET_ANGLE_FIX = -90f;
 
+	[Header("References")]
 	public Rigidbody2D TargetBody;
-	public float PreferedScreenPercentage = 0.9f;
-	public float LaserTargetScreenPercentage = 1.1f;
-	public float MinSqrMagnitudeToMove = 1f;
+	[Space(20)]
+
+	[Header("General parameters")]
 	public int Level = 0;
+	public float PreferedScreenPercentage = 0.9f;
+	public float MinSqrMagnitudeToMove = 1f;
 	public float MinImpulseForce = 1f;
 	public float MaxImpulseForce = 4f;
 	public float MinWaitToShootTime = 2f;
 	public float MaxWaitToShootTime = 10f;
-	public GameObject LaserTarget;
-	public GameObjectPool LaserPool;
-	public GameObjectPool LaserCrashPool;
-	public GameObjectPool CrashPool;
+	[Space(20)]
 
+	[Header("Targeting")]
+	public GameObject LaserTarget;
+	public float LaserTargetScreenPercentage = 1.1f;
+	public float LaserTargetMaxOffset = 15f;
+	public float LaserTargetRate = 0.95f;
+	[Space(20)]
+
+	[Header("Events")]
 	public SaucerEvent OnStruck;
 	public SaucerEvent OnDie;
 	public SaucerEvent OnGone;
+	[Space(20)]
+
+	[Header("Object Pools")]
+	public GameObjectPool LaserPool;
+	public GameObjectPool LaserCrashPool;
+	public GameObjectPool CrashPool;
 
 	bool _isAlive = false;
 	Camera _camera;
@@ -59,11 +74,19 @@ public class SaucerBehavior : Waiter {
 			var targetRegion = UnityExtensions.CreateRectFromCamera(_camera, LaserTargetScreenPercentage);
 
 			if (targetRegion.Contains(LaserTarget.transform.position)) {
-				var moveDirection = transform.position - LaserTarget.transform.position; 
-				if (moveDirection != Vector3.zero) {
-					var angle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-					transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-					transform.Rotate (0, 0, 90);
+				var direction = LaserTarget.transform.position - transform.position; 
+				if (direction != Vector3.zero) {
+
+					var offsetAngle = Mathf.Sin(Time.timeSinceLevelLoad) * LaserTargetMaxOffset;
+					var targetAngle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+
+					var fixedTargetAngle = UnityExtensions.ClampAngle(targetAngle + TARGET_ANGLE_FIX);
+					var currentAngle = UnityExtensions.ClampAngle(transform.rotation.eulerAngles.z);
+					var angleDifference = UnityExtensions.ClampAngle(fixedTargetAngle - currentAngle + offsetAngle);
+					
+					var finalAngle = currentAngle + angleDifference * Time.deltaTime * 5f * LaserTargetRate;
+
+					transform.rotation = Quaternion.Euler(0f, 0f, finalAngle);
 				}
 			}
 			

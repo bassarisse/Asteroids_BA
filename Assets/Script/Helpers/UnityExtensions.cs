@@ -12,5 +12,16 @@ public class UnityExtensions {
 
 			return new Rect(center.x - width / 2f, center.y - height / 2f, width, height);
 	}
+
+	static public float ClampAngle(float angle) {
+		var newAngle = angle;
+
+		while (newAngle > 180)
+			newAngle -= 360f;
+		while (newAngle < -180)
+			newAngle += 360f;
+
+		return newAngle;
+	}
 	
 }
