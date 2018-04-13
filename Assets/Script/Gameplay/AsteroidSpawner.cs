@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : Waiter {
+public class AsteroidSpawner : Waiter {
 	
 	[Header("General Settings")]
 	public bool AutoDeploy = false;

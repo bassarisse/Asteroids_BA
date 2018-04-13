@@ -12,7 +12,7 @@ public class AsteroidEvent : UnityEvent<GameObject, AsteroidBehavior> {
 }
 
 [System.Serializable]
-public class SaucerEvent : UnityEvent<GameObject, SaucerBehavior> {
+public class EnemyEvent : UnityEvent<GameObject, EnemyBehavior> {
 }
 
 [System.Serializable]

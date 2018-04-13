@@ -54,15 +54,15 @@ public class EnemySpawner : Waiter {
 	}
 
 	public void ConfigEnemy(GameObject newObject) {
-		var saucerBehavior = newObject.GetComponent<SaucerBehavior> ();
-		if (saucerBehavior != null) {
-			saucerBehavior.LaserTarget = saucerBehavior.Level > 1 ? LaserTarget : null;
-			saucerBehavior.LaserPool = EnemyLaserPool;
-			saucerBehavior.LaserCrashPool = EnemyLaserCrashPool;
-			saucerBehavior.CrashPool = EnemyCrashPool;
-			saucerBehavior.OnStruck.AddListener (StruckEnemy);
-			saucerBehavior.OnDie.AddListener (ScheduleNewEnemy);
-			saucerBehavior.OnGone.AddListener (ReturnEnemy);
+		var enemyBehavior = newObject.GetComponent<EnemyBehavior> ();
+		if (enemyBehavior != null) {
+			enemyBehavior.LaserTarget = enemyBehavior.Level > 1 ? LaserTarget : null;
+			enemyBehavior.LaserPool = EnemyLaserPool;
+			enemyBehavior.LaserCrashPool = EnemyLaserCrashPool;
+			enemyBehavior.CrashPool = EnemyCrashPool;
+			enemyBehavior.OnStruck.AddListener (StruckEnemy);
+			enemyBehavior.OnDie.AddListener (ScheduleNewEnemy);
+			enemyBehavior.OnGone.AddListener (ReturnEnemy);
 		}
 	}
 
@@ -134,15 +134,15 @@ public class EnemySpawner : Waiter {
 
 	}
 
-	void StruckEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {
+	void StruckEnemy(GameObject gameObject, EnemyBehavior enemyBehavior) {
 		OnEnemyStruck.Invoke (gameObject);
 	}
 
-	void ScheduleNewEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {
-		DeployEnemies (saucerBehavior.Level);
+	void ScheduleNewEnemy(GameObject gameObject, EnemyBehavior enemyBehavior) {
+		DeployEnemies (enemyBehavior.Level);
 	}
 
-	void ReturnEnemy(GameObject gameObject, SaucerBehavior saucerBehavior) {
+	void ReturnEnemy(GameObject gameObject, EnemyBehavior enemyBehavior) {
 		gameObject.SetActive (false);
 	}
 

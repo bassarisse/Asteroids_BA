@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaucerBehavior : Waiter {
+public class EnemyBehavior : Waiter {
 
 	const string CRASH_SFX = "ship_crash";
 	const float TARGET_ANGLE_FIX = -90f;
@@ -29,9 +29,9 @@ public class SaucerBehavior : Waiter {
 	[Space(20)]
 
 	[Header("Events")]
-	public SaucerEvent OnStruck;
-	public SaucerEvent OnDie;
-	public SaucerEvent OnGone;
+	public EnemyEvent OnStruck;
+	public EnemyEvent OnDie;
+	public EnemyEvent OnGone;
 	[Space(20)]
 
 	[Header("Object Pools")]
@@ -47,11 +47,11 @@ public class SaucerBehavior : Waiter {
 		AudioHandler.Load (CRASH_SFX);
 
 		if (OnStruck == null)
-			OnStruck = new SaucerEvent ();
+			OnStruck = new EnemyEvent ();
 		if (OnDie == null)
-			OnDie = new SaucerEvent ();
+			OnDie = new EnemyEvent ();
 		if (OnGone == null)
-			OnGone = new SaucerEvent ();
+			OnGone = new EnemyEvent ();
 
 		LaserPool.Fill ();
 		LaserCrashPool.Fill ();
@@ -147,7 +147,7 @@ public class SaucerBehavior : Waiter {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		var cache = SaucerHit.Cache;
+		var cache = EnemyHit.Cache;
 		var key = collider.gameObject;
 		if (cache.ContainsKey(key))
 			cache [key].Hit (gameObject, collider);

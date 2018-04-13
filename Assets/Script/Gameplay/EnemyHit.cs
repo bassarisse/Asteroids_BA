@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SaucerHit : MonoBehaviour {
+public class EnemyHit : MonoBehaviour {
 
-	public static readonly Dictionary<GameObject, SaucerHit> Cache = new Dictionary<GameObject, SaucerHit>();
+	public static readonly Dictionary<GameObject, EnemyHit> Cache = new Dictionary<GameObject, EnemyHit>();
 	public void OnEnable() { Cache.Add(gameObject, this); }
 	public void OnDisable() { Cache.Remove(gameObject); }
 
