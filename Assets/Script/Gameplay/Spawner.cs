@@ -56,6 +56,9 @@ public class Spawner : Waiter {
 
 	void DeployAsteroids() {
 
+		if (!gameObject.activeInHierarchy)
+			return;
+
 		var camera = Camera.main;
 		if (camera == null)
 			return;

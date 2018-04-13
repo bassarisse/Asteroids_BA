@@ -62,6 +62,9 @@ public class EnemySpawner : Waiter {
 
 	void DeployEnemies(params int[] enemyLevels) {
 
+		if (!gameObject.activeInHierarchy)
+			return;
+
 		var camera = Camera.main;
 		if (camera == null)
 			return;
