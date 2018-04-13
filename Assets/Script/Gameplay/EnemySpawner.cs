@@ -134,6 +134,7 @@ public class EnemySpawner : Waiter {
 	}
 
 	public void ResetEnemies() {
+		StopAllCoroutines ();
 		SaucerPool.Reclaim ();
 		EnemyShipPool.Reclaim ();
 		_enemyCount = 0;
