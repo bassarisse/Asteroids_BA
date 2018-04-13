@@ -98,6 +98,9 @@ public class EnemyBehavior : Waiter {
 		while (this._isAlive) {
 
 			yield return Wait(0.5f);
+
+			if (!this._isAlive)
+				yield break;
 		
 			if (TargetBody.velocity.sqrMagnitude >= MinSqrMagnitudeToMove)
 				continue;
@@ -128,9 +131,6 @@ public class EnemyBehavior : Waiter {
 			if (!this._isAlive)
 				yield break;
 
-			var impulse = Random.Range (MinImpulseForce, MaxImpulseForce);
-
-			this.TargetBody.AddForce (Random.insideUnitCircle.normalized * impulse, ForceMode2D.Impulse);
 
 			var laser = LaserPool.GetObject ();
 			if (laser == null)
