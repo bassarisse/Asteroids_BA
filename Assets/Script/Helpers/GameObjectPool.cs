@@ -56,6 +56,10 @@ public class GameObjectPool : System.Object {
 		return _pool [_pool.Count - 1];
 	}
 
+	public bool Contains(GameObject gameObject) {
+		return _pool.Contains(gameObject);
+	}
+
 	public void Drain() {
 		var l = _pool.Count;
 		for (var i = 0; i < l; i++) {
@@ -81,6 +85,14 @@ public class ListOfPools {
 		for (var i = 0; i < Pools.Count; i++) {
 			Pools [i].Fill ();
 		}
+	}
+
+	public bool Contains(GameObject gameObject) {
+		for (var i = 0; i < Pools.Count; i++) {
+			if (Pools [i].Contains (gameObject))
+			return true;
+		}
+		return false;
 	}
 
 	public void Drain() {
@@ -121,6 +133,14 @@ public class DoubleListOfPools {
 		for (var i = 0; i < Lists.Count; i++) {
 			Lists [i].Fill ();
 		}
+	}
+
+	public bool Contains(GameObject gameObject) {
+		for (var i = 0; i < Lists.Count; i++) {
+			if (Lists [i].Contains (gameObject))
+			return true;
+		}
+		return false;
 	}
 
 	public void Drain() {

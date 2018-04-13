@@ -249,29 +249,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetBody: {fileID: 50434438676695306}
-  Level: 2
   PreferedScreenPercentage: 0.85
   MinSqrMagnitudeToMove: 0.75
   MinImpulseForce: 4
   MaxImpulseForce: 9
   MinWaitToShootTime: 4
   MaxWaitToShootTime: 8
+  WantsTarget: 1
   LaserTarget: {fileID: 0}
   LaserTargetScreenPercentage: 1.1
   LaserTargetMaxOffset: 4
-  LaserTargetRate: 0.75
+  LaserTargetAimRate: 0.75
   OnStruck:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SaucerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: EnemyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnDie:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SaucerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: EnemyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnGone:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SaucerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: EnemyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   LaserPool:
     Prefab: {fileID: 0}
     InitialSize: 0

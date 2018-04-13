@@ -8313,56 +8313,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoDeploy: 0
   SpawnOffset: 2
-  LaserTarget: {fileID: 1705047365}
+  DefaultEnemyTarget: {fileID: 1705047365}
   ScoreToDifficultyFactor: 0.0003
   MinDifficultyLevel: 1
   MaxDifficultyLevel: 15
-  MinSaucerWaitTime: 4
-  MaxSaucerWaitTime: 12
-  MinEnemyShipWaitTime: 16
-  MaxEnemyShipWaitTime: 30
-  SaucerPool:
-    Prefab: {fileID: 1416540888331136, guid: 219c8fcdf1de44b03bf3aec4b67a49d2, type: 2}
-    InitialSize: 1
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1778881073}
-          m_MethodName: ConfigEnemy
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    Container: {fileID: 0}
-  EnemyShipPool:
-    Prefab: {fileID: 1540895057935644, guid: 480d1ff9ac8674a8ea59b7469db3b1f7, type: 2}
-    InitialSize: 1
-    AutoExpandQuantity: 0
-    OnCreate:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1778881073}
-          m_MethodName: ConfigEnemy
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    Container: {fileID: 0}
+  OnEnemyStruck:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1667952125}
+        m_MethodName: CollectScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   EnemyLaserPool:
     Prefab: {fileID: 1996712855909130, guid: 140057eed7cf34d47913e330c041c9fe, type: 2}
     InitialSize: 4
@@ -8404,22 +8374,55 @@ MonoBehaviour:
       m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     Container: {fileID: 0}
-  OnEnemyStruck:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1667952125}
-        m_MethodName: CollectScore
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  Enemies:
+  - MinSpawnWaitTime: 4
+    MaxSpawnWaitTime: 12
+    AffectedByDifficultyLevel: 0
+    Pool:
+      Prefab: {fileID: 1416540888331136, guid: 219c8fcdf1de44b03bf3aec4b67a49d2, type: 2}
+      InitialSize: 1
+      AutoExpandQuantity: 0
+      OnCreate:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1778881073}
+            m_MethodName: ConfigEnemy
+            m_Mode: 0
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Container: {fileID: 0}
+  - MinSpawnWaitTime: 16
+    MaxSpawnWaitTime: 30
+    AffectedByDifficultyLevel: 1
+    Pool:
+      Prefab: {fileID: 1540895057935644, guid: 480d1ff9ac8674a8ea59b7469db3b1f7, type: 2}
+      InitialSize: 1
+      AutoExpandQuantity: 0
+      OnCreate:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1778881073}
+            m_MethodName: ConfigEnemy
+            m_Mode: 0
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        m_TypeName: GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Container: {fileID: 0}
 --- !u!4 &1778881074
 Transform:
   m_ObjectHideFlags: 0

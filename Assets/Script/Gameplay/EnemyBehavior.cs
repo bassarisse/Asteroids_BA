@@ -12,7 +12,6 @@ public class EnemyBehavior : Waiter {
 	[Space(20)]
 
 	[Header("General parameters")]
-	public int Level = 0;
 	public float PreferedScreenPercentage = 0.9f;
 	public float MinSqrMagnitudeToMove = 1f;
 	public float MinImpulseForce = 1f;
@@ -22,10 +21,11 @@ public class EnemyBehavior : Waiter {
 	[Space(20)]
 
 	[Header("Targeting")]
+	public bool WantsTarget = false;
 	public GameObject LaserTarget;
 	public float LaserTargetScreenPercentage = 1.1f;
 	public float LaserTargetMaxOffset = 15f;
-	public float LaserTargetRate = 0.95f;
+	public float LaserTargetAimRate = 0.95f;
 	[Space(20)]
 
 	[Header("Events")]
@@ -84,7 +84,7 @@ public class EnemyBehavior : Waiter {
 					var currentAngle = UnityExtensions.ClampAngle(transform.rotation.eulerAngles.z);
 					var angleDifference = UnityExtensions.ClampAngle(fixedTargetAngle - currentAngle + offsetAngle);
 					
-					var finalAngle = currentAngle + angleDifference * Time.deltaTime * 5f * LaserTargetRate;
+					var finalAngle = currentAngle + angleDifference * Time.deltaTime * 5f * LaserTargetAimRate;
 
 					transform.rotation = Quaternion.Euler(0f, 0f, finalAngle);
 				}
@@ -131,6 +131,8 @@ public class EnemyBehavior : Waiter {
 			if (!this._isAlive)
 				yield break;
 
+			if (WantsTarget && LaserTarget == null)
+				yield break;
 
 			var laser = LaserPool.GetObject ();
 			if (laser == null)

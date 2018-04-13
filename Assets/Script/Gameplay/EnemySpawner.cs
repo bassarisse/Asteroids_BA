@@ -7,26 +7,26 @@ public class EnemySpawner : Waiter {
 	[Header("General Settings")]
 	public bool AutoDeploy = false;
 	public float SpawnOffset = 2f;
-	public GameObject LaserTarget;
+	public GameObject DefaultEnemyTarget;
 	[Space(20)]
 
 	[Header("Difficulty Settings")]
 	public float ScoreToDifficultyFactor = 0.001f;
 	public float MinDifficultyLevel = 1f;
 	public float MaxDifficultyLevel = 15f;
-	public float MinSaucerWaitTime = 3f;
-	public float MaxSaucerWaitTime = 8f;
-	public float MinEnemyShipWaitTime = 5f;
-	public float MaxEnemyShipWaitTime = 12f;
+	[Space(20)]
+
+	[Header("Events")]
+	public GameObjectEvent OnEnemyStruck;
 	[Space(20)]
 
 	[Header("Object Pools")]
-	public GameObjectPool SaucerPool;
-	public GameObjectPool EnemyShipPool;
 	public GameObjectPool EnemyLaserPool;
 	public GameObjectPool EnemyLaserCrashPool;
 	public GameObjectPool EnemyCrashPool;
-	public GameObjectEvent OnEnemyStruck;
+	[Space(20)]
+
+	public List<EnemyData> Enemies;
 
 	float _difficultyLevel = 0;
 
@@ -35,8 +35,10 @@ public class EnemySpawner : Waiter {
 		if (OnEnemyStruck == null)
 			OnEnemyStruck = new GameObjectEvent ();
 
-		SaucerPool.Fill ();
-		EnemyShipPool.Fill ();
+		foreach	(var enemyData in Enemies) {
+			enemyData.Pool.Fill();
+		}
+
 		EnemyLaserPool.Fill ();
 		EnemyLaserCrashPool.Fill ();
 		EnemyCrashPool.Fill ();
@@ -45,7 +47,7 @@ public class EnemySpawner : Waiter {
 
 	void Start () {
 		if (AutoDeploy)
-			DeployEnemies(1, 2);
+			DeployEnemies(Enemies.ToArray());
 	}
 
 	public void IncreaseDifficultyFromScore(int score) {
@@ -56,7 +58,7 @@ public class EnemySpawner : Waiter {
 	public void ConfigEnemy(GameObject newObject) {
 		var enemyBehavior = newObject.GetComponent<EnemyBehavior> ();
 		if (enemyBehavior != null) {
-			enemyBehavior.LaserTarget = enemyBehavior.Level > 1 ? LaserTarget : null;
+			enemyBehavior.LaserTarget = enemyBehavior.WantsTarget ? DefaultEnemyTarget : null;
 			enemyBehavior.LaserPool = EnemyLaserPool;
 			enemyBehavior.LaserCrashPool = EnemyLaserCrashPool;
 			enemyBehavior.CrashPool = EnemyCrashPool;
@@ -73,7 +75,7 @@ public class EnemySpawner : Waiter {
 		}
 	}
 
-	void DeployEnemies(params int[] enemyLevels) {
+	void DeployEnemies(params EnemyData[] enemyDataList) {
 
 		if (!gameObject.activeInHierarchy)
 			return;
@@ -87,27 +89,27 @@ public class EnemySpawner : Waiter {
 		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
 		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 
-		for (var i = 0; i < enemyLevels.Length; i++) {
-			var level = enemyLevels [i];
+		for (var i = 0; i < enemyDataList.Length; i++) {
+			var enemyData = enemyDataList [i];
 			var offset = 1f + Random.Range (0, SpawnOffset);
 
-			if (level == 1)
-				StartCoroutine (DeploySaucer (posMin, posMax, offset));
-			else if (level == 2)
-				StartCoroutine (DeployEnemyShip (posMin, posMax, offset));
-			
+			StartCoroutine (ScheduleEnemyDeploy(enemyData, posMin, posMax, offset));
 		}
 
 	}
 
-	IEnumerator DeploySaucer(Vector3 posMin, Vector3 posMax, float offset) {
-		yield return Wait(Random.Range(MinSaucerWaitTime, MinSaucerWaitTime));
-		DeployEnemy (SaucerPool.GetObject (), posMin, posMax, offset);
-	}
+	IEnumerator ScheduleEnemyDeploy(EnemyData enemyData, Vector3 posMin, Vector3 posMax, float offset) {
 
-	IEnumerator DeployEnemyShip(Vector3 posMin, Vector3 posMax, float offset) {
-		yield return Wait(Random.Range(MinEnemyShipWaitTime / _difficultyLevel, MaxEnemyShipWaitTime / _difficultyLevel));
-		DeployEnemy (EnemyShipPool.GetObject (), posMin, posMax, offset);
+		float minTime = enemyData.MinSpawnWaitTime;
+		float maxTime = enemyData.MaxSpawnWaitTime;
+
+		if (enemyData.AffectedByDifficultyLevel) {
+			minTime /= _difficultyLevel;
+			maxTime /= _difficultyLevel;
+		}
+		
+		yield return Wait(Random.Range(minTime, maxTime));
+		DeployEnemy (enemyData.Pool.GetObject (), posMin, posMax, offset);
 	}
 
 	void DeployEnemy(GameObject enemy, Vector3 posMin, Vector3 posMax, float offset) {
@@ -139,7 +141,13 @@ public class EnemySpawner : Waiter {
 	}
 
 	void ScheduleNewEnemy(GameObject gameObject, EnemyBehavior enemyBehavior) {
-		DeployEnemies (enemyBehavior.Level);
+		foreach (var enemyData in Enemies)
+		{
+			if (enemyData.Pool.Contains(gameObject)) {
+				DeployEnemies(enemyData);
+				return;
+			}
+		}
 	}
 
 	void ReturnEnemy(GameObject gameObject, EnemyBehavior enemyBehavior) {
@@ -148,9 +156,23 @@ public class EnemySpawner : Waiter {
 
 	public void ResetEnemies() {
 		StopAllCoroutines ();
-		SaucerPool.Reclaim ();
-		EnemyShipPool.Reclaim ();
-		DeployEnemies (1, 2);
+
+		foreach (var enemyData in Enemies)
+		{
+			enemyData.Pool.Reclaim ();
+		}
+
+		DeployEnemies (Enemies.ToArray());
 	}
+
+}
+
+[System.Serializable]
+public class EnemyData : System.Object {
+
+	public float MinSpawnWaitTime = 3f;
+	public float MaxSpawnWaitTime = 8f;
+	public bool AffectedByDifficultyLevel = false;
+	public GameObjectPool Pool;
 
 }
