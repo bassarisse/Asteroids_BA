@@ -9,6 +9,7 @@ public class ShipBehavior : Waiter {
 	const string NEW_LIFE_SFX = "new_life";
 	const string CRASH_SFX = "ship_crash";
 	const string HYPERSPACE_SFX = "hyperspace";
+	const string MEGA_EXPLOSION_SFX = "mega_explosion";
 
 	internal enum ShipState {
 		Idle = 0,
@@ -48,6 +49,7 @@ public class ShipBehavior : Waiter {
 	[Space(20)]
 
 	[Header("Object Pools")]
+	public GameObjectPool MegaExplosionPool;
 	public GameObjectPool ShipExplosionPool;
 	public GameObjectPool HyperspacePool;
 	public GameObjectPool HyperspaceFinishPool;
@@ -73,6 +75,7 @@ public class ShipBehavior : Waiter {
 		if (OnDie == null)
 			OnDie = new UnityEvent ();
 
+		MegaExplosionPool.Fill ();
 		ShipExplosionPool.Fill ();
 		HyperspacePool.Fill ();
 		HyperspaceFinishPool.Fill ();
@@ -169,11 +172,19 @@ public class ShipBehavior : Waiter {
 
 	}
 
-	IEnumerator Enter() {
+	IEnumerator Enter(bool clearScreen = false) {
+
+		if (clearScreen) {
+			var megaExplosion = MegaExplosionPool.GetObject ();
+			megaExplosion.SetActive (true);
+			AudioHandler.Play (MEGA_EXPLOSION_SFX, 0.75f);
+		}
 
 		_state = ShipState.Entering;
 
 		transform.position = BeforeEnterPosition;
+
+		yield return Wait(0.1f);
 
 		VoidHit.HitAll ();
 
@@ -288,7 +299,7 @@ public class ShipBehavior : Waiter {
 		if (this._currentLifeCount == 0) {
 			OnDie.Invoke();
 		} else {
-			StartCoroutine (Enter ());
+			StartCoroutine (Enter (true));
 		}
 
 	}
