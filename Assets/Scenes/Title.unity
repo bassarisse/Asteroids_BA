@@ -431,7 +431,7 @@ Prefab:
     - target: {fileID: 114434687089605174, guid: ac0ffb9c1aef94b88b58ce8768544ccf,
         type: 2}
       propertyPath: m_Text
-      value: Asteroids_FH
+      value: Asteroids_BA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0ffb9c1aef94b88b58ce8768544ccf, type: 2}
