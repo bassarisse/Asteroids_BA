@@ -173,6 +173,8 @@ public class ShipBehavior : Waiter {
 	}
 
 	IEnumerator Enter(bool clearScreen = false) {
+		
+		ClearTrails ();
 
 		if (clearScreen) {
 			var megaExplosion = MegaExplosionPool.GetObject ();
@@ -188,6 +190,7 @@ public class ShipBehavior : Waiter {
 
 		VoidHit.HitAll ();
 
+		ClearTrails ();
 		FireParticle.Clear ();
 		FireParticle.Play ();
 
@@ -326,7 +329,10 @@ public class ShipBehavior : Waiter {
 	public void ClearTrails() {
 
 		for (var i = 0; i < WingTrails.Count; i++) {
+			// not sure why disabling/re-enabling is needed after Unity update
+			WingTrails [i].enabled = false;
 			WingTrails [i].Clear ();
+			WingTrails [i].enabled = true;
 		}
 
 	}
