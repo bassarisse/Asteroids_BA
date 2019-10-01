@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidSpawner : Waiter {
+public class AsteroidSpawner : Waiter
+{
 	
 	[Header("General Settings")]
 	public bool AutoDeploy = false;
@@ -11,9 +12,11 @@ public class AsteroidSpawner : Waiter {
 	[Space(20)]
 
 	[Header("Difficulty Settings")]
-	public int MinAsteroids = 3;
-	public int MaxAsteroids = 8;
+	[SerializeField]private int minAsteroids;
+    [SerializeField] private int maxAsteroids;
+
 	public float StageToAsteroidsAddFactor = 0.5f;
+
 	[Space(20)]
 
 	public DoubleListOfPools AsteroidPools;
@@ -23,17 +26,35 @@ public class AsteroidSpawner : Waiter {
 	int _stage = 1;
 	int _asteroidCount = 0;
 
-	void Awake() {
-		
-		if (OnAsteroidStruck == null)
+    protected override void SetDifficulty(int difficulty)
+    {
+        switch (UserSession.CurrentDifficulty)
+        {
+            case UserSession.EASY:
+                minAsteroids = 1;
+                maxAsteroids = 4;
+                break;
+            case UserSession.MEDIUM:
+            case UserSession.HARD:
+                minAsteroids = 3;
+                maxAsteroids = 8;
+                break;
+        }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (OnAsteroidStruck == null)
 			OnAsteroidStruck = new GameObjectEvent ();
 
 		AsteroidPools.Fill ();
 		AsteroidCrashPool.Fill ();
+    }
 
-	}
-
-	void Start () {
+	void Start ()
+    {
 		if (AutoDeploy)
 			DeployAsteroids();
 	}
@@ -76,7 +97,7 @@ public class AsteroidSpawner : Waiter {
 		var posMin = camera.ViewportToWorldPoint (new Vector3 (area.xMin, area.yMin, 0));
 		var posMax = camera.ViewportToWorldPoint (new Vector3 (area.xMax, area.yMax, 0));
 
-		var qtyToDeploy = Mathf.Min(MinAsteroids + Mathf.FloorToInt (_stage * StageToAsteroidsAddFactor), MaxAsteroids);
+		var qtyToDeploy = Mathf.Min(minAsteroids + Mathf.FloorToInt (_stage * StageToAsteroidsAddFactor), maxAsteroids);
 
 		for (var i = 0; i < qtyToDeploy; i++) {
 			var offset = 1f + Random.Range (0, SpawnOffset);

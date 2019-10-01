@@ -30,9 +30,16 @@ public class EnemySpawner : Waiter {
 
 	float _difficultyLevel = 0;
 
-	void Awake() {
+    protected override void SetDifficulty(int difficulty)
+    {
+       
+    }
 
-		if (OnEnemyStruck == null)
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (OnEnemyStruck == null)
 			OnEnemyStruck = new GameObjectEvent ();
 
 		foreach	(var enemyData in Enemies) {

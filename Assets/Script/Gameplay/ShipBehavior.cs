@@ -61,7 +61,15 @@ public class ShipBehavior : Waiter {
 	bool _canHyperspace = true;
 	Camera _camera;
 
-	void Awake () {
+    protected override void SetDifficulty(int difficulty)
+    {
+        
+    }
+
+    protected  override void Awake ()
+    {
+        base.Awake();
+
 		AudioHandler.Load (NEW_LIFE_SFX, CRASH_SFX, HYPERSPACE_SFX);
 
 		if (OnLifeChange == null)

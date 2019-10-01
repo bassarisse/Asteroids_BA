@@ -1,11 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Navigation : MonoBehaviour {
 
-	public void StartGame() {
+
+    public void SelectDifficulty()
+    {
+        SceneManager.LoadScene("GameLevel");
+    }
+
+    public void StartGame(int difficulty)
+    {
+        UserSession.SetDifficulty(difficulty);
 		SceneManager.LoadScene ("Game");
 	}
 

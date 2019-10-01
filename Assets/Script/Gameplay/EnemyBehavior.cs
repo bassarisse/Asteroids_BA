@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : Waiter {
+public class EnemyBehavior : Waiter
+{
 
 	const string CRASH_SFX = "ship_crash";
 	const float TARGET_ANGLE_FIX = -90f;
@@ -42,9 +42,15 @@ public class EnemyBehavior : Waiter {
 	bool _isAlive = false;
 	Camera _camera;
 
-	void Awake() {
+    protected override void SetDifficulty(int difficulty)
+    {
+        
+    }
 
-		AudioHandler.Load (CRASH_SFX);
+    protected override void Awake()
+    {
+        base.Awake();
+        AudioHandler.Load (CRASH_SFX);
 
 		if (OnStruck == null)
 			OnStruck = new EnemyEvent ();
