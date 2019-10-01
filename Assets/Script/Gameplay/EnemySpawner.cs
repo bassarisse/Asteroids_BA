@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : Waiter {
+public class EnemySpawner : Waiter
+{
 
 	[Header("General Settings")]
 	public bool AutoDeploy = false;
@@ -57,7 +58,8 @@ public class EnemySpawner : Waiter {
 			DeployEnemies(Enemies.ToArray());
 	}
 
-	public void IncreaseDifficultyFromScore(int score) {
+	public void IncreaseDifficultyFromScore(int score)
+    {
 		_difficultyLevel = Mathf.Min(MaxDifficultyLevel, score * ScoreToDifficultyFactor);
 		_difficultyLevel = Mathf.Max(MinDifficultyLevel, _difficultyLevel);
 	}

@@ -63,7 +63,7 @@ public class ShipBehavior : Waiter {
 
     protected override void SetDifficulty(int difficulty)
     {
-        
+       
     }
 
     protected  override void Awake ()
@@ -315,13 +315,17 @@ public class ShipBehavior : Waiter {
 
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		if (_state != ShipState.Idle)
-			return;
-		var cache = ShipHit.Cache;
-		var key = collider.gameObject;
-		if (cache.ContainsKey(key))
-			cache [key].Hit (gameObject, collider);
+	void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (_state != ShipState.Idle)
+            return;
+
+        var cache = ShipHit.Cache;
+        var key = collider.gameObject;
+
+        if (cache.ContainsKey(key))
+            cache[key].Hit(gameObject, collider);
+        
 	}
 
 	public void ReceiveNewLife() {

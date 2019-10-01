@@ -22,6 +22,7 @@ public class LaserBehavior : MonoBehaviour {
 	bool _isAlive = false;
 	float _lifeTime = 0f;
 
+    
 	void Awake() {
 
 		AudioHandler.Load (LASER_FIRE_SFX, LASER_HIT_SFX);
@@ -54,15 +55,16 @@ public class LaserBehavior : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		
+	void OnTriggerEnter2D(Collider2D collider)
+    {
 		if (!this._isAlive)
 			return;
 		
 		var cache = LaserHit.GetCache(Type);
 		var key = collider.gameObject;
 
-		if (cache.ContainsKey (key)) {
+		if (cache.ContainsKey(key))
+        {
 			AudioHandler.Play (LASER_HIT_SFX);
 			cache [key].Hit (gameObject, collider);
 			this.Explode ();
