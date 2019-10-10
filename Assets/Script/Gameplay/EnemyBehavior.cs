@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : Waiter {
+public class EnemyBehavior : Waiter
+{
 
 	const string CRASH_SFX = "ship_crash";
 	const float TARGET_ANGLE_FIX = -90f;
@@ -14,10 +14,10 @@ public class EnemyBehavior : Waiter {
 	[Header("General parameters")]
 	public float PreferedScreenPercentage = 0.9f;
 	public float MinSqrMagnitudeToMove = 1f;
-	public float MinImpulseForce = 1f;
-	public float MaxImpulseForce = 4f;
-	public float MinWaitToShootTime = 2f;
-	public float MaxWaitToShootTime = 10f;
+	[SerializeField]private float minImpulseForce;
+	[SerializeField]private float maxImpulseForce;
+	[SerializeField]private float MinWaitToShootTime = 2f;
+	[SerializeField]private float MaxWaitToShootTime = 10f;
 	[Space(20)]
 
 	[Header("Targeting")]
@@ -42,9 +42,28 @@ public class EnemyBehavior : Waiter {
 	bool _isAlive = false;
 	Camera _camera;
 
-	void Awake() {
+    protected override void SetDifficulty(int difficulty)
+    {
+        if (difficulty >= UserSession.HARD)
+        {
+            minImpulseForce = 4f;
+            maxImpulseForce = 8f;
+            MinWaitToShootTime = 1f;
+            MaxWaitToShootTime = 4f;
+        }
+        else
+        {
+            minImpulseForce = 1f;
+            maxImpulseForce = 4f;
+            MinWaitToShootTime = 2f;
+            MaxWaitToShootTime = 10f;
+        }
+    }
 
-		AudioHandler.Load (CRASH_SFX);
+    protected override void Awake()
+    {
+        base.Awake();
+        AudioHandler.Load (CRASH_SFX);
 
 		if (OnStruck == null)
 			OnStruck = new EnemyEvent ();
@@ -116,7 +135,7 @@ public class EnemyBehavior : Waiter {
 				moveDirection = targetPosition - new Vector2(transform.position.x, transform.position.y);
 			}
 			
-			var impulse = Random.Range (MinImpulseForce, MaxImpulseForce);
+			var impulse = Random.Range (minImpulseForce, maxImpulseForce);
 			this.Body.AddForce (moveDirection.normalized * impulse, ForceMode2D.Impulse);
 
 		}

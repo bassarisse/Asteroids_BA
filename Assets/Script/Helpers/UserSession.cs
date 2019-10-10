@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +11,14 @@ public static class UserSession {
 
 	public static int LastScore = 0;
 
-	public static string LastUserName {
+    public const int EASY = 0;
+    public const int MEDIUM = 1;
+    public const int HARD = 2;
+
+    // 0 = easy , 1 = medium , 2 = hard
+    public static int CurrentDifficulty { get; private set; }
+
+    public static string LastUserName {
 		get {
 			return PlayerPrefs.GetString (LAST_USERNAME_KEY, "");
 		}
@@ -107,6 +113,12 @@ public static class UserSession {
 
 		SaveScores ();
 	}
+
+    public static void SetDifficulty(int difficulty)
+    {
+        CurrentDifficulty = difficulty;
+    }
+
 
 	public static IList<UserScore> GetScores(int limit = 0) {
 		EnsureScoresAreLoaded ();

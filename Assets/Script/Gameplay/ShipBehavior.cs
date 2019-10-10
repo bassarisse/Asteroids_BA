@@ -61,7 +61,15 @@ public class ShipBehavior : Waiter {
 	bool _canHyperspace = true;
 	Camera _camera;
 
-	void Awake () {
+    protected override void SetDifficulty(int difficulty)
+    {
+       
+    }
+
+    protected  override void Awake ()
+    {
+        base.Awake();
+
 		AudioHandler.Load (NEW_LIFE_SFX, CRASH_SFX, HYPERSPACE_SFX);
 
 		if (OnLifeChange == null)
@@ -307,13 +315,17 @@ public class ShipBehavior : Waiter {
 
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		if (_state != ShipState.Idle)
-			return;
-		var cache = ShipHit.Cache;
-		var key = collider.gameObject;
-		if (cache.ContainsKey(key))
-			cache [key].Hit (gameObject, collider);
+	void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (_state != ShipState.Idle)
+            return;
+
+        var cache = ShipHit.Cache;
+        var key = collider.gameObject;
+
+        if (cache.ContainsKey(key))
+            cache[key].Hit(gameObject, collider);
+        
 	}
 
 	public void ReceiveNewLife() {

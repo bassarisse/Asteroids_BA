@@ -24,7 +24,7 @@ public class HighScoreList : MonoBehaviour {
 
 		var scores = UserSession.GetScores (50);
 
-		if (scores.Count() == 0) {
+		if (!scores.Any()) {
 			Scores.text = "-";
 			Positions.text = " ";
 			UserNames.text = "-";

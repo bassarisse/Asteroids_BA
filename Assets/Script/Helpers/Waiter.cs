@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waiter : MonoBehaviour {
+public abstract class Waiter : MonoBehaviour {
 
 	protected WaiterModule _waiter = new WaiterModule();
 	protected bool _paused = false;
 
+    protected abstract void SetDifficulty(int difficulty);
+
+    protected virtual void Awake()
+    {
+        SetDifficulty(UserSession.CurrentDifficulty);
+    }
 	void FixedUpdate() {
 		if (!_paused)
 			_waiter.Update (Time.deltaTime);
